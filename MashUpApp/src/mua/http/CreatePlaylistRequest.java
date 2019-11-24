@@ -1,6 +1,6 @@
 package mua.http;
 
-public class UploadPlaylistRequest {
+public class CreatePlaylistRequest {
 	public String playlistID;
 	public String playlistName;
 	public String base64EncodedValue;
@@ -14,13 +14,13 @@ public class UploadPlaylistRequest {
 	public String getBase64EncodedValue() { return base64EncodedValue; }
 	public void setBase64EncodedValue(String base64EncodedValue) { this.base64EncodedValue = base64EncodedValue; }
 	
-	public UploadPlaylistRequest(String playlistID, String playlistName, String encoding) {
+	public CreatePlaylistRequest(String playlistID, String playlistName, String encoding) {
 		this.playlistID = playlistID; 
 		this.playlistName = playlistName;
 		this.base64EncodedValue = encoding;
 	}
 	
-	public UploadPlaylistRequest(String playlistID, String playlistName, String encoding, boolean system) {
+	public CreatePlaylistRequest(String playlistID, String playlistName, String encoding, boolean system) {
 		this.playlistID = playlistID; 
 		this.playlistName = playlistName;
 		this.base64EncodedValue = encoding;

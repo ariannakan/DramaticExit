@@ -1,18 +1,18 @@
 package mua.http;
 
-public class UploadPlaylistResponse {
+public class CreatePlaylistResponse {
 	public final String playlistID;
 	public final int statusCode;
 	public String error;
 	
-	public UploadPlaylistResponse(String playlistID, int statusCode) {
+	public CreatePlaylistResponse(String playlistID, int statusCode) {
 		this.playlistID = playlistID;
 		this.statusCode = statusCode;
 		this.error = "";
 	}
 	
 	// 200 = success
-	public UploadPlaylistResponse(String playlistID, int statusCode, String errorMessage) {
+	public CreatePlaylistResponse(String playlistID, int statusCode, String errorMessage) {
 		this.playlistID = playlistID;
 		this.statusCode = statusCode;
 		this.error = errorMessage;
