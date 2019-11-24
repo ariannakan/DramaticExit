@@ -4,8 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.wpi.cs.heineman.calculator.db.DatabaseUtil;
-import edu.wpi.cs.heineman.calculator.model.Constant;
+import mua.db.DatabaseUtil;
+import mua.model.Video;
 
 /**
  * Note that CAPITALIZATION matters regarding the table name. If you create with 
@@ -19,7 +19,7 @@ public class VideosDAO {
 
 	java.sql.Connection conn;
 
-    public ConstantsDAO() {
+    public VideosDAO() {
     	try  {
     		conn = DatabaseUtil.connect();
     	} catch (Exception e) {
@@ -27,10 +27,10 @@ public class VideosDAO {
     	}
     }
 
-    public Constant getConstant(String name) throws Exception {
+    public Video getVideo(String name) throws Exception {
         
         try {
-            Constant constant = null;
+            Video constant = null;
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Constants WHERE name=?;");
             ps.setString(1,  name);
             ResultSet resultSet = ps.executeQuery();
@@ -49,7 +49,7 @@ public class VideosDAO {
         }
     }
     
-    public boolean updateConstant(Constant constant) throws Exception {
+    public boolean updateVideo(Video video) throws Exception {
         try {
         	String query = "UPDATE Constants SET value=? WHERE name=?;";
         	PreparedStatement ps = conn.prepareStatement(query);
@@ -64,10 +64,10 @@ public class VideosDAO {
         }
     }
     
-    public boolean deleteConstant(Constant constant) throws Exception {
+    public boolean deleteVideo(Video video) throws Exception {
         try {
             PreparedStatement ps = conn.prepareStatement("DELETE FROM Constants WHERE name = ?;");
-            ps.setString(1, constant.name);
+            ps.setString(1, video.name);
             int numAffected = ps.executeUpdate();
             ps.close();
             
@@ -79,7 +79,7 @@ public class VideosDAO {
     }
 
 
-    public boolean addConstant(Constant constant) throws Exception {
+    public boolean addVideo(Video constant) throws Exception {
         try {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Constants WHERE name = ?;");
             ps.setString(1, constant.name);
@@ -103,16 +103,16 @@ public class VideosDAO {
         }
     }
 
-    public List<Constant> getAllConstants() throws Exception {
+    public List<Video> getAllConstants() throws Exception {
         
-        List<Constant> allConstants = new ArrayList<>();
+        List<Video> allConstants = new ArrayList<>();
         try {
             Statement statement = conn.createStatement();
             String query = "SELECT * FROM Constants";
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                Constant c = generateConstant(resultSet);
+                Video c = generateConstant(resultSet);
                 allConstants.add(c);
             }
             resultSet.close();
@@ -124,7 +124,7 @@ public class VideosDAO {
         }
     }
     
-    private Constant generateConstant(ResultSet resultSet) throws Exception {
+    private Video generateConstant(ResultSet resultSet) throws Exception {
         String name  = resultSet.getString("name");
         Double value = resultSet.getDouble("value");
         return new Constant (name, value);
