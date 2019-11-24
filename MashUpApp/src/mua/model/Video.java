@@ -1,21 +1,24 @@
 package mua.model;
 
 public class Video {
-	public final String id;
-	public final String charName;
+	public final String videoID;
+	public final String characterName;
 	public final String sentence;
+	public boolean availability;
 	public boolean system;      // when TRUE this is actually stored in S3 bucket
 	
-	public Video (String id, String charName, String sentence) {
-		this.id = id;
-		this.charName = charName;
+	public Video (String videoID, String characterName, String sentence, boolean availability) {
+		this.videoID = videoID;
+		this.characterName = characterName;
 		this.sentence = sentence;
+		this.availability = availability;
 	}
 	
-	public Video (String id, String charName, String sentence, boolean system) {
-		this.id = id;
-		this.charName = charName;
+	public Video (String videoID, String characterName, String sentence, boolean availability, boolean system) {
+		this.videoID = videoID;
+		this.characterName = characterName;
 		this.sentence = sentence;
+		this.availability = availability;
 		this.system = system;
 	}
 	
@@ -30,7 +33,7 @@ public class Video {
 		
 		if (o instanceof Video) {
 			Video other = (Video) o;
-			return id.equals(other.id);
+			return videoID.equals(other.videoID);
 		}
 		
 		return false;  // not a Constant

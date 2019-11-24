@@ -27,106 +27,111 @@ public class VideosDAO {
     	}
     }
 
-    public Video getVideo(String name) throws Exception {
+    public Video getVideo(String id) throws Exception {
         
         try {
-            Video constant = null;
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Constants WHERE name=?;");
-            ps.setString(1,  name);
+            Video video = null;
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Videos WHERE videoID=?;");
+            ps.setString(1,  id);		//WHAT TO DO
             ResultSet resultSet = ps.executeQuery();
             
             while (resultSet.next()) {
-                constant = generateConstant(resultSet);
+                video = generateVideo(resultSet);
             }
             resultSet.close();
             ps.close();
             
-            return constant;
+            return video;
 
         } catch (Exception e) {
         	e.printStackTrace();
-            throw new Exception("Failed in getting constant: " + e.getMessage());
+            throw new Exception("Failed in getting video: " + e.getMessage());
         }
     }
     
+/**    
     public boolean updateVideo(Video video) throws Exception {
         try {
-        	String query = "UPDATE Constants SET value=? WHERE name=?;";
+        	String query = "UPDATE Videos SET availability=? WHERE videoID=?;";
         	PreparedStatement ps = conn.prepareStatement(query);
-            ps.setDouble(1, constant.value);
-            ps.setString(2, constant.name);
+            ps.setBoolean(1, video.availability);
+            ps.setString(2, video.videoID);
             int numAffected = ps.executeUpdate();
             ps.close();
             
             return (numAffected == 1);
         } catch (Exception e) {
-            throw new Exception("Failed to update report: " + e.getMessage());
+            throw new Exception("Failed to update video: " + e.getMessage());
         }
     }
-    
+**/
     public boolean deleteVideo(Video video) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM Constants WHERE name = ?;");
-            ps.setString(1, video.name);
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM Videos WHERE videoID = ?;");
+            ps.setString(1, video.videoID);
             int numAffected = ps.executeUpdate();
             ps.close();
             
             return (numAffected == 1);
 
         } catch (Exception e) {
-            throw new Exception("Failed to insert constant: " + e.getMessage());
+            throw new Exception("Failed to delete video: " + e.getMessage());
         }
     }
 
 
-    public boolean addVideo(Video constant) throws Exception {
+    public boolean addVideo(Video video) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Constants WHERE name = ?;");
-            ps.setString(1, constant.name);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Videos WHERE videoID = ?;");
+            ps.setString(1, video.videoID);
             ResultSet resultSet = ps.executeQuery();
             
             // already present?
             while (resultSet.next()) {
-                Constant c = generateConstant(resultSet);
+                Video v = generateVideo(resultSet);
                 resultSet.close();
                 return false;
             }
 
-            ps = conn.prepareStatement("INSERT INTO Constants (name,value) values(?,?);");
-            ps.setString(1,  constant.name);
-            ps.setDouble(2,  constant.value);
+            ps = conn.prepareStatement("INSERT INTO Videos (videoID,characterName,sentence,availability) values(?,?,?,?);");
+            ps.setString(1,  video.videoID);
+            ps.setString(2, video.characterName);
+            ps.setString(3, video.sentence);
+            ps.setBoolean(4,  video.availability);
             ps.execute();
             return true;
 
         } catch (Exception e) {
-            throw new Exception("Failed to insert constant: " + e.getMessage());
+            throw new Exception("Failed to add video: " + e.getMessage());
         }
     }
 
-    public List<Video> getAllConstants() throws Exception {
+    public List<Video> getAllVideos() throws Exception {
         
-        List<Video> allConstants = new ArrayList<>();
+        List<Video> allVideos = new ArrayList<>();
         try {
             Statement statement = conn.createStatement();
-            String query = "SELECT * FROM Constants";
+            String query = "SELECT * FROM Videos";
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                Video c = generateConstant(resultSet);
-                allConstants.add(c);
+                Video v = generateVideo(resultSet);
+                allVideos.add(v);
             }
             resultSet.close();
             statement.close();
-            return allConstants;
+            return allVideos;
 
         } catch (Exception e) {
-            throw new Exception("Failed in getting books: " + e.getMessage());
+            throw new Exception("Failed in getting videos: " + e.getMessage());
         }
     }
     
-    private Video generateConstant(ResultSet resultSet) throws Exception {
-        String name  = resultSet.getString("name");
-        Double value = resultSet.getDouble("value");
-        return new Constant (name, value);
+    private Video generateVideo(ResultSet resultSet) throws Exception {
+        String videoID  = resultSet.getString("videoID");
+        String characterName = resultSet.getString("characterName");
+        String sentence = resultSet.getString("sentence");
+        boolean availability = resultSet.getBoolean("availability");
+        return new Video(videoID, characterName, sentence, availability);
     }
 }
