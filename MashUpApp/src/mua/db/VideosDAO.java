@@ -2,7 +2,7 @@ package mua.db;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import mua.db.DatabaseUtil;
 import mua.model.Video;
@@ -32,7 +32,7 @@ public class VideosDAO {
         try {
             Video video = null;
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Videos WHERE videoID=?;");
-            ps.setString(1,  id);		//WHAT TO DO
+            ps.setString(1,  id);		//videoID is 1st index in database
             ResultSet resultSet = ps.executeQuery();
             
             while (resultSet.next()) {

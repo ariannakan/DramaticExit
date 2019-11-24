@@ -26,7 +26,7 @@ public class Video {
 	public void setSystem(boolean s) { system = s; }
 	
 	/**
-	 * Equality of Constants determined by name alone.
+	 * Equality of Videos determined by videoID alone.
 	 */
 	public boolean equals (Object o) {
 		if (o == null) { return false; }
@@ -36,6 +36,6 @@ public class Video {
 			return videoID.equals(other.videoID);
 		}
 		
-		return false;  // not a Constant
+		return false;  // not a Video
 	}
 }
