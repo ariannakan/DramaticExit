@@ -22,7 +22,7 @@ public class DeleteVideoResponse {
 		if(statusCode == 200) {
 			return "DeleteResponse(" + videoID + " deleted successfully!)";
 		} else {
-			return "ErrorResult(" + videoID + ", statusCode = " + statusCode + ", err=" + error +")";
+			return "ErrorResult(" + videoID + ", statusCode = " + statusCode + ", err=" + error + ")";
 		}
 	}
 

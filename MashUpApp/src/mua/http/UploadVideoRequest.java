@@ -5,35 +5,43 @@ public class UploadVideoRequest {
 	public String characterName;
 	public String sentence;
 	public boolean availability;
-	public String base64EncodedValue;
 	public boolean system;
 	
-	public String getVideo() { return videoID; }
+	public String getVideoID() { return videoID; }
+	public void setVideoID(String videoID) { this.videoID = videoID; }
+	
+	public String getCharacterName() { return characterName; }
+	public void setCharacterName(String characterName) { this.characterName = characterName; }
+	
+	public String getSentence() { return sentence; }
+	public void setSentence(String sentence) { this.sentence = sentence; }
+	
+	public boolean getAvailability() { return availability; }
+	public void setAvailability(boolean availability) { this.availability = availability; }
 	
 	public boolean getSystem( ) { return system; }
 	public void setSystem(boolean system) { this.system = system; }
 	
-	public String getBase64EncodedValue() { return base64EncodedValue; }
-	public void setBase64EncodedValue(String base64EncodedValue) { this.base64EncodedValue = base64EncodedValue; }
-	
-	public UploadVideoRequest(String videoID, String characterName, String sentence, boolean availability, String encoding) {
-		this.videoID = videoID; 
-		this.characterName = characterName;
-		this.sentence = sentence;
-		this.availability = true;
-		this.base64EncodedValue = encoding;
+	public UploadVideoRequest() {
+		
 	}
 	
-	public UploadVideoRequest(String videoID, String characterName, String sentence, boolean availability, String encoding, boolean system) {
+	public UploadVideoRequest(String videoID, String characterName, String sentence, boolean availability) {
 		this.videoID = videoID; 
 		this.characterName = characterName;
 		this.sentence = sentence;
-		this.availability = true;
-		this.base64EncodedValue = encoding;
+		this.availability = availability;
+	}
+	
+	public UploadVideoRequest(String videoID, String characterName, String sentence, boolean availability, boolean system) {
+		this.videoID = videoID; 
+		this.characterName = characterName;
+		this.sentence = sentence;
+		this.availability = availability;
 		this.system = system;
 	}
 	
 	public String toString() {
-		return "UploadVideo(" + videoID + "," + characterName + "," + sentence + "," + base64EncodedValue + ")";
+		return "UploadVideo(" + videoID + "," + characterName + "," + sentence + "," + availability + ")";
 	}
 }
