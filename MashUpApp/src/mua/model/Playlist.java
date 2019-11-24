@@ -24,17 +24,5 @@ public class Playlist {
 	public boolean getSystem() { return system; }
 	public void setSystem(boolean s) { system = s; }
 	
-	public boolean addVideo(){
-		return false;
-	}
-	
-	public boolean removeVideo(){
-		return false;
-	}
-	
-	public void showVideo() {}
-	
-	public void listVideos() {}
-	
 }
 
