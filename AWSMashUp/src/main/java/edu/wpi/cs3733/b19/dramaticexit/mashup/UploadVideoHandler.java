@@ -1,10 +1,22 @@
 package edu.wpi.cs3733.b19.dramaticexit.mashup;
 
+import java.io.ByteArrayInputStream;
+
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.PutObjectResult;
 
+import edu.wpi.cs.heineman.calculator.db.ConstantsDAO;
+import edu.wpi.cs.heineman.calculator.http.CreateConstantRequest;
+import edu.wpi.cs.heineman.calculator.http.CreateConstantResponse;
+import edu.wpi.cs.heineman.calculator.model.Constant;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.db.VideosDAO;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoResponse;
@@ -12,82 +24,85 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 
 public class UploadVideoHandler implements RequestHandler<UploadVideoRequest,UploadVideoResponse> {
 	
-	// I am leaving in this S3 code so it can be a LAST RESORT if the constant is not in the database
+LambdaLogger logger;
+	
+	// To access S3 storage
 	private AmazonS3 s3 = null;
-	
-	LambdaLogger logger;
-	
-	/**
-	 * Try to get from RDS first. Then get from bucket.
-	 * 
-	 * @param arg
-	 * @return
-	 * @throws Exception
-	 */
-	public double loadVideo(String arg) throws Exception {
-		double val = 0;
-		try {
-			val = loadVideoIDFromRDS(arg);
-			return val;
-		} catch (Exception e) {
-			return getDoubleFromBucket(arg);
-		}
-	}
-	
-	/** Load from RDS, if it exists
+		
+	/** Store into RDS.
 	 * 
 	 * @throws Exception 
 	 */
-	String loadVideoIDFromRDS(String arg) throws Exception {
-		if (logger != null) { logger.log("in loadValue"); }
+	boolean uploadVideotoRDS(String videoID, String characterName, String sentence, boolean availability, String url) throws Exception {
+		if (logger != null) { logger.log("in uploadVideo"); }
 		VideosDAO dao = new VideosDAO();
-		Video video = dao.getVideo(arg);
-		return video.videoID;
+		
+		// check if present
+		Video exist = dao.getVideo(videoID);
+		Video video = new Video (videoID, characterName, sentence, availability, url);
+		if (exist == null) {
+			return dao.addVideo(video);
+		} else {
+			return false;
+		}
 	}
 	
-	@Override
-	public UploadVideoResponse handleRequest(UploadVideoRequest req, Context context) {
+	/** Create S3 bucket
+	 * 
+	 * @throws Exception 
+	 */
+	boolean createVideo(String oggFile) throws Exception {
+		if (logger != null) { logger.log("in createVideo"); }
+		
+		if (s3 == null) {
+			logger.log("attach to S3 request");
+			s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
+			logger.log("attach to S3 succeed");
+		}
+		
+		ByteArrayInputStream bais = new ByteArrayInputStream(oggFile);
+		ObjectMetadata omd = new ObjectMetadata();
+		omd.setContentLength(oggFile.length());
+		
+		PutObjectResult res = s3.putObject(new PutObjectRequest("b19dramaticexit", "Videos/" + name, bais, omd));
+		// makes the object publicly visible
+		PutObjectResult res = s3.putObject(new PutObjectRequest("cs3733wpi", "constants/" + name, bais, omd)
+				.withCannedAcl(CannedAccessControlList.PublicRead));
+		
+		// if we ever get here, then whole thing was stored
+		return true;
+	}
+	
+	@Override 
+	public UploadVideoResponse handleRequest(UploadVideoRequest req, Context context)  {
 		logger = context.getLogger();
-		logger.log("Loading Java Lambda handler of RequestHandler");
 		logger.log(req.toString());
 
-		boolean fail = false;
-		String failMessage = "";
-		double val1 = 0.0;
-		try {
-			val1 = Double.parseDouble(req.getArg1());
-		} catch (NumberFormatException e) {
-			try {
-				val1 = loadConstant(req.getArg1());
-			} catch (Exception ex) {
-				failMessage = req.getArg1() + " is an invalid constant.";
-				fail = true;
-			}
-		}
-
-		double val2 = 0.0;
-		try {
-			val2 = Double.parseDouble(req.getArg2());
-		} catch (NumberFormatException e) {
-			try {
-				val2 = loadConstant(req.getArg2());
-			} catch (Exception ex) {
-				failMessage = req.getArg2() + " is an invalid constant.";
-				fail = true;
-			}
-		}
-
-		// compute proper response and return. Note that the status code is internal to the HTTP response
-		// and has to be processed specifically by the client code.
 		UploadVideoResponse response;
-		if (fail) {
-			response = new UploadVideoResponse(failMessage, 400);
-		} else {
-			response = new UploadVideoResponse(val1 + val2, 200);  // success
+		try {
+			byte[] encoded = java.util.Base64.getDecoder().decode(req.base64EncodedValue);
+			if (req.system) {
+				if (createSystemConstant(req.name, encoded)) {
+					response = new CreateConstantResponse(req.name);
+				} else {
+					response = new CreateConstantResponse(req.name, 422);
+				}
+			} else {
+				String contents = new String(encoded);
+				double value = Double.valueOf(contents);
+				
+				if (createConstant(req.name, value)) {
+					response = new CreateConstantResponse(req.name);
+				} else {
+					response = new CreateConstantResponse(req.name, 422);
+				}
+			}
+		} catch (Exception e) {
+			response = new CreateConstantResponse("Unable to create constant: " + req.name + "(" + e.getMessage() + ")", 400);
 		}
 
-		return response; 
+		return response;
 	}
-	
+
 
 }

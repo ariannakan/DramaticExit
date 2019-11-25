@@ -55,7 +55,7 @@ public class ListAllVideosHandler implements RequestHandler<ListVideosRequest,Al
 		// retrieve listing of all objects in the designated bucket
 		ListObjectsV2Request listObjectsRequest = new ListObjectsV2Request()
 				  .withBucketName("b19dramaticexit")    // top-level bucket
-				  .withPrefix("Video Segments");       // sub-folder declarations here (i.e., a/b/c)
+				  .withPrefix("Videos");       // sub-folder declarations here (i.e., a/b/c)
 												  
 		
 		// request the s3 objects in the s3 bucket 'b19dramaticexit/Video Segments' -- change based on your bucket name

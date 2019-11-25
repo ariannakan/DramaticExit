@@ -8,20 +8,20 @@ public class Video {
 	public String url;
 	public boolean system;      // when TRUE this is actually stored in S3 bucket
 	
-	public Video (String videoID, String characterName, String sentence, boolean availability) {
+	public Video (String videoID, String characterName, String sentence, boolean availability, String url) {
 		this.videoID = videoID;
 		this.characterName = characterName;
 		this.sentence = sentence;
 		this.availability = availability;
-		this.url = "";
+		this.url = url;
 	}
 	
-	public Video (String videoID, String characterName, String sentence, boolean availability, boolean system) {
+	public Video (String videoID, String characterName, String sentence, boolean availability, String url, boolean system) {
 		this.videoID = videoID;
 		this.characterName = characterName;
 		this.sentence = sentence;
 		this.availability = availability;
-		this.url = "";
+		this.url = url;
 		this.system = system;
 	}
 	

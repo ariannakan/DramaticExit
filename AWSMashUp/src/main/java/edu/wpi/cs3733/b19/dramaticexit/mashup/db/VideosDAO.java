@@ -93,11 +93,12 @@ public class VideosDAO {
                 return false;
             }
 
-            ps = conn.prepareStatement("INSERT INTO Videos (videoID,characterName,sentence,availability) values(?,?,?,?);");
+            ps = conn.prepareStatement("INSERT INTO Videos (videoID,characterName,sentence,availability,url) values(?,?,?,?,?);");
             ps.setString(1,  video.videoID);
             ps.setString(2, video.characterName);
             ps.setString(3, video.sentence);
             ps.setBoolean(4,  video.availability);
+            ps.setString(5,  video.url);
             ps.execute();
             return true;
 
@@ -132,6 +133,7 @@ public class VideosDAO {
         String characterName = resultSet.getString("characterName");
         String sentence = resultSet.getString("sentence");
         boolean availability = resultSet.getBoolean("availability");
-        return new Video(videoID, characterName, sentence, availability);
+        String url = resultSet.getString("url");
+        return new Video(videoID, characterName, sentence, availability, url);
     }
 }
