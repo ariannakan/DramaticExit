@@ -3,7 +3,7 @@ package edu.wpi.cs3733.b19.dramaticexit.mashup.http;
 import java.util.ArrayList;
 import java.util.List;
 
-import mua.model.Site;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Site;
 
 public class AllSitesResponse {
 	public List<Site> list;
@@ -23,8 +23,8 @@ public class AllSitesResponse {
 	}
 	
 	public String toString() {
-		if(list == null) {return "No sites registered";}
-		return "ListSites(" + list.size() + ")";
+		if(list == null) {return "EmptySites";}
+		return "AllSites(" + list.size() + ")";
 	}
 
 }
