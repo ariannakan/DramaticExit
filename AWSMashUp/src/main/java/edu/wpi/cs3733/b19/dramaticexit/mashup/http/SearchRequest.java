@@ -4,18 +4,22 @@ import java.util.List;
 
 import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 
-public class SearchVideoRequest {
+public class SearchRequest {
 	public String keyword;
 	public List<Video> list;
 	
-	public String getKeyword() {return keyword, List<Video> list;}
+	public String getKeyword() {return keyword;}
 	public void setKeywork(String keyword) {this.keyword = keyword;}
 	
-	public SearchVideoRequest() {
+	public SearchRequest() {
 	}
 	
-	public SearchVideoRequest(String keyword) {
-		this.s
+	public SearchRequest(String keyword) {
+		this.keyword = keyword;
+	}
+	
+	public String toString() {
+		return "SearchRequest(" + keyword +")";
 	}
 
 }

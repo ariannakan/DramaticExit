@@ -1,28 +1,30 @@
 package edu.wpi.cs3733.b19.dramaticexit.mashup.http;
 
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
+
 public class UploadVideoResponse {
-	public final String videoID;
-	public final int statusCode;
+	public Video videoSegment;
+	public int statusCode;
 	public String error;
 	
-	public UploadVideoResponse(String videoID, int statusCode) {
-		this.videoID = videoID;
-		this.statusCode = statusCode;
+	public UploadVideoResponse(Video video, int code) {
+		this.videoSegment = video;
+		this.statusCode = code;
 		this.error = "";
 	}
 	
 	// 200 = success
-	public UploadVideoResponse(String videoID, int statusCode, String errorMessage) {
-		this.videoID = videoID;
-		this.statusCode = statusCode;
+	public UploadVideoResponse(Video video, int code, String errorMessage) {
+		this.videoSegment = video;
+		this.statusCode = code;
 		this.error = errorMessage;
 	}
 	
 	public String toString() {
 		if(statusCode == 200) {
-			return "UploadResponse(" + videoID + " has been uploaded successfully!)";
+			return "UploadResponse(" + videoSegment + ")";
 		} else {
-			return "ErrorResult(" + videoID + ", statusCode = " + statusCode + ", err=" + error + ")";
+			return "ErrorResult(" + videoSegment + ", statusCode = " + statusCode + ", err=" + error + ")";
 		}
 	}
 

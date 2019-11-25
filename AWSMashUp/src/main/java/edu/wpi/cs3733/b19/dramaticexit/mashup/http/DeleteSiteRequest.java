@@ -6,12 +6,12 @@ public class DeleteSiteRequest {
 	public void setSiteURL(String url) {this.siteURL = url;}
 	public String getSiteURL() {return siteURL;}
 	
-	public DeleteSiteRequest(String url) {
-		this.siteURL = url;
-	}
-	
 	public DeleteSiteRequest() {
 		
+	}
+	
+	public DeleteSiteRequest(String url) {
+		this.siteURL = url;
 	}
 	
 	public String toString() {

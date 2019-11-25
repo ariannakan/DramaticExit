@@ -8,12 +8,12 @@ public class DeleteVideoRequest {
 	
 	public String getVideo() { return videoID; }
 	
-	public DeleteVideoRequest(String videoID) {
-		this.videoID = videoID;
-	}
-	
 	public DeleteVideoRequest() {
 		
+	}
+	
+	public DeleteVideoRequest(String videoID) {
+		this.videoID = videoID;
 	}
 	
 	public String toString() {

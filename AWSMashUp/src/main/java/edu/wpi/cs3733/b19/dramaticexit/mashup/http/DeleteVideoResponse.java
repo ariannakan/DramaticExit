@@ -5,22 +5,22 @@ public class DeleteVideoResponse {
 	public int statusCode;
 	public String error;
 	
-	public DeleteVideoResponse(String videoID, int statusCode) {
-		this.videoID = videoID;
-		this.statusCode = statusCode;
+	public DeleteVideoResponse(String id, int code) {
+		this.videoID = id;
+		this.statusCode = code;
 		this.error = "";
 	}
 	
 	// 200 = success
-	public DeleteVideoResponse(String videoID, int statusCode, String errorMessage) {
-		this.videoID = videoID;
-		this.statusCode = statusCode;
+	public DeleteVideoResponse(String id, int code, String errorMessage) {
+		this.videoID = id;
+		this.statusCode = code;
 		this.error = errorMessage;
 	}
 	
 	public String toString() {
 		if(statusCode == 200) {
-			return "DeleteResponse(" + videoID + " deleted successfully!)";
+			return "DeleteResponse(" + videoID + ")";
 		} else {
 			return "ErrorResult(" + videoID + ", statusCode = " + statusCode + ", err=" + error + ")";
 		}

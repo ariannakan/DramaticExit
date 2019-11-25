@@ -5,24 +5,24 @@ public class DeletePlaylistResponse {
 	public int statusCode;
 	public String error;
 	
-	public DeletePlaylistResponse(String playlistID, int statusCode) {
-		this.playlistID = playlistID;
-		this.statusCode = statusCode;
+	public DeletePlaylistResponse(String id, int code) {
+		this.playlistID = id;
+		this.statusCode = code;
 		this.error = "";
 	}
 	
 	// 200 = success
-	public DeletePlaylistResponse(String playlistID, int statusCode, String errorMessage) {
-		this.playlistID = playlistID;
-		this.statusCode = statusCode;
+	public DeletePlaylistResponse(String id, int code, String errorMessage) {
+		this.playlistID = id;
+		this.statusCode = code;
 		this.error = errorMessage;
 	}
 	
 	public String toString() {
 		if(statusCode == 200) {
-			return "DeleteResponse(" + playlistID + " deleted successfully!)";
+			return "DeletePlaylist(" + playlistID + ")";
 		} else {
-			return "ErrorResult(" + playlistID + ", statusCode = " + statusCode + ", err=" + error +")";
+			return "ErrorResult(" + playlistID + ", statusCode = " + statusCode + ", err=" + error + ")";
 		}
 	}
 
