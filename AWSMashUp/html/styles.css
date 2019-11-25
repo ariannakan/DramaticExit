@@ -12,17 +12,118 @@ body {
 html, body {
     margin: 0;
     padding: 0;
+    height: 100%;
+}
+
+.Library {
+	padding-left: 235px;
+	font-size: 20px;
+	font-weight: bold;
+	height:5%;
 }
 
 .playlists {
 	padding-left: 235px;
-	padding-bottom: px;
+	padding-top: 10px;
 	font-size: 16px;
+	height: 40%;
 }
 
 .videos {
 	padding-left: 235px;
 	font-size: 16px;
+	height: 30%
+}
+
+.register {
+	padding-left: 235px;
+	position: absolute; 
+	bottom: 20px;
+}
+
+.register input[type=text] {
+  padding: 6px;
+  margin-left:5px;
+  width: 850px;
+  font-size: 15px;
+}
+
+.btn {
+  border: none;
+  background-color: inherit;
+  padding: 14px 28px;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-block;
+  color: white;
+  font-family:Times New Roman;
+}
+
+.btn:Hover {
+  color:#F08080;
+}
+
+.newPlaylist {
+  margin-left:820px;
+}
+
+.delete {
+  margin-left:870px;	
+}
+
+.play {
+  margin-left:830px;
+}
+
+.mark {
+  margin-left: 10px;
+}
+
+.switchToAdmin {
+  font-size: 18px; 
+  position: absolute; 
+  bottom: 70px; 
+  margin-left: -100px; 
+  margin-bottom: 3px;
+}
+
+.switchToUser {
+  font-size: 18px; 
+  position: absolute; 
+  bottom: 70px; 
+  margin-left: -200px; 
+  margin-bottom: 3px;
+}
+
+.switchToRegister {
+  font-size: 16px;
+  margin-top:-10px;
+  width:225px;
+}
+
+.switchToMyLibrary {
+  font-size: 16px;
+  width: 225px;
+  margin-top: 20px;
+}
+
+.switchToVideos {
+  font-size: 16px;
+  margin-top:-10px;
+  width:225px;
+}
+
+.searchButton {
+  background-color: inherit;
+  border: none; 
+  color: white;
+  padding: 4px 8px;
+  font-size: 16px; 
+  cursor: pointer; 
+}
+
+.searchButton:hover {
+  color: #F08080;
 }
 
 .sidenav {

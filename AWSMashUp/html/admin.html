@@ -1,0 +1,47 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>Admin Library Page</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<div class = "MashUpAppTitle" id = "MashTitle">
+	<h2>MashUpApp</h2>
+</div>
+
+<div class = "sidenav">
+   <input type="text" placeholder="Search..">
+   <button class = "searchButton" style = "display: inline;"><i class="fa fa-search"></i></button>      
+   <p style = "font-size: 18px; position: absolute; bottom: 70px; margin-left: 105px;">|</p>
+   <button class = "btn switchToUser" onclick="window.location.href = 'user.html';">User</button>
+   <p style = "font-size: 18px; font-weight: bold; color: #F08080; position: absolute; bottom: 70px; margin-left: 135px;">Admin</p>
+   <p style = "font-size: 16px; text-align:center; margin-top: 25px; line-height: 200%; width: 225px; background-color: gray;">My Library</p>
+   <button class = "btn switchToRegister" onclick="window.location.href = 'adminRegister.html';">Register Site</button>
+</div>
+
+<div class = "Library">
+	<h3>My Library</h3>
+</div>
+
+<div class = "videos">
+	<div style = "border-bottom: 2px solid white;">
+		<h3>Video Segments</h3>
+	</div> 
+	<div>
+		<p style = "display:inline;">Video Segment 1</p>
+		<button class="btn mark">Hide</button>
+	</div>
+	<div>
+		<p style = "display:inline;">Video Segment 2</p>
+		<button class="btn mark">Hide</button>
+	</div>
+	<div>
+		<p style = "display:inline;">Video Segment 3</p>
+		<button class="btn mark">Show</button>
+	</div>
+</div>
+
+</body>
+</html> 
