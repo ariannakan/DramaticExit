@@ -20,7 +20,7 @@ public class CreatePlaylistResponse {
 	
 	public String toString() {
 		if(statusCode == 200) {
-			return "UploadResponse(" + playlistID + " has been uploaded successfully!)";
+			return "CreateResponse(" + playlistID + " has been uploaded successfully!)";
 		} else {
 			return "ErrorResult(" + playlistID + ", statusCode = " + statusCode + ", err=" + error + ")";
 		}

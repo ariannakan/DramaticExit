@@ -28,6 +28,6 @@ public class CreatePlaylistRequest {
 	}
 	
 	public String toString() {
-		return "UploadPlaylist(" + playlistID + "," + playlistName + "," + base64EncodedValue + ")";
+		return "CreatePlaylist(" + playlistID + "," + playlistName + "," + base64EncodedValue + ")";
 	}
 }
