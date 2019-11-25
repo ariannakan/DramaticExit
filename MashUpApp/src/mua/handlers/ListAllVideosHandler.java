@@ -71,7 +71,7 @@ public class ListAllVideosHandler implements RequestHandler<Object,AllVideosResp
 	      if (name.endsWith("/")) { continue; }
 			
 	      S3Object obj = s3.getObject("b19dramaticexit", name);
-	    	
+// WHAT TO DO HERE!!! PLEASE EXPLAIN	    	
 	    	try (S3ObjectInputStream constantStream = obj.getObjectContent()) {
 				Scanner sc = new Scanner(constantStream);
 				String val = sc.nextLine();
