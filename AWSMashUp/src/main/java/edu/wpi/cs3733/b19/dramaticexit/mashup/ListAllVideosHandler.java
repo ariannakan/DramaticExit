@@ -80,17 +80,17 @@ public class ListAllVideosHandler implements RequestHandler<ListVideosRequest,Al
 				
 				// just grab name *after* the slash. Note this is a SYSTEM constant
 				int postSlash = name.indexOf('/');
-				sysConstants.add(new Constant(name.substring(postSlash+1), Double.valueOf(val), true));
+				videoList.add(new Video());
 			} catch (Exception e) {
 				logger.log("Unable to parse contents of " + name);
 			}
 	    }
 		
-		return sysConstants;
+		return videoList;
 	}
 	
 	@Override
-	public AllVideosResponse handleRequest(Object input, Context context)  {
+	public AllVideosResponse handleRequest(ListVideosRequest input, Context context)  {
 		logger = context.getLogger();
 		logger.log("Loading Java Lambda handler to list all videos");
 
@@ -111,4 +111,5 @@ public class ListAllVideosHandler implements RequestHandler<ListVideosRequest,Al
 		
 		return response;
 	}
+
 }
