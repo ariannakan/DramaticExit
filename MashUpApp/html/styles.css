@@ -1,0 +1,46 @@
+body {
+  background-color: gray;
+  color: white;
+}
+
+.MashUpAppTitle {
+  padding: 1px 10px;
+  background: black;
+  color: white;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.playlists {
+	padding-left: 235px;
+	padding-bottom: px;
+	font-size: 16px;
+}
+
+.videos {
+	padding-left: 235px;
+	font-size: 16px;
+}
+
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 225px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 6; /* Stay at the top */
+  left: 0;
+  background-color: #585858;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+
+/* Style the search box inside the navigation bar */
+.sidenav input[type=text] {
+  padding: 6px;
+  margin-left:10px;
+  width: 155px;
+  font-size: 13px;
+}
