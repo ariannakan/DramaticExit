@@ -25,7 +25,7 @@ function refreshVideoList() {
 /**
  * Respond to server JSON object.
  *
- * Replace the contents of 'constantList' with a <br>-separated list of name,value pairs.
+ * Replace the contents of 'videoList' with a <br>-separated list of name,value pairs.
  */
 function processListResponse(result) {
   console.log("res:" + result);
@@ -38,14 +38,14 @@ function processListResponse(result) {
     var videoJson = js.list[i];
     console.log(videoJson);
     
-    var vname = videoJson["name"];
+    var videoID = videoJson["videoID"];
     var character = videoJson["character"];
     var sentence = videoJson["sentence"];
     var sysvar = videoJson["system"];
     if (sysvar) {
-    	output = output + "<div id=\"video" + vname + "\"><b>" + vname + ":</b> = " + character + "\"><b>" + vname + ":</b> = " + sentence + "<br></div>";
+    	output = output + "<div id=\"const" + videoID + "\"><b>" + videoID + ":</b> = " + character + "\"><b>" + videoID + ":</b> = " + sentence + "<br></div>";
     } else {
-    	output = output + "<div id=\"video" + vname + "\"><b>" + vname + ":</b> = " + character + "\"><b>" + vname + ":</b> = " + sentence + "(<a href='javaScript:requestVidDelete(\"" + vname + "\")'><img src='deleteIcon.png'></img></a>) <br></div>";
+    	output = output + "<div id=\"const" + videoID + "\"><b>" + videoID + ":</b> = " + character + "\"><b>" + videoID + ":</b> = " + sentence + "(<a href='javaScript:requestVidDelete(\"" + vname + "\")'><img src='deleteIcon.png'></img></a>) <br></div>";
     }
   }
 

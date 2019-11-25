@@ -19,8 +19,9 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.db.VideosDAO;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.AllVideosResponse;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.ListVideosRequest;
 
-public class ListAllVideosHandler implements RequestHandler<Object,AllVideosResponse>{
+public class ListAllVideosHandler implements RequestHandler<ListVideosRequest,AllVideosResponse>{
 
 	public LambdaLogger logger;
 
@@ -49,7 +50,7 @@ public class ListAllVideosHandler implements RequestHandler<Object,AllVideosResp
 			s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
 			logger.log("attach to S3 succeed");
 		}
-		ArrayList<Video> sysConstants = new ArrayList<>();
+		ArrayList<Video> videoList = new ArrayList<>();
 	    
 		// retrieve listing of all objects in the designated bucket
 		ListObjectsV2Request listObjectsRequest = new ListObjectsV2Request()
