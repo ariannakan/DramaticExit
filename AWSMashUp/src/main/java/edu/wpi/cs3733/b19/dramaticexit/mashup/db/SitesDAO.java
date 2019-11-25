@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import mua.model.Site;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Site;
 
 public class SitesDAO {
 

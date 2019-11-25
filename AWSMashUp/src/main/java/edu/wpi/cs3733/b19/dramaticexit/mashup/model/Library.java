@@ -19,6 +19,7 @@ public class Library {
 	
 	public boolean addVideo(Video video){
 		videos.add(video);
+		return true;
 	}
 	
 	public boolean remVideo(String searchID){
@@ -27,10 +28,12 @@ public class Library {
 				videos.remove(iterator1.next());
 			}
 		}
+		return true;
 	}
 	
 	public boolean addPlaylist(Playlist playlist){
 		playlists.add(playlist);
+		return true;
 	}
 	
 	public boolean remPlaylist(String searchID){
@@ -39,6 +42,7 @@ public class Library {
 				videos.remove(iterator2.next());
 			}
 		}
+		return true;
 	}
 	
 	//public void showVideo() {}
@@ -60,6 +64,7 @@ public class Library {
 				searchplay.add(iterator2.next());
 			}
 		}
+		return true;
 	}
 }
 
