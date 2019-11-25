@@ -5,6 +5,7 @@ public class Video {
 	public final String characterName;
 	public final String sentence;
 	public boolean availability;
+	public String url;
 	public boolean system;      // when TRUE this is actually stored in S3 bucket
 	
 	public Video (String videoID, String characterName, String sentence, boolean availability) {
@@ -12,6 +13,7 @@ public class Video {
 		this.characterName = characterName;
 		this.sentence = sentence;
 		this.availability = availability;
+		this.url = "";
 	}
 	
 	public Video (String videoID, String characterName, String sentence, boolean availability, boolean system) {
@@ -19,7 +21,16 @@ public class Video {
 		this.characterName = characterName;
 		this.sentence = sentence;
 		this.availability = availability;
+		this.url = "";
 		this.system = system;
+	}
+	
+	public Video() {
+		this.videoID = "";
+		this.characterName = "";
+		this.sentence = "";
+		this.availability = true;
+		this.url = "";
 	}
 	
 	public boolean getSystem() { return system; }
