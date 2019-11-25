@@ -16,9 +16,9 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 
-import mua.db.VideosDAO;
-import mua.model.Video;
-import mua.http.AllVideosResponse;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.db.VideosDAO;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.AllVideosResponse;
 
 public class ListAllVideosHandler implements RequestHandler<Object,AllVideosResponse>{
 

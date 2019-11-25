@@ -3,19 +3,21 @@ package edu.wpi.cs3733.b19.dramaticexit.mashup.http;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Playlist;
+
 public class AllPlaylistVideosResponse {
-	public List<Constant> list;
+	public List<Playlist> list;
 	public int statusCode;
 	public String error;
 	
-	public AllConstantsResponse (List<Constant> list, int code) {
+	public AllPlaylistVideosResponse (List<Playlist> list, int code) {
 		this.list = list;
 		this.statusCode = code;
 		this.error = "";
 	}
 	
-	public AllConstantsResponse (int code, String errorMessage) {
-		this.list = new ArrayList<Constant>();
+	public AllPlaylistVideosResponse (int code, String errorMessage) {
+		this.list = new ArrayList<Playlist>();
 		this.statusCode = code;
 		this.error = errorMessage;
 	}

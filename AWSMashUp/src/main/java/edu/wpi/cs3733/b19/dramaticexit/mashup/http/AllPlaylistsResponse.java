@@ -3,7 +3,7 @@ package edu.wpi.cs3733.b19.dramaticexit.mashup.http;
 import java.util.ArrayList;
 import java.util.List;
 
-import mua.model.Playlist;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Playlist;
 
 public class AllPlaylistsResponse {
 	public List<Playlist> list;

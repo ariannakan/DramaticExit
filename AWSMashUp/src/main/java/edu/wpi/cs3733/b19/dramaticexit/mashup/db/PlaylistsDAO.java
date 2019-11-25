@@ -4,9 +4,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.*;
 
-import mua.db.DatabaseUtil;
-import mua.model.Video;
-import mua.model.Playlist;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.db.DatabaseUtil;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Playlist;
 
 /**
  * Note that CAPITALIZATION matters regarding the table name. If you create with 

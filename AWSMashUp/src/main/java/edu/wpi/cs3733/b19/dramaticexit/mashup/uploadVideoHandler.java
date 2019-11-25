@@ -1,12 +1,14 @@
 package edu.wpi.cs3733.b19.dramaticexit.mashup;
 
 import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.s3.AmazonS3;
 
-import mua.db.VideosDAO;
-import mua.http.UploadVideoRequest;
-import mua.http.UploadVideoResponse;
-import mua.model.Video;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.db.VideosDAO;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoRequest;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoResponse;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 
 public class uploadVideoHandler implements RequestHandler<UploadVideoRequest,UploadVideoResponse> {
 	
@@ -25,7 +27,7 @@ public class uploadVideoHandler implements RequestHandler<UploadVideoRequest,Upl
 	public double loadVideo(String arg) throws Exception {
 		double val = 0;
 		try {
-			val = loadValueFromRDS(arg);
+			val = loadVideoIDFromRDS(arg);
 			return val;
 		} catch (Exception e) {
 			return getDoubleFromBucket(arg);
@@ -36,7 +38,7 @@ public class uploadVideoHandler implements RequestHandler<UploadVideoRequest,Upl
 	 * 
 	 * @throws Exception 
 	 */
-	String loadValueFromRDS(String arg) throws Exception {
+	String loadVideoIDFromRDS(String arg) throws Exception {
 		if (logger != null) { logger.log("in loadValue"); }
 		VideosDAO dao = new VideosDAO();
 		Video video = dao.getVideo(arg);
@@ -79,7 +81,7 @@ public class uploadVideoHandler implements RequestHandler<UploadVideoRequest,Upl
 		// and has to be processed specifically by the client code.
 		UploadVideoResponse response;
 		if (fail) {
-			response = new UploadVideoResponse(400, failMessage);
+			response = new UploadVideoResponse(failMessage, 400);
 		} else {
 			response = new UploadVideoResponse(val1 + val2, 200);  // success
 		}

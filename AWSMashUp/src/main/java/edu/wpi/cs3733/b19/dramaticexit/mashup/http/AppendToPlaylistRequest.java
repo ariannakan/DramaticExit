@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.b19.dramaticexit.mashup.http;
 
-import mua.model.Video;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 
 public class AppendToPlaylistRequest {
 	
