@@ -10,7 +10,7 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 
-public class uploadVideoHandler implements RequestHandler<UploadVideoRequest,UploadVideoResponse> {
+public class UploadVideoHandler implements RequestHandler<UploadVideoRequest,UploadVideoResponse> {
 	
 	// I am leaving in this S3 code so it can be a LAST RESORT if the constant is not in the database
 	private AmazonS3 s3 = null;
