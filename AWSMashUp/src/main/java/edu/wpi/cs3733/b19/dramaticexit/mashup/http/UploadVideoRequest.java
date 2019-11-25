@@ -1,13 +1,31 @@
 package edu.wpi.cs3733.b19.dramaticexit.mashup.http;
 
-import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
-
 public class UploadVideoRequest {
-	public Video videoSegment;
+	public String videoID;
+	public String characterName;
+	public String sentence;
+	public String oggFile;
+	public boolean availability;
+	public String videoURL;
 	public boolean system;
 	
-	public Video getVideo() { return videoSegment; }
-	public void setVideo(Video videoSegment) { this.videoSegment = videoSegment; }
+	public String getVideoID() { return videoID; }
+	public void setVideoID(String videoID) { this.videoID = videoID; }
+
+	public String getCharacterName() { return characterName; }
+	public void setCharacterName(String characterName) { this.characterName = characterName; }
+	
+	public String getSentence() { return sentence; }
+	public void setSentence(String sentence) { this.sentence = sentence; }
+	
+	public String getoggFile() { return oggFile; }
+	public void setoggFile(String oggFile) { this.oggFile = oggFile; }
+	
+	public boolean getAvailability() { return availability; }
+	public void setAvailability(boolean availability) { this.availability = availability; }
+	
+	public String getVideoURL() { return videoURL; }
+	public void setVideoURL(String videoURL) { this.videoURL = videoURL; }
 	
 	public boolean getSystem( ) { return system; }
 	public void setSystem(boolean system) { this.system = system; }
@@ -16,16 +34,26 @@ public class UploadVideoRequest {
 		
 	}
 	
-	public UploadVideoRequest(Video videoSegment) {
-		this.videoSegment = videoSegment; 
+	public UploadVideoRequest(String videoID, String characterName, String sentence, String oggFile, boolean availability, String videoURL) {
+		this.videoID = videoID;
+		this.characterName = characterName;
+		this.sentence = sentence;
+		this.oggFile = oggFile; 
+		this.availability = availability;
+		this.videoURL = videoURL;
 	}
 	
-	public UploadVideoRequest(Video videoSegment, boolean system) {
-		this.videoSegment = videoSegment;
+	public UploadVideoRequest(String videoID, String characterName, String sentence, String oggFile, boolean availability, String videoURL, boolean system) {
+		this.videoID = videoID;
+		this.characterName = characterName;
+		this.sentence = sentence;
+		this.oggFile = oggFile; 
+		this.availability = availability;
+		this.videoURL = videoURL;
 		this.system = system;
 	}
 	
 	public String toString() {
-		return "UploadVideo(" + videoSegment + ")";
+		return "UploadVideo(" + videoID + "," + characterName + "," + sentence + "," + oggFile + "," + availability + "," + videoURL + ")";
 	}
 }
