@@ -33,13 +33,12 @@ function processListResponse(result) {
   var js = JSON.parse(result);
   var vidList = document.getElementById('videoList');
   var list =  JSON.parse(result).list
-  
   for (var I = 0; I < list.length; I++)
   {
-       video = "<video id=\""+ list[I].videoID + "\" controls>" + "<source src=\""+list[I].url+ "\" type=\"video/ogg\"> </video>"
+       video = "<video id=\""+ list[I].videoID + "\"height=\"" +150+ "\" controls>" + "<source src=\""+list[I].url+ "\" type=\"video/ogg\"> </video>"
        document.getElementById("videoList").innerHTML += video;
   }
-  
+
  
   
   //var output = "";
