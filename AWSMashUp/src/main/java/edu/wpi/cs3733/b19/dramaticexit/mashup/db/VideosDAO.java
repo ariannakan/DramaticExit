@@ -2,6 +2,9 @@ package edu.wpi.cs3733.b19.dramaticexit.mashup.db;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
+
 import java.util.*;
 
 import edu.wpi.cs3733.b19.dramaticexit.mashup.db.DatabaseUtil;
@@ -18,6 +21,8 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 public class VideosDAO {
 
 	java.sql.Connection conn;
+	
+	LambdaLogger logger;
 
     public VideosDAO() {
     	try  {
@@ -114,7 +119,8 @@ public class VideosDAO {
             Statement statement = conn.createStatement();
             String query = "SELECT * FROM Videos";
             ResultSet resultSet = statement.executeQuery(query);
-
+            
+            logger.log("recieved resultSet");
             while (resultSet.next()) {
                 Video v = generateVideo(resultSet);
                 allVideos.add(v);

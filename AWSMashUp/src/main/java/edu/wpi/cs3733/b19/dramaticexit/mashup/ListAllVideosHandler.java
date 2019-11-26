@@ -32,7 +32,7 @@ public class ListAllVideosHandler implements RequestHandler<ListVideosRequest,Al
 	List<Video> getVideos() throws Exception {
 		logger.log("in getVideos");
 		VideosDAO dao = new VideosDAO();
-		
+	
 		return dao.getAllVideos();
 	}
 	
