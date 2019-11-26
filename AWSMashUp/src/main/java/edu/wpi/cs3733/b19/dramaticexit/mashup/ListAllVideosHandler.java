@@ -30,9 +30,8 @@ public class ListAllVideosHandler implements RequestHandler<ListVideosRequest,Al
 	 * @throws Exception 
 	 */
 	List<Video> getVideos() throws Exception {
-		logger.log("in getVideos");
 		VideosDAO dao = new VideosDAO();
-	
+
 		return dao.getAllVideos();
 	}
 	
@@ -91,6 +90,8 @@ public class ListAllVideosHandler implements RequestHandler<ListVideosRequest,Al
 	
 	@Override
 	public AllVideosResponse handleRequest(ListVideosRequest input, Context context)  {
+		
+		
 		logger = context.getLogger();
 		logger.log("Loading Java Lambda handler to list all videos");
 
@@ -99,11 +100,12 @@ public class ListAllVideosHandler implements RequestHandler<ListVideosRequest,Al
 			// get all user defined constants AND system-defined constants.
 			// Note that user defined constants override system-defined constants.
 			List<Video> list = getVideos();
-			for (Video v : systemVideos()) {
-				if (!list.contains(v)) {
-					list.add(v);
-				}
-			}
+		
+//			for (Video v : systemVideos()) {
+//				if (!list.contains(v)) {
+//					list.add(v);
+//				}
+//			}
 			response = new AllVideosResponse(list, 200);
 		} catch (Exception e) {
 			response = new AllVideosResponse(403, e.getMessage());

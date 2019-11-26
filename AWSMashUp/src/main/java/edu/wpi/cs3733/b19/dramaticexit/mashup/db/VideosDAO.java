@@ -12,7 +12,7 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 
 /**
  * Note that CAPITALIZATION matters regarding the table name. If you create with 
- * a capital "Constants" then it must be "Constants" in the SQL queries.
+ * a capital "Videos" then it must be "Videos" in the SQL queries.
  * 
  * @author b193733 DramaticExit
  *
@@ -25,10 +25,14 @@ public class VideosDAO {
 	LambdaLogger logger;
 
     public VideosDAO() {
+    	System.out.println("\n trying to connect");
     	try  {
+//    		logger.log("\n trying to connect");
     		conn = DatabaseUtil.connect();
     	} catch (Exception e) {
     		conn = null;
+//    		logger.log("null connection");
+    		e.printStackTrace();
     	}
     }
 
@@ -112,6 +116,10 @@ public class VideosDAO {
         }
     }
 
+    public void testFunction() {
+    	System.out.println("\n test function entered");
+    }
+    
     public List<Video> getAllVideos() throws Exception {
         
         List<Video> allVideos = new ArrayList<>();
@@ -120,7 +128,6 @@ public class VideosDAO {
             String query = "SELECT * FROM Videos";
             ResultSet resultSet = statement.executeQuery(query);
             
-            logger.log("recieved resultSet");
             while (resultSet.next()) {
                 Video v = generateVideo(resultSet);
                 allVideos.add(v);
@@ -130,7 +137,7 @@ public class VideosDAO {
             return allVideos;
 
         } catch (Exception e) {
-            throw new Exception("Failed in getting videos: " + e.getMessage());
+            throw new Exception("Failed in getting videos: " + e);
         }
     }
     
