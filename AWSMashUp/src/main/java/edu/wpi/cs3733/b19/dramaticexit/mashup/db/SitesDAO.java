@@ -120,7 +120,7 @@ public class SitesDAO {
         }
     }
     
-    private Video generateVideo(ResultSet resultSet) throws Exception {
+    private Video generateSite(ResultSet resultSet) throws Exception {
         String videoID  = resultSet.getString("videoID");
         String characterName = resultSet.getString("characterName");
         String sentence = resultSet.getString("sentence");
