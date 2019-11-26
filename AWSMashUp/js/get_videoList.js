@@ -32,12 +32,15 @@ function processListResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
   var js = JSON.parse(result);
   var vidList = document.getElementById('videoList');
+  var infoList = document.getElementById('infoList');
   var list =  JSON.parse(result).list
   
   for (var I = 0; I < list.length; I++)
   {
        video = "<video id=\""+ list[I].videoID + "\" controls>" + "<source src=\""+list[I].url+ "\" type=\"video/ogg\"> </video>"
+       info = "<div id=\"" + list[I].videoID + "\"><b>" + list[I].availability + ":</b><br></div>"
        document.getElementById("videoList").innerHTML += video;
+       document.getElementById("infoList").innnerHTML += info;
   }
   
  
