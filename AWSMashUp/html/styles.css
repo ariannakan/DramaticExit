@@ -1,44 +1,55 @@
 body {
-  background-color: gray;
-  color: white;
+  background: linear-gradient(to bottom, #cc6600 -15%, #000000 56%);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'proxima-nova', sans-serif;
 }
 
 .MashUpAppTitle {
   padding: 1px 10px;
   background: black;
   color: white;
+  width:205px;
+}
+
+.iconify{
+  background-color: inherit;
+  border: none; 
+  color: white;
+  padding: 4px 8px;
+  font-size: 25px;
 }
 
 html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+   margin: 0;
+   padding: 0;
+   height: 100%;
 }
 
 .Library {
-	padding-left: 235px;
-	font-size: 20px;
-	font-weight: bold;
-	height:5%;
+  padding-left: 235px;
+  margin-top: -90px;
+  font-size: 20px;
+  font-weight: bold;
+  height:5%;
 }
 
 .playlists {
-	padding-left: 235px;
-	padding-top: 10px;
-	font-size: 16px;
-	height: 40%;
+  padding-left: 235px;
+  padding-top: 10px;
+  font-size: 16px;
+  height: 40%;
 }
 
 .videos {
-	padding-left: 235px;
-	font-size: 16px;
-	height: 30%
+  padding-left: 235px;
+  font-size: 16px;
+  height: 30%
 }
 
 .register {
-	padding-left: 235px;
-	position: absolute; 
-	bottom: 20px;
+  padding-left: 235px;
+  position: absolute; 
+  bottom: 20px;
 }
 
 .register input[type=text] {
@@ -55,12 +66,12 @@ html, body {
   font-size: 14px;
   cursor: pointer;
   display: inline-block;
-  color: white;
-  font-family:Times New Roman;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'proxima-nova', sans-serif;
 }
 
 .btn:Hover {
-  color:#F08080;
+  color:#944f00;
 }
 
 .newPlaylist {
@@ -123,7 +134,7 @@ html, body {
 }
 
 .searchButton:hover {
-  color: #F08080;
+  color: #944f00;
 }
 
 .sidenav {
@@ -133,9 +144,8 @@ html, body {
   z-index: 1; /* Stay on top */
   top: 6; /* Stay at the top */
   left: 0;
-  background-color: #585858;
+  background-color: #000000;
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px;
 }
 
 /* Style the search box inside the navigation bar */
