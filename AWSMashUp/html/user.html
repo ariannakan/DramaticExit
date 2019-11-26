@@ -1,12 +1,26 @@
  <!DOCTYPE html>
 <html>
 <head>
+<!-- relative path-name to access js -->
+<script type='text/javascript' src='../js/api.js'></script>
+
+<script type="text/javascript">
+function initialize() {
+  
+   // get all constants
+   refreshVideoList();
+   
+   // show remote constants in specific range
+   //refreshRemoteList();
+}
+</script>
+
 <title>User Library Page</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
 </head>
-<body>
+<body onload="initialize()">
 
 <div class = "MashUpAppTitle" id = "MashTitle">
 	<h2 style = "display:inline;">MashUpApp</h2>
@@ -22,7 +36,6 @@
    <button class = "btn switchToAdmin" onclick="window.location.href = 'admin.html';">Admin</button>
    <p style = "font-size: 16px; text-align:center; margin-top: 25px; line-height: 200%; width: 225px; background-color: #6b3900;">My Library</p>
    <button class = "btn switchToVideos" onclick="window.location.href = 'videos.html';">Video Segments</button>
-   
 </div>
 
 <div class = "Library">

@@ -39,13 +39,14 @@ function processListResponse(result) {
     console.log(videoJson);
     
     var videoID = videoJson["videoID"];
-    var character = videoJson["character"];
+    var url = videoJson["url"];
+    var character = videoJson["characterName"];
     var sentence = videoJson["sentence"];
     var sysvar = videoJson["system"];
     if (sysvar) {
-    	output = output + "<div id=\"const" + videoID + "\"><b>" + videoID + ":</b> = " + character + "\"><b>" + videoID + ":</b> = " + sentence + "<br></div>";
+    	output = output + "<div id=\"video" + videoID + "\"><b>" + videoID + ":</b> = " + character + "\"><b>" + videoID + ":</b> = " + sentence + "<br></div>";
     } else {
-    	output = output + "<div id=\"const" + videoID + "\"><b>" + videoID + ":</b> = " + character + "\"><b>" + videoID + ":</b> = " + sentence + "(<a href='javaScript:requestVidDelete(\"" + vname + "\")'><img src='deleteIcon.png'></img></a>) <br></div>";
+    	output = output + "<div id=\"video" + videoID + "\"><b>" + videoID + ":</b> = " + character + "\"><b>" + videoID + ":</b> = " + sentence + "(<a href='javaScript:requestVidDelete(\"" + vname + "\")'><img src='deleteIcon.png'></img></a>) <br></div>";
     }
   }
 
