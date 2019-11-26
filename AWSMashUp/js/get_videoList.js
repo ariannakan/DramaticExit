@@ -37,7 +37,7 @@ function processListResponse(result) {
   
   for (var I = 0; I < list.length; I++)
   {
-       video = "<video id=\""+ list[I].videoID + "\"height=\"" +150+ "\" controls>" + "<source src=\""+list[I].url+ "\" type=\"video/ogg\"> </video>"
+              video = "<video id=\""+ list[I].videoID + "\"height=\"" +150+ "\" controls>" + "<source src=\""+list[I].url+ "\" type=\"video/ogg\"> </video>"
        info = "<div id=\"" + list[I].videoID + "\"><b>" + list[I].availability + ":</b><br></div>"
        document.getElementById("videoList").innerHTML += video;
        document.getElementById("infoList").innnerHTML += info;
