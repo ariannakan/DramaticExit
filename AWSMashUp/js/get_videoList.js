@@ -37,13 +37,11 @@ function processListResponse(result) {
   
   for (var I = 0; I < list.length; I++)
   {
-              video = "<video id=\""+ list[I].videoID + "\"height=\"" +150+ "\" controls>" + "<source src=\""+list[I].url+ "\" type=\"video/ogg\"> </video>"
-       info = "<div id=\"" + list[I].videoID + "\"><b>" + list[I].availability + ":</b><br></div>"
+       video = "<video id=\""+ list[I].videoID + "\"height=\"" +150+ "\" controls>" + "<source src=\""+list[I].url+ "\" type=\"video/ogg\"> </video>"
+       info = "<div id=\"" + list[I].videoID + "\"><b>" + list[I].characterName + ":</b><br></div>"
        document.getElementById("videoList").innerHTML += video;
        document.getElementById("infoList").innnerHTML += info;
   }
-  
- 
   
   //var output = "";
   for (var i = 0; i < js.list.length; i++) {
