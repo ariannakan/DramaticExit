@@ -1,14 +1,17 @@
  <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
 <!-- relative path-name to access js -->
 <script type='text/javascript' src='../js/api.js'></script>
+<script type='text/javascript' src='../js/get_playlistLists.js'></script>
 
 <script type="text/javascript">
+
 function initialize() {
   
    // get all constants
-   refreshVideoList();
+   refreshPlaylistList();
 }
 </script>
 
@@ -31,7 +34,7 @@ function initialize() {
    <p style = "font-size: 18px; font-weight: bold; color: #944f00; position: absolute; bottom: 70px; margin-left: 35px;">User</p>
    <p style = "font-size: 18px; position: absolute; bottom: 70px; margin-left: 105px;">|</p>
    <button class = "btn switchToAdmin" onclick="window.location.href = 'admin.html';">Admin</button>
-   <p style = "font-size: 16px; text-align:center; margin-top: 25px; line-height: 200%; width: 225px; background-color: #6b3900;">My Library</p>
+   <p style = "font-size: 16px; text-align:center; margin-top: 25px; line-height: 200%; width: 225px; background-color: #6b3900;">My Playlists</p>
    <button class = "btn switchToVideos" onclick="window.location.href = 'videos.html';">My Videos</button>
 </div>
 
@@ -39,13 +42,19 @@ function initialize() {
 	<h3>My Library</h3>
 </div>
 
-<div id="playlistList" style = "margin-top: 10px; margin-left:250px;"><script src = "../js/get_playlistList.js"></script></div>
 
 <div class = "playlists">
 	<div style = "border-bottom: 1px solid white;">
 		<h3 style = "display:inline;">Playlists</h3>
 		<button class="btn newPlaylist">+ New Playlist</button>
 	</div>
+	<div id="playlistList" style = "margin-top: 10px;">
+		<script src = "../js/get_playlistList.js"></script>
+		<button class="btn delete" style = "display:inline;">Delete</button>
+	</div>
+	<button class="btn delete" style = "display:inline;">Delete</button>
+</div>
+<!--  
 	<div>
 		<p style = "display:inline;">Playlist 1</p>
 		<button class="btn delete">Delete</button>
@@ -59,6 +68,7 @@ function initialize() {
 		<button class="btn delete">Delete</button>
 	</div>
 </div>
+-->
 
 </body>
 </html> 
