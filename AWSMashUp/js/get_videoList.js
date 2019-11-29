@@ -38,7 +38,7 @@ function processListResponse(result) {
   for (var I = 0; I < list.length; I++)
   {
        video = "<div><b>Video Segment " + I + "</b></div>" + "<div><video id=\""+ list[I].videoID + "\"height=\"" +150+ "\" controls>" + "<source src=\""+list[I].url+ "\" type=\"video/ogg\"></video>" + "</></div>" +
-       		"<div><b>" + list[I].characterName + ":</b>" + list[I].sentence + "</></div>"
+       		"<div><b>" + list[I].characterName + ": </b>" + list[I].sentence + "</></div>"
        document.getElementById("videoList").innerHTML += video;
   }
   

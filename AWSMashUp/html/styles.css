@@ -1,5 +1,4 @@
 body {
-  background: linear-gradient(to bottom, #cc6600 -15%, #000000 56%);
   color: rgba(255, 255, 255, 0.9);
   font-family: 'proxima-nova', sans-serif;
 }
@@ -11,12 +10,13 @@ body {
   width:205px;
 }
 
-.iconify{
-  background-color: inherit;
-  border: none; 
-  color: white;
-  padding: 4px 8px;
-  font-size: 25px;
+.door{
+	cursor:pointer;
+}
+
+.door:hover .fa-door-open:before{
+  content:"\f52a";
+  color:white
 }
 
 html, body {
@@ -27,7 +27,7 @@ html, body {
 
 .Library {
   padding-left: 235px;
-  margin-top: -90px;
+  margin-top: -70px;
   font-size: 20px;
   font-weight: bold;
   height:5%;
@@ -70,24 +70,32 @@ html, body {
   font-family: 'proxima-nova', sans-serif;
 }
 
-.btn:Hover {
-  color:#944f00;
+.registerSite:hover{
+  color:#0066cc;
 }
 
 .newPlaylist {
   margin-left:820px;
 }
 
+.newPlaylist:hover{
+  color: #e17800;
+}
+
 .delete {
   margin-left:870px;	
 }
 
-.play {
-  margin-left:830px;
+.delete:hover{
+  color: #e17800;
 }
 
 .mark {
   margin-left: 10px;
+}
+
+.mark:hover{
+  color:#0066cc; 
 }
 
 .switchToAdmin {
@@ -98,6 +106,10 @@ html, body {
   margin-bottom: 3px;
 }
 
+.switchToAdmin:hover{
+  color:#0066cc;
+}
+
 .switchToUser {
   font-size: 18px; 
   position: absolute; 
@@ -106,16 +118,38 @@ html, body {
   margin-bottom: 3px;
 }
 
+.switchToUser:hover{
+	color:#944f00;
+}
+
 .switchToRegister {
   font-size: 16px;
   margin-top:-10px;
   width:225px;
 }
 
-.switchToMyLibrary {
+.switchToRegister:hover{
+  color:#0066cc;
+}
+
+.switchToUserMyLibrary {
   font-size: 16px;
   width: 225px;
   margin-top: 20px;
+}
+
+.switchToUserMyLibrary:hover{
+  color:#944f00;
+}
+
+.switchToAdminMyLibrary{
+  font-size: 16px;
+  width: 225px;
+  margin-top: 20px;
+}
+
+.switchToAdminMyLibrary:hover{
+  color:#0066cc;
 }
 
 .switchToVideos {
@@ -124,17 +158,34 @@ html, body {
   width:225px;
 }
 
-.searchButton {
+.switchToVideos:hover{
+  color:#944f00;
+}
+
+.searchUserButton {
   background-color: inherit;
   border: none; 
   color: white;
   padding: 4px 8px;
   font-size: 16px; 
-  cursor: pointer; 
+  cursor: pointer;
 }
 
-.searchButton:hover {
+.searchUserButton:hover {
   color: #944f00;
+}
+
+.searchAdminButton {
+  background-color: inherit;
+  border: none; 
+  color: white;
+  padding: 4px 8px;
+  font-size: 16px; 
+  cursor: pointer;
+}
+
+.searchAdminButton:hover {
+  color: #0066cc;
 }
 
 .sidenav {

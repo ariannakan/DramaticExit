@@ -18,23 +18,23 @@ function initialize() {
 <title>User Library Page</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
 </head>
-<body onload="initialize()">
+<body onload="initialize()" style = "background: linear-gradient(to bottom, #cc6600 -15%, #000000 56%);">
 
 <div class = "MashUpAppTitle" id = "MashTitle">
-	<h2 style = "display:inline;">MashUpApp</h2>
-	<span style = "display:inline;" class="iconify" data-icon="fa-solid:door-open"></span>
-	<p>A Dramatic Exit Group</p>
+	<span class="door"><i class='fas fa-door-open' style = " background-color: inherit; border: none; color: white; padding: 4px 8px; font-size: 25px; cursor:pointer;"></i></span>	
+	<h2 style = "display:inline;">MashUpApp<br><span style = "font-size:12px; margin-left:30px;">A Dramatic Exit Group</span></h2>
 </div>
 
 <div class = "sidenav">
-   <input type="text" placeholder="Search..">
-   <button class = "searchButton" style = "display: inline;"><i class="fa fa-search"></i></button>      
+   <input type="text" placeholder="Search.." style = "margin-top:20px;">
+   <button class = "searchUserButton" style = "display: inline;"><i class="fa fa-search"></i></button>      
    <p style = "font-size: 18px; font-weight: bold; color: #944f00; position: absolute; bottom: 70px; margin-left: 35px;">User</p>
    <p style = "font-size: 18px; position: absolute; bottom: 70px; margin-left: 105px;">|</p>
    <button class = "btn switchToAdmin" onclick="window.location.href = 'admin.html';">Admin</button>
-   <p style = "font-size: 16px; text-align:center; margin-top: 25px; line-height: 200%; width: 225px; background-color: #6b3900;">My Playlists</p>
+   <p style = "font-size: 16px; text-align:center; margin-top: 25px; line-height: 200%; width: 225px; background-color: #6b3900;">My Library</p>
    <button class = "btn switchToVideos" onclick="window.location.href = 'videos.html';">My Videos</button>
 </div>
 
@@ -48,11 +48,11 @@ function initialize() {
 		<h3 style = "display:inline;">Playlists</h3>
 		<button class="btn newPlaylist">+ New Playlist</button>
 	</div>
-	<div id="playlistList" style = "margin-top: 10px;">
+	<div id="playlistList" style = "margin-top: 10px; margin-right:50px; display:inline;">
 		<script src = "../js/get_playlistList.js"></script>
-		<button class="btn delete" style = "display:inline;">Delete</button>
+		<button class="btn delete">Delete</button>
+		<button class="btn delete">Delete</button>
 	</div>
-	<button class="btn delete" style = "display:inline;">Delete</button>
 </div>
 <!--  
 	<div>
