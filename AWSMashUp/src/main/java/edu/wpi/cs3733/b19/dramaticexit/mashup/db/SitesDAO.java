@@ -61,7 +61,7 @@ public class SitesDAO {
     public boolean deleteSite(Site site) throws Exception {
         try {
             PreparedStatement ps = conn.prepareStatement("DELETE FROM Sites WHERE timestampID = ?;");
-            ps.setString(1, site.siteID);
+            ps.setString(1, site.timestampID);
             int numAffected = ps.executeUpdate();
             ps.close();
             
@@ -86,8 +86,8 @@ public class SitesDAO {
                 return false;
             }
 
-            ps = conn.prepareStatement("INSERT INTO Sites (siteID,url) values(?,?);");
-            ps.setString(1,  site.siteID);
+            ps = conn.prepareStatement("INSERT INTO Sites (timestampID,url) values(?,?);");
+            ps.setString(1,  site.timestampID);
             ps.setString(2, site.url);
             ps.execute();
             return true;
@@ -119,9 +119,9 @@ public class SitesDAO {
     }
     
     private Site generateSite(ResultSet resultSet) throws Exception {
-        String siteID  = resultSet.getString("timestampID");
+        String timestampID  = resultSet.getString("timestampID");
         String url = resultSet.getString("url");
-        return new Site(siteID, url);
+        return new Site(timestampID, url);
     }
 
 }

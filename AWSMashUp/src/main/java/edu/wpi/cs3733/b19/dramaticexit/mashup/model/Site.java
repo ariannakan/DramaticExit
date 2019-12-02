@@ -3,16 +3,16 @@ package edu.wpi.cs3733.b19.dramaticexit.mashup.model;
 public class Site {
 
 	public boolean system;	// when TRUE this is actually stored in S3 bucket
-	public String siteID;
+	public String timestampID;
 	public String url;
 	
 	public Site(String siteID, String url) {
-		this.siteID = siteID;
+		this.timestampID = siteID;
 		this.url = url;
 	}
 	
 	public Site(String siteID, String url, boolean system) {
-		this.siteID = siteID;
+		this.timestampID = siteID;
 		this.url = url;
 		this.system = system;
 	}
