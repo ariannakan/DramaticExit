@@ -1,22 +1,22 @@
 package edu.wpi.cs3733.b19.dramaticexit.mashup.http;
 
 public class RegisterSiteRequest {
-	String siteURL;
+	public String url;
 	
-	public String getSiteURL() {return siteURL;}
-	public void setSiteURL(String url) {this.siteURL = url;}
+	public String getSiteURL() {return url;}
+	public void setSiteURL(String url) {this.url = url;}
 	
 	public RegisterSiteRequest() {
 		
 	}
 	
 	public RegisterSiteRequest(String url) {
-		this.siteURL = url;
+		this.url = url;
 	}
 	
 	
 	public String toString() {
-		return "Register(" + siteURL + ")";
+		return "Register(" + url + ")";
 	}
 
 }

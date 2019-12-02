@@ -20,12 +20,12 @@ public class SitesDAO {
     	}
     }
 
-    public Site getSite(String url) throws Exception {
-        
+    public Site getSiteURL(String url) throws Exception {
+      
         try {
             Site site = null;
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Sites WHERE url=?;");
-            ps.setString(1,  url);		//videoID is 1st index in database
+            ps.setString(1, url);		//videoID is 1st index in database
             ResultSet resultSet = ps.executeQuery();
             
             while (resultSet.next()) {
@@ -34,11 +34,11 @@ public class SitesDAO {
             resultSet.close();
             ps.close();
             
-            return video;
+            return site;
 
         } catch (Exception e) {
         	e.printStackTrace();
-            throw new Exception("Failed in getting video: " + e.getMessage());
+            throw new Exception("Failed in getting site url: " + e.getMessage());
         }
     }
     
@@ -58,73 +58,70 @@ public class SitesDAO {
         }
     }
 **/
-    public boolean deleteVideo(Video video) throws Exception {
+    public boolean deleteSite(Site site) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM Videos WHERE videoID = ?;");
-            ps.setString(1, video.videoID);
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM Sites WHERE timestampID = ?;");
+            ps.setString(1, site.siteID);
             int numAffected = ps.executeUpdate();
             ps.close();
             
             return (numAffected == 1);
 
         } catch (Exception e) {
-            throw new Exception("Failed to delete video: " + e.getMessage());
+            throw new Exception("Failed to delete site: " + e.getMessage());
         }
     }
 
 
-    public boolean addVideo(Video video) throws Exception {
+    public boolean addSite(Site site) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Videos WHERE videoID = ?;");
-            ps.setString(1, video.videoID);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Sites WHERE timestampID = ?;");
+            ps.setString(1, site.siteID);
             ResultSet resultSet = ps.executeQuery();
             
             // already present?
             while (resultSet.next()) {
-                Video v = generateVideo(resultSet);
+                Site s = generateSite(resultSet);
                 resultSet.close();
                 return false;
             }
 
-            ps = conn.prepareStatement("INSERT INTO Videos (videoID,characterName,sentence,availability) values(?,?,?,?);");
-            ps.setString(1,  video.videoID);
-            ps.setString(2, video.characterName);
-            ps.setString(3, video.sentence);
-            ps.setBoolean(4,  video.availability);
+            ps = conn.prepareStatement("INSERT INTO Sites (siteID,url) values(?,?);");
+            ps.setString(1,  site.siteID);
+            ps.setString(2, site.url);
             ps.execute();
             return true;
 
         } catch (Exception e) {
-            throw new Exception("Failed to add video: " + e.getMessage());
+            throw new Exception("Failed to add site: " + e.getMessage());
         }
     }
 
-    public List<Video> getAllVideos() throws Exception {
+    public List<Site> getAllSites() throws Exception {
         
-        List<Video> allVideos = new ArrayList<>();
+        List<Site> allSites = new ArrayList<>();
         try {
             Statement statement = conn.createStatement();
-            String query = "SELECT * FROM Videos";
+            String query = "SELECT * FROM Sites";
             ResultSet resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                Video v = generateVideo(resultSet);
-                allVideos.add(v);
+                Site s = generateSite(resultSet);
+                allSites.add(s);
             }
             resultSet.close();
             statement.close();
-            return allVideos;
+            return allSites;
 
         } catch (Exception e) {
-            throw new Exception("Failed in getting videos: " + e.getMessage());
+            throw new Exception("Failed in getting sites: " + e.getMessage());
         }
     }
     
-    private Video generateSite(ResultSet resultSet) throws Exception {
-        String videoID  = resultSet.getString("videoID");
-        String characterName = resultSet.getString("characterName");
-        String sentence = resultSet.getString("sentence");
-        boolean availability = resultSet.getBoolean("availability");
-        return new Video(videoID, characterName, sentence, availability);
+    private Site generateSite(ResultSet resultSet) throws Exception {
+        String siteID  = resultSet.getString("timestampID");
+        String url = resultSet.getString("url");
+        return new Site(siteID, url);
     }
+
 }
