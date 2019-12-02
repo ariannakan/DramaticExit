@@ -23,16 +23,15 @@ function initialize() {
 </head>
 <body onload="initialize()" style = "background: linear-gradient(to bottom, #cc6600 -15%, #000000 56%);">
 
-<div class = "MashUpAppTitle" id = "MashTitle">
-	<span class="door"><i class='fas fa-door-open' style = " background-color: inherit; border: none; color: white; padding: 4px 8px; font-size: 25px; cursor:pointer;"></i></span>	
-	<h2 style = "display:inline;">MashUpApp<br><span style = "font-size:12px; margin-left:30px;">A Dramatic Exit Group</span></h2>
-</div>
-
 <div class = "sidenav">
+	<div class = "MashUpAppTitle" id = "MashTitle">
+		<span class="door"><i class='fas fa-door-open' style = " background-color: inherit; border: none; color: white; padding: 4px 8px; font-size: 25px; cursor:pointer;"></i></span>	
+		<h2 style = "display:inline;">MashUpApp<br><span style = "font-size:12px; margin-left:30px;">A Dramatic Exit Group</span></h2>
+	</div>
    <input type="text" placeholder="Search.." style = "margin-top:20px;">
    <button class = "searchUserButton" style = "display: inline;"><i class="fa fa-search"></i></button>      
-   <p style = "font-size: 18px; font-weight: bold; color: #944f00; position: absolute; bottom: 70px; margin-left: 35px;">User</p>
-   <p style = "font-size: 18px; position: absolute; bottom: 70px; margin-left: 105px;">|</p>
+   <p style = "font-size: 18px; font-weight: bold; color: #944f00; position: absolute; bottom: 0; margin-left: 35px;">User</p>
+   <p style = "font-size: 18px; position: absolute; bottom: 0; margin-left: 110px;">|</p>
    <button class = "btn switchToAdmin" onclick="window.location.href = 'admin.html';">Admin</button>
    <button class = "btn switchToUserMyLibrary" onClick="window.location.href = 'user.html';">My Library</button>
    <p style = "font-size: 16px; text-align:center; margin-top: 5px; line-height: 200%; width: 225px; background-color: #6b3900;">My Videos</p>
@@ -42,7 +41,10 @@ function initialize() {
 	<h3>My Videos</h3>
 </div>
 
-<div id="videoList" style = "margin-top: 10px; margin-left:250px; "><script src = "../js/get_videoList.js"></script></div>
+<div class = "grid-container" id="videoList" style = "margin-top: 10px; margin-left:240px;">
+	<script src = "../js/get_videoList.js"></script>
+</div>
+
 
 <!--  
 <div class = "videos" style = "margin-top:150px;">

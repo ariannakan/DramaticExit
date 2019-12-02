@@ -37,12 +37,12 @@ function processListResponse(result) {
   for (var I = 0; I < list.length; I++){
 	  playlist = "<div id=\"" + list[I].playlistID + "\">" + list[I].playlistID + ". " + list[I].playlistName + "<br></div>";
       document.getElementById("playlistList").innerHTML += playlist; 
+      document.getElementById("1").style.display = "inline";
   }
   
   for (var i = 0; i < js.list.length; i++) {
     var list = js.list[i];
     console.log(list);
   }
-
 }
 

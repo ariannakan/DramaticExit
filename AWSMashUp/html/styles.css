@@ -20,14 +20,20 @@ body {
 }
 
 html, body {
-   margin: 0;
-   padding: 0;
-   height: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.grid-container {
+  display:grid; 
+  grid-template-columns: 210px 210px 210px 210px 210px; 
+  grid-template-rows: 210px 210px;
 }
 
 .Library {
   padding-left: 235px;
-  margin-top: -70px;
+  margin-top: -10px;
   font-size: 20px;
   font-weight: bold;
   height:5%;
@@ -101,7 +107,7 @@ html, body {
 .switchToAdmin {
   font-size: 18px; 
   position: absolute; 
-  bottom: 70px; 
+  bottom: 0; 
   margin-left: -100px; 
   margin-bottom: 3px;
 }
@@ -113,7 +119,7 @@ html, body {
 .switchToUser {
   font-size: 18px; 
   position: absolute; 
-  bottom: 70px; 
+  bottom: 0; 
   margin-left: -200px; 
   margin-bottom: 3px;
 }
@@ -193,7 +199,7 @@ html, body {
   width: 225px; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
-  top: 6; /* Stay at the top */
+  top: 0; /* Stay at the top */
   left: 0;
   background-color: #000000;
   overflow-x: hidden; /* Disable horizontal scroll */
