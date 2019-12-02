@@ -75,8 +75,8 @@ public class SitesDAO {
 
     public boolean addSite(Site site) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Sites WHERE timestampID = ?;");
-            ps.setString(1, site.siteID);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Sites WHERE url = ?;");
+            ps.setString(1, site.url);
             ResultSet resultSet = ps.executeQuery();
             
             // already present?

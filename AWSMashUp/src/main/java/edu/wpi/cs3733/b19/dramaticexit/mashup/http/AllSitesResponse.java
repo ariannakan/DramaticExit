@@ -13,7 +13,6 @@ public class AllSitesResponse {
 	public AllSitesResponse(List<Site> list, int code) {
 		this.list = list;
 		this.statusCode = code;
-		this.error = "";
 	}
 	
 	public AllSitesResponse(int code, String errorMessage) {

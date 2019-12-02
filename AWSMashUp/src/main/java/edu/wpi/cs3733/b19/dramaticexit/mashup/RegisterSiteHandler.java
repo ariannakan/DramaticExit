@@ -21,7 +21,7 @@ public class RegisterSiteHandler implements RequestHandler<RegisterSiteRequest,R
 	 * @throws Exception 
 	 */
 	boolean registerSite(String url) throws Exception {
-		if (logger != null) { logger.log("in createConstant"); }
+		if (logger != null) { logger.log("in registerSite"); }
 		SitesDAO dao = new SitesDAO();
 		
 		// check if present
