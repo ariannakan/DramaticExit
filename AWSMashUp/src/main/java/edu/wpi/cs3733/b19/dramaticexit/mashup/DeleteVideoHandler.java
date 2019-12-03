@@ -24,10 +24,10 @@ public class DeleteVideoHandler implements RequestHandler<DeleteVideoRequest,Del
 		//check if present
 		Video exist = dao.getVideo(id);
 		if(exist == null) {
-			logger.log("video does not exist");
+			System.out.println("video does not exist");
 			return false;
 		} else {
-			logger.log("video exists");
+			System.out.println("video exists");
 			return dao.deleteVideo(id);
 		}
 	}
@@ -35,7 +35,7 @@ public class DeleteVideoHandler implements RequestHandler<DeleteVideoRequest,Del
 	@Override
 	public DeleteVideoResponse handleRequest(DeleteVideoRequest req, Context context) {
 		logger = context.getLogger();
-		logger.log("Loading Java Lambda handler to delete video");
+		System.out.println("Loading Java Lambda handler to delete video");
 		logger.log(req.toString());
 
 		DeleteVideoResponse response;

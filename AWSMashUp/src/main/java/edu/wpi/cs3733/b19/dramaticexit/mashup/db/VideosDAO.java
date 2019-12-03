@@ -27,17 +27,17 @@ public class VideosDAO {
     public VideosDAO() {
 //    	System.out.println("\n trying to connect");
     	try  {
-    		logger.log("trying to connect");
+    		System.out.println("trying to connect");
     		conn = DatabaseUtil.connect();
     	} catch (Exception e) {
     		conn = null;
-    		logger.log("null connection");
+    		System.out.println("null connection");
 //    		e.printStackTrace();
     	}
     }
 
     public Video getVideo(String videoID) throws Exception {
-    	logger.log("in getVideo");
+    	System.out.println("in getVideo");
         try {
             Video video = null;
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Videos WHERE videoID=?;");
@@ -76,7 +76,7 @@ public class VideosDAO {
 **/
     public boolean deleteVideo(String videoID) throws Exception {
         try {
-        	logger.log("in deleteVideo DAO");
+        	System.out.println("in deleteVideo DAO");
             PreparedStatement ps = conn.prepareStatement("DELETE FROM Videos WHERE videoID = ?;");
             ps.setString(1, videoID);
             int numAffected = ps.executeUpdate();
