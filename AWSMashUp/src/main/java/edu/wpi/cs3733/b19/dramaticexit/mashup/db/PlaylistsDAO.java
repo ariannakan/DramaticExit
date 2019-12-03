@@ -86,7 +86,7 @@ public class PlaylistsDAO {
     
     public boolean removeVideo(String playlistName, String videoID) throws Exception {
     	try {
-    		PreparedStatement ps = conn.prepareStatement("DELETE FROM PlaylistVideos WHERE playlistName IS NOT NULL GROUPBY playlistName HAVING videoID = ?;");
+    		PreparedStatement ps = conn.prepareStatement("DELETE FROM PlaylistVideos WHERE playlistName = ? AND videoID = ?;");
     		ps.setString(1, playlistName);
     		ps.setString(2, videoID);
     		int numAffected = ps.executeUpdate();
