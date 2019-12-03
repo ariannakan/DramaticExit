@@ -32,12 +32,14 @@ function processListResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
   var js = JSON.parse(result);
   var vidList = document.getElementById('videoList');
-  var infoList = document.getElementById('infoList');
   var list =  JSON.parse(result).list
   
   for (var I = 0; I < list.length; I++)
   {
-       video = "<div><b>Video Segment " + I + "</b>" + "<video id=\""+ list[I].videoID + "\"height=\"" +150+ "\" controls>" + "<source src=\""+list[I].url+ "\" type=\"video/ogg\"></video>" + "</>" +
+       video = "<div id=\"" + list[I].videoID + "\">" +
+       		"<div><center><a href='javaScript:requestVidDelete(\"" + list[I].videoID + "\")'><img src='https://cdn0.iconfinder.com/data/icons/very-basic-android-l-lollipop-icon-pack/24/close-128.png' height="+ 20 +" width="+ 20 +"></img></a></center>" +
+       		"<div><center><b>Video Segment " + I + "</b></center>" + 
+       		"<div><video height=" + 150 + " controls>" + "<source src=\"" + list[I].url + "\" type=\"video/ogg\"></video>" +
        		"<div><b>" + list[I].characterName + ": </b>" + list[I].sentence + "</></div>"
        document.getElementById("videoList").innerHTML += video;
   }
