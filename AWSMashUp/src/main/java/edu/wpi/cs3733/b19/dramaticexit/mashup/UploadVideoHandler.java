@@ -1,9 +1,7 @@
 package edu.wpi.cs3733.b19.dramaticexit.mashup;
 
-import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.net.URL;
 
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.lambda.runtime.Context;
@@ -97,7 +95,7 @@ String tempurl;
 				}
 			}
 		} catch (Exception e) {
-			response = new UploadVideoResponse("Unable to create constant: " + req.videoID + "(" + e.getMessage() + ")", 400);
+			response = new UploadVideoResponse("Unable to create video: " + req.videoID + "(" + e.getMessage() + ")", 400);
 		}
 
 		return response;
