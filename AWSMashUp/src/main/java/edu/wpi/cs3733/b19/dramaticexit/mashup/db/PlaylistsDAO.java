@@ -1,12 +1,14 @@
 package edu.wpi.cs3733.b19.dramaticexit.mashup.db;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 import edu.wpi.cs3733.b19.dramaticexit.mashup.db.DatabaseUtil;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Playlist;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.db.VideosDAO;
 
 /**
  * Note that CAPITALIZATION matters regarding the table name. If you create with 
@@ -82,18 +84,18 @@ public class PlaylistsDAO {
         }
     }
     
-    public boolean deleteVideo(Playlist playlist, Video video) throws Exception {
+    public boolean removeVideo(String playlistName, String videoID) throws Exception {
     	try {
-    		PreparedStatement ps = conn.prepareStatement("DELETE WHERE videoID = ? FROM Playlists WHERE playlistID = ? ;");
-    		ps.setString(1, video.videoID);
-    		ps.setString(2, playlist.playlistID);
+    		PreparedStatement ps = conn.prepareStatement("DELETE FROM PlaylistVideos WHERE playlistName IS NOT NULL GROUPBY playlistName HAVING videoID = ?;");
+    		ps.setString(1, playlistName);
+    		ps.setString(2, videoID);
     		int numAffected = ps.executeUpdate();
     		ps.close();
     		
     		return (numAffected == 1);
     	}
     	catch (Exception e){
-    		throw new Exception("Failed to delete video from playlist " + e.getMessage());
+    		throw new Exception("Failed to remove video from playlist " + e.getMessage());
     	}
     }
     
@@ -158,9 +160,39 @@ public class PlaylistsDAO {
         }
     }
     
+public List<Video> getPlaylistVideos(String playlistName) throws Exception {
+        
+        List<Video> allVideos = new ArrayList<>();
+        try {
+        	PreparedStatement ps = conn.prepareStatement("SELECT * FROM PlaylistVideos WHERE playlistName=?;");
+            ps.setString(1,  playlistName);
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                Video v = generateVideo(resultSet);
+                allVideos.add(v);
+            }
+            resultSet.close();
+            ps.close();
+            return allVideos;
+
+        } catch (Exception e) {
+            throw new Exception("Failed in getting videos from playlist: " + e.getMessage());
+        }
+    }
+    
     private Playlist generatePlaylist(ResultSet resultSet) throws Exception {
         String playlistID  = resultSet.getString("playlistID");
         String playlistName = resultSet.getString("playlistName");
         return new Playlist(playlistID, playlistName);
+    }
+    
+    private Video generateVideo(ResultSet resultSet) throws Exception {
+        String videoID  = resultSet.getString("videoID");
+        String characterName = resultSet.getString("characterName");
+        String sentence = resultSet.getString("sentence");
+        boolean availability = resultSet.getBoolean("availability");
+        String url = resultSet.getString("url");
+        return new Video(videoID, characterName, sentence, availability, url);
     }
 }
