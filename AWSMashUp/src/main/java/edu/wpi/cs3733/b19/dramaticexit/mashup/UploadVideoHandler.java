@@ -44,7 +44,7 @@ LambdaLogger logger;
 		ObjectMetadata omd = new ObjectMetadata();
 		omd.setContentLength(oggFile.length());
 		
-		PutObjectResult res = s3.putObject(new PutObjectRequest("b19dramaticexit", "Videos/" + name, bais, omd)
+		PutObjectResult res = s3.putObject(new PutObjectRequest("b19dramaticexit", "Videos/" + oggFile, inputstream, omd)
 				.withCannedAcl(CannedAccessControlList.PublicRead));
 		
 		// if we ever get here, then whole thing was stored
@@ -76,19 +76,18 @@ LambdaLogger logger;
 
 		UploadVideoResponse response;
 		try {
-			byte[] encoded = java.util.Base64.getDecoder().decode(req.base64EncodedValue);
 			if (req.system) {
-				if (uploadVideotoRDS(req.videoID, encoded)) {
-					response = new UploadVideoResponse(req.videoID);
+				if (uploadVideotoRDS(req.videoID, req.characterName, req.sentence, req.availability, req.videoURL)) {
+					response = new UploadVideoResponse(req.videoID, 200);
 				} else {
 					response = new UploadVideoResponse(req.videoID, 422);
 				}
 			} else {
-				String contents = new String(encoded);
-				double value = Double.valueOf(contents);
-				
-				if (uploadVideotoRDS(req.videoID, value)) {
-					response = new UploadVideoResponse(req.videoID);
+//				String contents = new String(encoded);
+//				double value = Double.valueOf(contents);
+//				
+				if (uploadVideotoRDS(req.videoID, req.characterName, req.sentence, req.availability, req.videoURL)) {
+					response = new UploadVideoResponse(req.videoID, 200);
 				} else {
 					response = new UploadVideoResponse(req.videoID, 422);
 				}
