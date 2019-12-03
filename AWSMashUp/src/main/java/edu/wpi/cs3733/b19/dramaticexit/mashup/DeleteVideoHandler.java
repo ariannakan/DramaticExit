@@ -11,9 +11,14 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 
 public class DeleteVideoHandler implements RequestHandler<DeleteVideoRequest,DeleteVideoResponse>{
 	
-	public LambdaLogger logger = null;
+	LambdaLogger logger;
 	
+	/** Find in RDS.
+	 * 
+	 * @throws Exception 
+	 */
 	boolean deleteVideo(String id) throws Exception {
+//		logger.log("in deleteVideo");
 		VideosDAO dao = new VideosDAO();
 
 		//check if present
@@ -31,12 +36,12 @@ public class DeleteVideoHandler implements RequestHandler<DeleteVideoRequest,Del
 	public DeleteVideoResponse handleRequest(DeleteVideoRequest req, Context context) {
 		logger = context.getLogger();
 		logger.log("Loading Java Lambda handler to delete video");
+		logger.log(req.toString());
 
 		DeleteVideoResponse response;
-
 		try {
 			if (deleteVideo(req.videoID)) {
-				response = new DeleteVideoResponse(req.videoID);
+				response = new DeleteVideoResponse(req.videoID, 200);
 			} else {
 				response = new DeleteVideoResponse(req.videoID, 422, "Unable to delete video.");
 			}

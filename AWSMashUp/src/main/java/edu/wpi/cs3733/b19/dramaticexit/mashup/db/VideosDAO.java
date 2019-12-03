@@ -25,23 +25,23 @@ public class VideosDAO {
 	LambdaLogger logger;
 
     public VideosDAO() {
-    	System.out.println("\n trying to connect");
+//    	System.out.println("\n trying to connect");
     	try  {
-//    		logger.log("\n trying to connect");
+    		logger.log("trying to connect");
     		conn = DatabaseUtil.connect();
     	} catch (Exception e) {
     		conn = null;
-//    		logger.log("null connection");
-    		e.printStackTrace();
+    		logger.log("null connection");
+//    		e.printStackTrace();
     	}
     }
 
     public Video getVideo(String videoID) throws Exception {
-        
+    	logger.log("in getVideo");
         try {
             Video video = null;
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Videos WHERE videoID=?;");
-            ps.setString(1,  videoID);		//videoID is 1st index in database
+            ps.setString(1, videoID);		//videoID is 1st index in database
             ResultSet resultSet = ps.executeQuery();
             
             while (resultSet.next()) {

@@ -6,9 +6,10 @@ public class DeleteVideoResponse {
 	public String error;
 	
 	// 200 = success
-	public DeleteVideoResponse(String videoID) {
+	public DeleteVideoResponse(String videoID, int statusCode) {
 		this.videoID = videoID;
-		this.statusCode = 200;
+		this.statusCode = statusCode;
+		this.error = "";
 	}
 	
 	public DeleteVideoResponse(String videoID, int statusCode, String errorMessage) {
