@@ -36,8 +36,8 @@ function processListResponse(result) {
   
   for (var I = 0; I < list.length; I++) {
 	  video = "<div id=\"" + list[I].videoID + "\">" +
-	  		"<div><b><center>" + list[I].videoID + "</b>     " +
-	  		"<a href='javaScript:requestVidDelete(\"" + list[I].videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a></center>" +
+	  		"<div><b><center>" + list[I].videoID + "</b>" +
+	  		"(<a href='javaScript:requestVidDelete(\"" + list[I].videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
        		"<div><video height=" + 150 + " controls>" + "<source src=\"" + list[I].url + "\" type=\"video/ogg\"></video>" +
        		"<div><b>" + list[I].characterName + ": </b>" + list[I].sentence + "</></div>";
 	  document.getElementById("videoList").innerHTML += video;

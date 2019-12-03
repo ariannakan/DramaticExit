@@ -35,7 +35,7 @@ function processListResponse(result) {
   var list = JSON.parse(result).list
   
   for (var I = 0; I < list.length; I++){
-	  playlist = "<div id=\"" + list[I].playlistID + "\">" + list[I].playlistID + ". " + list[I].playlistName + "<br></div>";
+	  playlist = "<div id=\"" + list[I].playlistID + "\">" + list[I].playlistName + "<br></div>";
       document.getElementById("playlistList").innerHTML += playlist; 
       document.getElementById("1").style.display = "inline";
   }
