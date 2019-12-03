@@ -68,9 +68,11 @@ public class PlaylistsDAO {
 **/
     public boolean appendVideo(Playlist playlist, Video video) throws Exception {
         try {
-        	String query = "UPDATE Playlists SET videoID=? WHERE playlistID=?;";
+        	String query = "INSERT INTO PlaylistVideos (playlistName,videoID,url) values(?,?,?);";
         	PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(3, video.videoID);
+        	ps.setString(1, playlist.playlistName);
+            ps.setString(2, video.videoID);
+            ps.setString(3, video.url);
             int numAffected = ps.executeUpdate();
             ps.close();
             

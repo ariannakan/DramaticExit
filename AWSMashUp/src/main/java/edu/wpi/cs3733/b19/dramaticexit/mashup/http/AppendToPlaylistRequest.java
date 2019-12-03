@@ -8,10 +8,10 @@ public class AppendToPlaylistRequest {
 	public String videoID;
 	public boolean system;
 	
-	public String getPlaylist() { return playlistID; }
+	public String getPlaylistID() { return playlistID; }
 	
-	public String getVideo() { return videoID; }
-	public void setVideo(String id) { this.videoID = id;	} 	//change to boolean
+	public String getVideoID() { return videoID; }
+	public void setVideoID(String id) { this.videoID = id;	} 	//change to boolean
 	
 	public boolean getSystem( ) { return system; }
 	public void setSystem(boolean system) { this.system = system; }
