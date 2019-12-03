@@ -40,14 +40,14 @@ public class DeleteSiteHandler implements RequestHandler<DeleteSiteRequest,Delet
 
 		DeleteSiteResponse response;
 		try {
-			if (deleteSite(req.siteURL)) {
-				response = new DeleteSiteResponse(req.siteURL, 200);
+			if (deleteSite(req.url)) {
+				response = new DeleteSiteResponse(req.url, 200);
 			} else {
-				response = new DeleteSiteResponse(req.siteURL, 422);
+				response = new DeleteSiteResponse(req.url, 422);
 			}
 			
 		} catch (Exception e) {
-			response = new DeleteSiteResponse("Unable to delate site: " + req.siteURL + "(" + e.getMessage() + ")", 400);
+			response = new DeleteSiteResponse("Unable to delate site: " + req.url + "(" + e.getMessage() + ")", 400);
 		}
 
 		return response;
