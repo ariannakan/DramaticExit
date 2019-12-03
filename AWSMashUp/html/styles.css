@@ -210,6 +210,18 @@ html, body {
   color: #e17800;
 }
 
+.browseButton {
+  float:right;
+  border: none;
+  background-color: inherit;
+  padding: 12px 0px;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'proxima-nova', sans-serif;
+}
+
 /* The popup form - hidden by default */
 .form-popup {
   display: none;

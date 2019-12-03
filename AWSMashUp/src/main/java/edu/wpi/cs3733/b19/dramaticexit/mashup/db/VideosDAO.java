@@ -25,23 +25,23 @@ public class VideosDAO {
 	LambdaLogger logger;
 
     public VideosDAO() {
-    	System.out.println("\n trying to connect");
+//    	System.out.println("\n trying to connect");
     	try  {
-//    		logger.log("\n trying to connect");
+    		System.out.println("trying to connect");
     		conn = DatabaseUtil.connect();
     	} catch (Exception e) {
     		conn = null;
-//    		logger.log("null connection");
-    		e.printStackTrace();
+    		System.out.println("null connection");
+//    		e.printStackTrace();
     	}
     }
 
-    public Video getVideo(String id) throws Exception {
-        
+    public Video getVideo(String videoID) throws Exception {
+    	System.out.println("in getVideo");
         try {
             Video video = null;
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Videos WHERE videoID=?;");
-            ps.setString(1,  id);		//videoID is 1st index in database
+            ps.setString(1, videoID);		//videoID is 1st index in database
             ResultSet resultSet = ps.executeQuery();
             
             while (resultSet.next()) {
@@ -74,11 +74,11 @@ public class VideosDAO {
         }
     }
 **/
-    public boolean deleteVideo(String id) throws Exception {
+    public boolean deleteVideo(String videoID) throws Exception {
         try {
-        	logger.log("in deleteVideo DAO");
+        	System.out.println("in deleteVideo DAO");
             PreparedStatement ps = conn.prepareStatement("DELETE FROM Videos WHERE videoID = ?;");
-            ps.setString(1, id);
+            ps.setString(1, videoID);
             int numAffected = ps.executeUpdate();
             ps.close();
             
