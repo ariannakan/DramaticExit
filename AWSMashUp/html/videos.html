@@ -5,6 +5,7 @@
 <!-- relative path-name to access js -->
 <script type='text/javascript' src='../js/api.js'></script>
 <script type='text/javascript' src='../js/get_videoList.js'></script>
+<script type='text/javascript' src='../js/delete_video.js'></script>
 
 <script type="text/javascript">
 
@@ -40,6 +41,39 @@ function initialize() {
 <div class = "Library">
 	<h3>My Videos</h3>
 </div>
+
+<form>
+	<!--  <input type = "button" class = "btn formButton" value = "Submit">-->
+	<input type = "button" class = "btn formButton" value = "Enter Video Details" onclick="openForm()">
+	<input type = "file" class = "btn formButton" id="file" name="file" style = "font-size:13px;">
+</form>
+
+<div class="form-popup" id="myForm">
+	<form action="/action_page.php" class="form-container">
+		<h3 style = "text-align:center; color:black;">Enter <u>Character Name</u> and <u>Sentence</u> Below</h3>
+		
+		<label for="cname"><b>Character Name</b></label>
+		<input type="text" placeholder="Enter Character Name..." name="cname" required>
+		
+		<label for="sentence"><b>Sentence</b></label>
+		<input type="text" placeholder="Enter Sentence..." name="sentence" required>
+		
+		<button type="submit" class="btn">Submit</button>
+		<button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+	</form>
+</div>
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
+
+<div style = "border-bottom: 1px solid white; margin-top:40px;"></div>
 
 <div class = "grid-container" id="videoList" style = "margin-top: 10px; margin-left:240px;">
 	<script src = "../js/get_videoList.js"></script>
