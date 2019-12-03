@@ -4,9 +4,15 @@ public class ListPlaylistVideosRequest {
 	
 	public String playlistName;
 	
+	public String getPlaylist() {
+		return this.playlistName;
+	}
+	
 	public ListPlaylistVideosRequest (String playlistName) {
 		this.playlistName = playlistName;
 	}
+	
+	public ListPlaylistVideosRequest() { }
 	
 	public String toString() {
 		return "List()";

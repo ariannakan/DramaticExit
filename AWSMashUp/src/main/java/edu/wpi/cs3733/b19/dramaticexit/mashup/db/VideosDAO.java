@@ -117,10 +117,6 @@ public class VideosDAO {
         }
     }
 
-    public void testFunction() {
-    	System.out.println("\n test function entered");
-    }
-    
     public List<Video> getAllVideos() throws Exception {
         
         List<Video> allVideos = new ArrayList<>();

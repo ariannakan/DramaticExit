@@ -189,10 +189,7 @@ public List<Video> getPlaylistVideos(String playlistName) throws Exception {
     
     private Video generateVideo(ResultSet resultSet) throws Exception {
         String videoID  = resultSet.getString("videoID");
-        String characterName = resultSet.getString("characterName");
-        String sentence = resultSet.getString("sentence");
-        boolean availability = resultSet.getBoolean("availability");
         String url = resultSet.getString("url");
-        return new Video(videoID, characterName, sentence, availability, url);
+        return new Video(videoID, url);
     }
 }
