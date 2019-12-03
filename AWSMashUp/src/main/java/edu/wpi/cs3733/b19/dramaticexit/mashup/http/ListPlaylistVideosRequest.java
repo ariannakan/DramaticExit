@@ -2,7 +2,10 @@ package edu.wpi.cs3733.b19.dramaticexit.mashup.http;
 
 public class ListPlaylistVideosRequest {
 	
-	public ListPlaylistVideosRequest () {
+	public String playlistName;
+	
+	public ListPlaylistVideosRequest (String playlistName) {
+		this.playlistName = playlistName;
 	}
 	
 	public String toString() {
