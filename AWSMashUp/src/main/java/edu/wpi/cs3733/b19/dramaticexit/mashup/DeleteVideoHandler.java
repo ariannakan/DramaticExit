@@ -19,9 +19,10 @@ public class DeleteVideoHandler implements RequestHandler<DeleteVideoRequest,Del
 		//check if present
 		Video exist = dao.getVideo(id);
 		if(exist == null) {
-			logger.log("false: video does not exist");
+			logger.log("video does not exist");
 			return false;
 		} else {
+			logger.log("video exists");
 			return dao.deleteVideo(id);
 		}
 	}
