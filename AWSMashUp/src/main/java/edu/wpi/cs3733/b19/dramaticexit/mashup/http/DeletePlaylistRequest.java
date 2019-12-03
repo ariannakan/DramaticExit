@@ -1,20 +1,19 @@
 package edu.wpi.cs3733.b19.dramaticexit.mashup.http;
 
 public class DeletePlaylistRequest {
-	public String playlistID;
+	public String playlistName;
 	
-	public void setPlaylistID(String id) {this.playlistID = id;}
-	public String getPlaylistID() {return playlistID;}
+	public String getPlaylistName() {return playlistName;}
 	
-	public DeletePlaylistRequest(String id) {
-		this.playlistID = id;
+	public DeletePlaylistRequest(String name) {
+		this.playlistName = name;
 	}
 	
 	public DeletePlaylistRequest() {
 	}
 	
 	public String toString() {
-		return "Delete(" + playlistID + ")";
+		return "Delete(" + playlistName + ")";
 	}
 
 }
