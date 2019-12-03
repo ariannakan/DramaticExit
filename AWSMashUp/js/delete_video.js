@@ -1,21 +1,22 @@
 function processDeleteResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
-  console.log("deleted :" + result);
+  console.log("deleted:" + result);
   
   refreshVideoList();
-  refreshRemoteList();
+  //might need to include refresh playlistlist
+  //refreshRemoteList();
 }
 
-function requestVidDelete(val) {
-   if (confirm("Request to delete " + val)) {
-     processDelete(val);
+function requestVidDelete(vid) {
+   if (confirm("Request to delete " + vid)) {
+     processDelete(vid);
    }
 }
 
-function processDelete(val) {
+function processDelete(vid) {
   var data = {};
-  data["name"] = val;
+  data["videoID"] = vid;
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);

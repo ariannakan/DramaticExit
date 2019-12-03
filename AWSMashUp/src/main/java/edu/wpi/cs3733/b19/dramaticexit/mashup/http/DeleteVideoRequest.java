@@ -6,8 +6,6 @@ public class DeleteVideoRequest {
 	public void setVideoID(String videoID) {this.videoID = videoID;}
 	public String getVideoID() { return videoID; }
 	
-	public String getVideo() { return videoID; }
-	
 	public DeleteVideoRequest() {
 		
 	}

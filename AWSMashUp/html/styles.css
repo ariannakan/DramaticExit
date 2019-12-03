@@ -27,8 +27,8 @@ html, body {
 
 .grid-container {
   display:grid; 
-  grid-template-columns: 210px 210px 210px 210px 210px; 
-  grid-template-rows: 210px 210px;
+  grid-template-columns: 215px 215px 215px 215px 215px; 
+  grid-template-rows: 215px 215px;
 }
 
 .Library {
@@ -81,10 +81,18 @@ html, body {
 }
 
 .newPlaylist {
-  margin-left:820px;
+  margin-left:870px;
 }
 
 .newPlaylist:hover{
+  color: #e17800;
+}
+
+.newVideo {
+  margin-left:1125px;
+}
+
+.newVideo:hover{
   color: #e17800;
 }
 
@@ -192,6 +200,70 @@ html, body {
 
 .searchAdminButton:hover {
   color: #0066cc;
+}
+
+.formButton{
+  float:right;
+}
+
+.formButton:hover {
+  color: #e17800;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 350px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=text] {
+  width: 90%;
+  padding: 15px;
+  margin-bottom: 15px;
+  margin-top:-10px;
+  border: none;
+  background: #f1f1f1;
+  font-family: 'proxima-nova', sans-serif;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=text]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
 }
 
 .sidenav {

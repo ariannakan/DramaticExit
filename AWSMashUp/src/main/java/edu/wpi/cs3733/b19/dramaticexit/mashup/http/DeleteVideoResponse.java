@@ -5,16 +5,15 @@ public class DeleteVideoResponse {
 	public int statusCode;
 	public String error;
 	
-	public DeleteVideoResponse(String id, int code) {
-		this.videoID = id;
-		this.statusCode = code;
-		this.error = "";
+	// 200 = success
+	public DeleteVideoResponse(String videoID) {
+		this.videoID = videoID;
+		this.statusCode = 200;
 	}
 	
-	// 200 = success
-	public DeleteVideoResponse(String id, int code, String errorMessage) {
-		this.videoID = id;
-		this.statusCode = code;
+	public DeleteVideoResponse(String videoID, int statusCode, String errorMessage) {
+		this.videoID = videoID;
+		this.statusCode = statusCode;
 		this.error = errorMessage;
 	}
 	
