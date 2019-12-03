@@ -45,9 +45,9 @@ function processListResponse(result) {
     var sentence = videoJson["sentence"];
     
     output = output + "<div id=\"vid" + videoID + "\">" +
-		"<div><b><center>" + videoID + "</b>" +
-  		"<div>(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
-   		"<div><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+		"<br><b><center>" + videoID + "</b>" +
+  		"<br>(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
+   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
    		"<div><b>" + characterName + ": </b>" + sentence + "</></div>";
   }
   
