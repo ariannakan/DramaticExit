@@ -3,6 +3,7 @@ package edu.wpi.cs3733.b19.dramaticexit.mashup;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.net.URL;
 
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.lambda.runtime.Context;
@@ -23,6 +24,7 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 public class UploadVideoHandler implements RequestHandler<UploadVideoRequest,UploadVideoResponse> {
 	
 LambdaLogger logger;
+String tempurl;
 	
 	// To access S3 storage
 	private AmazonS3 s3 = null;
@@ -47,6 +49,8 @@ LambdaLogger logger;
 		PutObjectResult res = s3.putObject(new PutObjectRequest("b19dramaticexit", "Videos/" + oggFile, inputstream, omd)
 				.withCannedAcl(CannedAccessControlList.PublicRead));
 		
+		tempurl = s3.getUrl("b19dramaticexit", "Videos/" + oggFile).toString();
+
 		// if we ever get here, then whole thing was stored
 		return true;
 	}
@@ -55,13 +59,13 @@ LambdaLogger logger;
 	 * 
 	 * @throws Exception 
 	 */
-	boolean uploadVideotoRDS(String videoID, String characterName, String sentence, boolean availability, String url) throws Exception {
+	boolean uploadVideotoRDS(String videoID, String characterName, String sentence, boolean availability, String tempurl) throws Exception {
 		if (logger != null) { logger.log("in uploadVideo"); }
 		VideosDAO dao = new VideosDAO();
 		
 		// check if present
 		Video exist = dao.getVideo(sentence);
-		Video video = new Video (videoID, characterName, sentence, availability, url);
+		Video video = new Video (videoID, characterName, sentence, availability, tempurl);
 		if (exist == null) {
 			return dao.addVideo(video);
 		} else {
