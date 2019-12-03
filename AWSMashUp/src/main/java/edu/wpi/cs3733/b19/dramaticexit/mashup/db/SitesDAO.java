@@ -58,10 +58,10 @@ public class SitesDAO {
         }
     }
 **/
-    public boolean deleteSite(Site site) throws Exception {
+    public boolean deleteSite(String url) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM Sites WHERE timestampID = ?;");
-            ps.setString(1, site.timestampID);
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM Sites WHERE url = ?;");
+            ps.setString(1, url);
             int numAffected = ps.executeUpdate();
             ps.close();
             

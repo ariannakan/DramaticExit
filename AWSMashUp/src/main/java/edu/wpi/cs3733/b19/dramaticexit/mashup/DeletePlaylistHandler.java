@@ -48,7 +48,7 @@ public class DeletePlaylistHandler implements RequestHandler<DeletePlaylistReque
 			}
 			
 		} catch (Exception e) {
-			response = new DeletePlaylistResponse("Unable to create playlist: " + req.playlistName + "(" + e.getMessage() + ")", 400);
+			response = new DeletePlaylistResponse("Unable to delete playlist: " + req.playlistName + "(" + e.getMessage() + ")", 400);
 		}
 
 		return response;
