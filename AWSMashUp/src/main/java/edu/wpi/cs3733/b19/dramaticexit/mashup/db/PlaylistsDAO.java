@@ -28,12 +28,12 @@ public class PlaylistsDAO {
     	}
     }
 
-    public Playlist getPlaylist(String id) throws Exception {
+    public Playlist getPlaylist(String name) throws Exception {
         
         try {
             Playlist playlist = null;
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Playlists WHERE playlistID=?;");
-            ps.setString(1,  id);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Playlists WHERE playlistName=?;");
+            ps.setString(1,  name);
             ResultSet resultSet = ps.executeQuery();
             
             while (resultSet.next()) {
@@ -95,10 +95,11 @@ public class PlaylistsDAO {
     	}
     }
     
-    public boolean deletePlaylist(Playlist playlist) throws Exception {
+    public boolean deletePlaylist(String playlistName) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM Playlists WHERE playlistID = ?;");
-            ps.setString(1, playlist.playlistID);
+        	System.out.println("in deletePlaylist DAO");
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM Playlists WHERE playlistName = ?;");
+            ps.setString(1, playlistName);
             int numAffected = ps.executeUpdate();
             ps.close();
             
@@ -112,8 +113,8 @@ public class PlaylistsDAO {
 
     public boolean addPlaylist(Playlist pl) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Playlists WHERE playlistID = ?;");
-            ps.setString(1, pl.playlistID);
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Playlists WHERE playlistName = ?;");
+            ps.setString(1, pl.playlistName);
             ResultSet resultSet = ps.executeQuery();
             
             // already present?
@@ -124,7 +125,7 @@ public class PlaylistsDAO {
             }
 
             ps = conn.prepareStatement("INSERT INTO Playlists (playlistID,playlistName) values(?,?);");
-            ps.setString(1,  pl.playlistID);
+            ps.setString(1, pl.playlistID);
             ps.setString(2, pl.playlistName);
             ps.execute();
             return true;

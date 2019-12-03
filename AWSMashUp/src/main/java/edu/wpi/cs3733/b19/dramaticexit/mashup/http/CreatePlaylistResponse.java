@@ -8,14 +8,12 @@ public class CreatePlaylistResponse {
 	public CreatePlaylistResponse(String playlistID, int statusCode) {
 		this.playlistID = playlistID;
 		this.statusCode = statusCode;
-		this.error = "";
 	}
 	
 	// 200 = success
-	public CreatePlaylistResponse(String playlistID, int statusCode, String errorMessage) {
+	public CreatePlaylistResponse(String playlistID) {
 		this.playlistID = playlistID;
-		this.statusCode = statusCode;
-		this.error = errorMessage;
+		this.statusCode = 200;
 	}
 	
 	public String toString() {

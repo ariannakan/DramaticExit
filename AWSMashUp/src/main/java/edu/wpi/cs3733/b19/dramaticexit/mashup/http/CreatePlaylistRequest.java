@@ -1,27 +1,28 @@
 package edu.wpi.cs3733.b19.dramaticexit.mashup.http;
 
 public class CreatePlaylistRequest {
-	public String playlistID;
 	public String playlistName;
 	public boolean system;
 	
-	public String getPlaylist() { return playlistID; }
+	public String getPlaylistName() { return playlistName; }
+	public void setPlaylistName(String name) { this.playlistName = name;}
+	
 	
 	public boolean getSystem( ) { return system; }
 	public void setSystem(boolean system) { this.system = system; }
 	
-	public CreatePlaylistRequest(String playlistID, String playlistName, String encoding) {
-		this.playlistID = playlistID; 
+	public CreatePlaylistRequest() { }
+	
+	public CreatePlaylistRequest(String playlistName) {
 		this.playlistName = playlistName;
 	}
 	
-	public CreatePlaylistRequest(String playlistID, String playlistName, String encoding, boolean system) {
-		this.playlistID = playlistID; 
+	public CreatePlaylistRequest(String playlistName, boolean system) {
 		this.playlistName = playlistName;
 		this.system = system;
 	}
 	
 	public String toString() {
-		return "CreatePlaylist(" + playlistID + "," + playlistName + "," + base64EncodedValue + ")";
+		return "CreatePlaylist(" + playlistName + ")";
 	}
 }
