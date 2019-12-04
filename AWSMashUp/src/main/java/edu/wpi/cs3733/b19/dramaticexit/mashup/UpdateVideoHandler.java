@@ -25,7 +25,7 @@ public class UpdateVideoHandler implements RequestHandler<UpdateVideoRequest,Upd
 			return false;
 		}
 		else {
-			dao.updateVideo
+			dao.updateVideo(exist);
 		}
 		return availability;
 	}

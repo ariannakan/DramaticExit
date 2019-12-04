@@ -59,12 +59,12 @@ public class VideosDAO {
     }
 
    
-    public boolean updateVideo(Video video) throws Exception {
+    public boolean updateVideo(String videoID, boolean availability) throws Exception {
         try {
         	String query = "UPDATE Videos SET availability=? WHERE videoID=?;";
         	PreparedStatement ps = conn.prepareStatement(query);
-            ps.setBoolean(1, video.availability);
-            ps.setString(2, video.videoID);
+            ps.setBoolean(1, availability);
+            ps.setString(2, videoID);
             int numAffected = ps.executeUpdate();
             ps.close();
             
