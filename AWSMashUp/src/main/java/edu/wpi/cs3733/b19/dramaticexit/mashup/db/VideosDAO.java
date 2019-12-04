@@ -53,7 +53,7 @@ public class VideosDAO {
             return video;
 
         } catch (Exception e) {
-        	e.printStackTrace();
+        	System.out.println("unable to get video in VideosDAO");
             throw new Exception("Failed in getting video: " + e.getMessage());
         }
     }

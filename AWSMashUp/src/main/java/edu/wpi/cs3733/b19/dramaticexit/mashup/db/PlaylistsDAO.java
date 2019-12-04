@@ -86,7 +86,7 @@ public class PlaylistsDAO {
     
     public boolean removeVideo(String playlistName, String videoID) throws Exception {
     	try {
-    		PreparedStatement ps = conn.prepareStatement("DELETE FROM PlaylistVideos WHERE playlistName IS NOT NULL GROUPBY playlistName HAVING videoID = ?;");
+    		PreparedStatement ps = conn.prepareStatement("DELETE FROM PlaylistVideos WHERE playlistName = ? AND videoID = ?;");
     		ps.setString(1, playlistName);
     		ps.setString(2, videoID);
     		int numAffected = ps.executeUpdate();
@@ -189,10 +189,7 @@ public List<Video> getPlaylistVideos(String playlistName) throws Exception {
     
     private Video generateVideo(ResultSet resultSet) throws Exception {
         String videoID  = resultSet.getString("videoID");
-        String characterName = resultSet.getString("characterName");
-        String sentence = resultSet.getString("sentence");
-        boolean availability = resultSet.getBoolean("availability");
         String url = resultSet.getString("url");
-        return new Video(videoID, characterName, sentence, availability, url);
+        return new Video(videoID, url);
     }
 }

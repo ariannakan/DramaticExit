@@ -28,10 +28,31 @@ function refreshVideoList() {
  * Replace the contents of 'videoList' with a <br>-separated list of name,value pairs.
  */
 function processListResponse(result) {
-  console.log("res:" , JSON.parse(result).list);
+  //console.log("res:" , JSON.parse(result).list);
+  console.log("res:" + result);
   // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
   var js = JSON.parse(result);
   var vidList = document.getElementById('videoList');
+  
+  var output = "";
+  for (var i = 0; i < js.list.length; i++) {
+    var videoJson = js.list[i];
+    console.log(videoJson);
+    
+    var videoID = videoJson["videoID"];
+    var url = videoJson["url"];
+    var characterName = videoJson["characterName"];
+    var sentence = videoJson["sentence"];
+    
+    output = output + "<div id=\"vid" + videoID + "\">" +
+		"<br><b><center>Video " + videoID + "</b>     " +
+  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
+   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+   		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
+  }
+  
+  vidList.innerHTML = output;
+  /**
   var list =  JSON.parse(result).list
   
   for (var I = 0; I < list.length; I++) {
@@ -41,12 +62,13 @@ function processListResponse(result) {
        		"<div><video height=" + 150 + " controls>" + "<source src=\"" + list[I].url + "\" type=\"video/ogg\"></video>" +
        		"<div><b>" + list[I].characterName + ": </b>" + list[I].sentence + "</></div>";
 	  document.getElementById("videoList").innerHTML += video;
-  }
+  }*/
   
   //var output = "";
+/**
   for (var i = 0; i < js.list.length; i++) {
     var list = js.list[i];
-    console.log(list);
+    console.log(list);*/
     
 //    var videoID = videoJson["videoID"];
 //    var url = videoJson["url"];
@@ -94,5 +116,4 @@ function processListResponse(result) {
 
   // Update computation result
   //vidList.innerHTML = output;
-}
 }

@@ -20,6 +20,7 @@ public class RemoveFromPlaylistHandler implements RequestHandler<RemoveFromPlayl
 	 * @throws Exception 
 	 */
 	boolean removeVideo(String playlistName, String videoID) throws Exception {
+		System.out.println("playlistName: " + playlistName + " VideoID: " + videoID);
 		logger.log("in removeVideoFromPlaylist");
 		PlaylistsDAO pdao = new PlaylistsDAO();
 		VideosDAO vdao = new VideosDAO();
@@ -28,10 +29,13 @@ public class RemoveFromPlaylistHandler implements RequestHandler<RemoveFromPlayl
 		Playlist pExist = pdao.getPlaylist(playlistName);
 		Video vExist = vdao.getVideo(videoID);
 		if (pExist == null) {
+			System.out.println("playlist doesn't exist");
 			return false;
 		} else if (vExist == null) {
+			System.out.println("video doesn't exist");
 			return false;
 		} else {
+			System.out.println("dao problem");
 			return pdao.removeVideo(playlistName, videoID);
 		}
 	}
