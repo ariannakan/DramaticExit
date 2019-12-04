@@ -57,6 +57,28 @@ public class VideosDAO {
             throw new Exception("Failed in getting video: " + e.getMessage());
         }
     }
+    
+    public Video getVideoByURL(String url) throws Exception {
+    	System.out.println("in getVideobyURL");
+        try {
+            Video video = null;
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Videos WHERE url=?;");
+            ps.setString(1, url);		//videoID is 1st index in database
+            ResultSet resultSet = ps.executeQuery();
+            
+            while (resultSet.next()) {
+                video = generateVideo(resultSet);
+            }
+            resultSet.close();
+            ps.close();
+            
+            return video;
+
+        } catch (Exception e) {
+        	System.out.println("unable to get video in VideosDAO");
+            throw new Exception("Failed in getting video: " + e.getMessage());
+        }
+    }
 
    
     public boolean updateVideo(String videoID, boolean availability) throws Exception {

@@ -3,6 +3,7 @@ package edu.wpi.cs3733.b19.dramaticexit.mashup;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
@@ -22,7 +23,6 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 public class UploadVideoHandler implements RequestHandler<UploadVideoRequest,UploadVideoResponse> {
 	
 LambdaLogger logger;
-String tempurl;
 	
 	// To access S3 storage
 	private AmazonS3 s3 = null;
@@ -31,7 +31,7 @@ String tempurl;
 	 * 
 	 * @throws Exception 
 	 */
-	boolean uploadVideo(String oggFile) throws Exception {
+	boolean uploadVideo(String oggFile, String videoID, String characterName, String sentence, boolean availability) throws Exception {
 		if (logger != null) { logger.log("in uploadVideo"); }
 		
 		if (s3 == null) {
@@ -44,26 +44,30 @@ String tempurl;
 		ObjectMetadata omd = new ObjectMetadata();
 		omd.setContentLength(oggFile.length());
 		
-		PutObjectResult res = s3.putObject(new PutObjectRequest("b19dramaticexit", "Videos/" + oggFile, inputstream, omd)
+		System.out.printf("Uploading %s to S3 bucket %s...\n", oggFile, "b19dramaticexit");
+		try {
+			PutObjectResult res = s3.putObject(new PutObjectRequest("b19dramaticexit", "Videos/" + oggFile, inputstream, omd)
 				.withCannedAcl(CannedAccessControlList.PublicRead));
-		
-		tempurl = s3.getUrl("b19dramaticexit", "Videos/" + oggFile).toString();
-
-		// if we ever get here, then whole thing was stored
-		return true;
+			String objectURL = s3.getUrl("b19dramaticexit", "Videos/" + oggFile).toString();
+			return uploadVideotoRDS(objectURL, videoID, characterName, sentence, availability);
+		} catch (AmazonServiceException e) {
+		    System.err.println(e.getErrorMessage());
+		    return false;
+		}
 	}
 		
 	/** Store into RDS.
 	 * 
 	 * @throws Exception 
 	 */
-	boolean uploadVideotoRDS(String videoID, String characterName, String sentence, boolean availability, String tempurl) throws Exception {
+	boolean uploadVideotoRDS(String objectURL, String videoID, String characterName, String sentence, boolean availability) throws Exception {
 		if (logger != null) { logger.log("in uploadVideo"); }
 		VideosDAO dao = new VideosDAO();
 		
 		// check if present
-		Video exist = dao.getVideo(sentence);
-		Video video = new Video (videoID, characterName, sentence, availability, tempurl);
+		Video exist = dao.getVideoByURL(objectURL);
+		
+		Video video = new Video (videoID, characterName, sentence, availability, objectURL);
 		if (exist == null) {
 			return dao.addVideo(video);
 		} else {
@@ -79,16 +83,13 @@ String tempurl;
 		UploadVideoResponse response;
 		try {
 			if (req.system) {
-				if (uploadVideotoRDS(req.videoID, req.characterName, req.sentence, req.availability, req.url)) {
+				if (uploadVideo(req.oggFile, req.videoID, req.characterName, req.sentence, req.availability)) {
 					response = new UploadVideoResponse(req.videoID, 200);
 				} else {
 					response = new UploadVideoResponse(req.videoID, 422);
 				}
-			} else {
-//				String contents = new String(encoded);
-//				double value = Double.valueOf(contents);
-//				
-				if (uploadVideotoRDS(req.videoID, req.characterName, req.sentence, req.availability, req.url)) {
+			} else {			
+				if (uploadVideotoRDS(req.oggFile, req.videoID, req.characterName, req.sentence, req.availability)) {
 					response = new UploadVideoResponse(req.videoID, 200);
 				} else {
 					response = new UploadVideoResponse(req.videoID, 422);
