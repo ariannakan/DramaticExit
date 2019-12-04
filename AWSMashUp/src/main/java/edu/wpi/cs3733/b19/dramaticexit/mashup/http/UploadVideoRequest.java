@@ -6,7 +6,7 @@ public class UploadVideoRequest {
 	public String sentence;
 	public String oggFile;
 	public boolean availability;
-	public String videoURL;
+	public String url;
 	public boolean system;
 	
 	public String getVideoID() { return videoID; }
@@ -24,8 +24,8 @@ public class UploadVideoRequest {
 	public boolean getAvailability() { return availability; }
 	public void setAvailability(boolean availability) { this.availability = availability; }
 	
-	public String getVideoURL() { return videoURL; }
-	public void setVideoURL(String videoURL) { this.videoURL = videoURL; }
+	public String getVideoURL() { return url; }
+	public void setVideoURL(String videoURL) { this.url = videoURL; }
 	
 	public boolean getSystem( ) { return system; }
 	public void setSystem(boolean system) { this.system = system; }
@@ -40,7 +40,7 @@ public class UploadVideoRequest {
 		this.sentence = sentence;
 		this.oggFile = oggFile; 
 		this.availability = availability;
-		this.videoURL = videoURL;
+		this.url = videoURL;
 	}
 	
 	public UploadVideoRequest(String videoID, String characterName, String sentence, String oggFile, boolean availability, String videoURL, boolean system) {
@@ -49,11 +49,11 @@ public class UploadVideoRequest {
 		this.sentence = sentence;
 		this.oggFile = oggFile; 
 		this.availability = availability;
-		this.videoURL = videoURL;
+		this.url = videoURL;
 		this.system = system;
 	}
 	
 	public String toString() {
-		return "UploadVideo(" + videoID + "," + characterName + "," + sentence + "," + oggFile + "," + availability + "," + videoURL + ")";
+		return "UploadVideo(" + videoID + "," + characterName + "," + sentence + "," + oggFile + "," + availability + "," + url + ")";
 	}
 }

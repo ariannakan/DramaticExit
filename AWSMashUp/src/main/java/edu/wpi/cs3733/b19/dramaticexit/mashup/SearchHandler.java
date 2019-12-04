@@ -28,24 +28,19 @@ public class SearchHandler implements RequestHandler<SearchRequest, SearchRespon
 	 * 
 	 * @throws Exception 
 	 */
-	List<Video> getVideos() throws Exception {
+	List<Video> search(String keyword) throws Exception {
 		VideosDAO dao = new VideosDAO();
 
-		return dao.getAllVideos();
+		return dao.searchByName(keyword);
 	}
 	
 	@Override
-	public SearchResponse handleRequest(SearchRequest input, Context context)  {
-		
-		
+	public SearchResponse handleRequest(SearchRequest req, Context context)  {
 		logger = context.getLogger();
-		logger.log("Loading Java Lambda handler to list all videos");
-
+		logger.log(req.toString());
 		SearchResponse response;
 		try {
-		
-			List<Video> list = getVideos();
-
+			List<Video> list = search(req.keyword);
 			response = new SearchResponse(list, 200);
 		} catch (Exception e) {
 			response = new SearchResponse(403, e.getMessage());

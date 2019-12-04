@@ -79,7 +79,7 @@ String tempurl;
 		UploadVideoResponse response;
 		try {
 			if (req.system) {
-				if (uploadVideotoRDS(req.videoID, req.characterName, req.sentence, req.availability, req.videoURL)) {
+				if (uploadVideotoRDS(req.videoID, req.characterName, req.sentence, req.availability, req.url)) {
 					response = new UploadVideoResponse(req.videoID, 200);
 				} else {
 					response = new UploadVideoResponse(req.videoID, 422);
@@ -88,7 +88,7 @@ String tempurl;
 //				String contents = new String(encoded);
 //				double value = Double.valueOf(contents);
 //				
-				if (uploadVideotoRDS(req.videoID, req.characterName, req.sentence, req.availability, req.videoURL)) {
+				if (uploadVideotoRDS(req.videoID, req.characterName, req.sentence, req.availability, req.url)) {
 					response = new UploadVideoResponse(req.videoID, 200);
 				} else {
 					response = new UploadVideoResponse(req.videoID, 422);

@@ -6,7 +6,6 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 
 public class SearchRequest {
 	public String keyword;
-	public List<Video> list;
 	
 	public String getKeyword() {return keyword;}
 	public void setKeywork(String keyword) {this.keyword = keyword;}

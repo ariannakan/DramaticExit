@@ -126,10 +126,8 @@ public class VideosDAO {
             ResultSet resultSet = statement.executeQuery(query);
             
             while (resultSet.next()) {
-            	if () {//matched char name 
-            		Video v = generateVideo(resultSet);
-            		allVideos.add(v);
-            	}
+            	Video v = generateVideo(resultSet);
+            	allVideos.add(v);
             }
             resultSet.close();
             statement.close();
@@ -140,7 +138,7 @@ public class VideosDAO {
         }
     }
     //search by character
-    public List<Video> searchByCharacter()throws Exception{
+    public List<Video> searchByName(String keyword)throws Exception{
     	List<Video> searchvid = new ArrayList<>();
     	try {
             Statement statement = conn.createStatement();
@@ -149,7 +147,7 @@ public class VideosDAO {
             
             while (resultSet.next()) {
         		Video v = generateVideo(resultSet);
-            	if () {//matched sentence 
+            	if (v.characterName.contains(keyword)||v.sentence.contains(keyword)) {//matched character name 
                 	searchvid.add(v);
             	}
             }
@@ -162,7 +160,7 @@ public class VideosDAO {
         }
     }
     //search by sentence
-    public List<Video> searchBySentence()throws Exception{
+    public List<Video> searchBySentence(String keyword)throws Exception{
     	List<Video> searchvid = new ArrayList<>();
     	try {
             Statement statement = conn.createStatement();
@@ -171,7 +169,9 @@ public class VideosDAO {
             
             while (resultSet.next()) {
                 Video v = generateVideo(resultSet);
-                searchvid.add(v);
+                if (v.sentence.contains(keyword)) {//matched sentence
+                	searchvid.add(v);
+                }
             }
             resultSet.close();
             statement.close();
