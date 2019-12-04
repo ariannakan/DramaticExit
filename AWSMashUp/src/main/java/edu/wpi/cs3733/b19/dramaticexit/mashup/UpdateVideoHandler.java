@@ -16,7 +16,7 @@ public class UpdateVideoHandler implements RequestHandler<UpdateVideoRequest,Upd
 
 	LambdaLogger logger;
 	
-	public boolean updateVideo(String videoID, boolean availability) {
+	boolean updateVideo(String videoID, boolean availability) throws Exception {
 		VideosDAO dao = new VideosDAO();
 		
 		//check if video is in RDS
@@ -25,9 +25,8 @@ public class UpdateVideoHandler implements RequestHandler<UpdateVideoRequest,Upd
 			return false;
 		}
 		else {
-			dao.updateVideo(exist);
+			return dao.updateVideo(videoID, availability);
 		}
-		return availability;
 	}
 	
 	@Override
@@ -37,13 +36,13 @@ public class UpdateVideoHandler implements RequestHandler<UpdateVideoRequest,Upd
 
 		UpdateVideoResponse response;
 		try {
-			if (updateVideo(req.videoID, boolean availability) {
-				response = new UpdateVideoResponse(req.videoID, 200);
+			if (updateVideo(req.videoID, req.availability)) {
+				response = new UpdateVideoResponse(req.videoID, req.availability);
 			} else {
-				response = new UpdateVideoResponse(req.videoID, 422);
+				response = new UpdateVideoResponse(req.videoID, req.availability, 422, "unable to update video");
 			}
 		} catch (Exception e) {
-			response = new UpdateVideoResponse("Unable to create video: " + req.videoID + "(" + e.getMessage() + ")", 400);
+			response = new UpdateVideoResponse("Unable to update video: " + req.videoID + "(" + e.getMessage() + ")", 400);
 		}
 
 		return response;
