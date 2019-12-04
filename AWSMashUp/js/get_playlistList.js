@@ -28,21 +28,44 @@ function refreshPlaylistList() {
  * Replace the contents of 'videoList' with a <br>-separated list of name,value pairs.
  */
 function processListResponse(result) {
-  console.log("res:" + JSON.parse(result).list);
+  //console.log("res:" + JSON.parse(result).list);
+  console.log("res:" + result);
   // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
   var js = JSON.parse(result);
   var plList = document.getElementById('playlistList');
+  
+  var output = "";
+  for (var i = 0; i < js.list.length; i++) {
+    var playlistJson = js.list[i];
+    console.log(playlistJson);
+    
+    var playlistID = playlistJson["playlistID"];
+    var playlistName = playlistJson["playlistName"];
+    
+    output = output + "<div id=\"" + playlistID + "\">" +
+		"<br>" + "(<img src='plus.png' height=" + 14 + "></img>) <b>" + playlistName + "</b>" +
+  		" (<a href='javaScript:requestPlaylistDelete(\"" + playlistID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)" + "</><br></div>";
+  }
+  
+  plList.innerHTML = output;
+  
+  /*
   var list = JSON.parse(result).list
   
   for (var I = 0; I < list.length; I++){
-	  playlist = "<div id=\"" + list[I].playlistID + "\">" + list[I].playlistName + "<br></div>";
-      document.getElementById("playlistList").innerHTML += playlist; 
-      document.getElementById("1").style.display = "inline";
+	  playlist = "<div id=\"" + list[I].playlistID + "\"> <br>" +
+	  "(<img src='plus.png' height=" + 14 + "></img>) " +
+	  list[I].playlistName +  
+	  " (<img src='trashcan.png' height=" + 14 + "></img>)" +
+	  "</div>"
+      document.getElementById("playlistList").innerHTML += playlist;
   }
+  
   
   for (var i = 0; i < js.list.length; i++) {
     var list = js.list[i];
     console.log(list);
   }
+  */
 }
 

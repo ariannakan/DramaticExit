@@ -22,7 +22,7 @@ function initialize() {
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
 </head>
-<body onload="initialize()" style = "background: linear-gradient(to bottom, #cc6600 -15%, #000000 56%);">
+<body onload="initialize()" style = "background: linear-gradient(to bottom, #cc6600 -15%, #000000 56%); background-repeat: no-repeat; background-attachment: fixed;">
 
 <div class = "sidenav">
 	<div class = "MashUpAppTitle" id = "MashTitle">
@@ -53,13 +53,10 @@ function initialize() {
 	<form action="/action_page.php" class="form-container">
 		<h3 style = "text-align:center; color:black;">Enter <u>Character Name</u> and <u>Sentence</u> Below</h3>
 		
-		<label for="cname"><b>Character Name</b></label>
 		<input type="text" placeholder="Enter Character Name..." name="cname" required>
-		
-		<label for="sentence"><b>Sentence</b></label>
 		<input type="text" placeholder="Enter Sentence..." name="sentence" required>
 		
-		<button type="submit" class="btn">Submit</button>
+		<button type="submit" class="btn" onClick="JavaScript:handleCreateClick(this)">Upload</button>
 		<button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
 	</form>
 </div>
@@ -97,7 +94,7 @@ function initialize() {
   }
   
   // register
-  document.getElementById('videoID').addEventListener('change', handleFileSelect, false);
+  document.getElementById('file').addEventListener('change', handleFileSelect, false);
 </script>
 
 <div style = "border-bottom: 1px solid white; margin-top:40px;"></div>
