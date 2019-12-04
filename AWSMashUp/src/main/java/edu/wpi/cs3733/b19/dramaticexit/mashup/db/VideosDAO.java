@@ -147,7 +147,7 @@ public class VideosDAO {
             
             while (resultSet.next()) {
         		Video v = generateVideo(resultSet);
-            	if (v.characterName.contains(keyword)||v.sentence.contains(keyword)) {//matched character name 
+            	if (v.characterName.toLowerCase().contains(keyword.toLowerCase())||v.sentence.toLowerCase().contains(keyword.toLowerCase())) {//matched character name 
                 	searchvid.add(v);
             	}
             }
