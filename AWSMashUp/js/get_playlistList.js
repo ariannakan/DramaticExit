@@ -43,7 +43,7 @@ function processListResponse(result) {
     var playlistName = playlistJson["playlistName"];
     
     output = output + "<div id=\"" + playlistID + "\">" +
-		"<br>" + "(<img src='plus.png' height=" + 14 + "></img>) <b>" + playlistName + "</b>" +
+		"<br>" + playlistName + "</b>" +
   		" (<a href='javaScript:requestPlaylistDelete(\"" + playlistID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)" + "</><br></div>";
   }
   
