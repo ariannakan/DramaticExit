@@ -126,8 +126,10 @@ public class VideosDAO {
             ResultSet resultSet = statement.executeQuery(query);
             
             while (resultSet.next()) {
-                Video v = generateVideo(resultSet);
-                allVideos.add(v);
+            	if () {//matched char name 
+            		Video v = generateVideo(resultSet);
+            		allVideos.add(v);
+            	}
             }
             resultSet.close();
             statement.close();
@@ -140,13 +142,44 @@ public class VideosDAO {
     //search by character
     public List<Video> searchByCharacter()throws Exception{
     	List<Video> searchvid = new ArrayList<>();
-    	return searchvid;
+    	try {
+            Statement statement = conn.createStatement();
+            String query = "SELECT * FROM Videos";
+            ResultSet resultSet = statement.executeQuery(query);
+            
+            while (resultSet.next()) {
+        		Video v = generateVideo(resultSet);
+            	if () {//matched sentence 
+                	searchvid.add(v);
+            	}
+            }
+            resultSet.close();
+            statement.close();
+            return searchvid;
+
+        } catch (Exception e) {
+            throw new Exception("Failed in searching videos: " + e);
+        }
     }
     //search by sentence
     public List<Video> searchBySentence()throws Exception{
     	List<Video> searchvid = new ArrayList<>();
-    	return searchvid;
-    }
+    	try {
+            Statement statement = conn.createStatement();
+            String query = "SELECT * FROM Videos";
+            ResultSet resultSet = statement.executeQuery(query);
+            
+            while (resultSet.next()) {
+                Video v = generateVideo(resultSet);
+                searchvid.add(v);
+            }
+            resultSet.close();
+            statement.close();
+            return searchvid;
+
+        } catch (Exception e) {
+            throw new Exception("Failed in searching videos: " + e);
+        }    }
     private Video generateVideo(ResultSet resultSet) throws Exception {
         String videoID  = resultSet.getString("videoID");
         String characterName = resultSet.getString("characterName");
