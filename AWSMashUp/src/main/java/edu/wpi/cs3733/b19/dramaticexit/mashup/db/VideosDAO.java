@@ -35,7 +35,7 @@ public class VideosDAO {
 //    		e.printStackTrace();
     	}
     }
-
+    //ListVideos
     public Video getVideo(String videoID) throws Exception {
     	System.out.println("in getVideo");
         try {
@@ -57,7 +57,7 @@ public class VideosDAO {
             throw new Exception("Failed in getting video: " + e.getMessage());
         }
     }
-    
+
 /**    
     public boolean updateVideo(Video video) throws Exception {
         try {
@@ -117,10 +117,6 @@ public class VideosDAO {
         }
     }
 
-    public void testFunction() {
-    	System.out.println("\n test function entered");
-    }
-    
     public List<Video> getAllVideos() throws Exception {
         
         List<Video> allVideos = new ArrayList<>();
@@ -141,7 +137,16 @@ public class VideosDAO {
             throw new Exception("Failed in getting videos: " + e);
         }
     }
-    
+    //search by character
+    public List<Video> searchByCharacter()throws Exception{
+    	List<Video> searchvid = new ArrayList<>();
+    	return searchvid;
+    }
+    //search by sentence
+    public List<Video> searchBySentence()throws Exception{
+    	List<Video> searchvid = new ArrayList<>();
+    	return searchvid;
+    }
     private Video generateVideo(ResultSet resultSet) throws Exception {
         String videoID  = resultSet.getString("videoID");
         String characterName = resultSet.getString("characterName");
