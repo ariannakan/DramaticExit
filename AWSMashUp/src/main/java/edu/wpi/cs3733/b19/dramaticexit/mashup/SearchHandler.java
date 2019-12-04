@@ -28,10 +28,10 @@ public class SearchHandler implements RequestHandler<SearchRequest, SearchRespon
 	 * 
 	 * @throws Exception 
 	 */
-	List<Video> search(String keyword) throws Exception {
+	List<Video> search(String keywordname, String keywordsentence) throws Exception {
 		VideosDAO dao = new VideosDAO();
 
-		return dao.searchByName(keyword);
+		return dao.search(keywordname, keywordsentence);
 	}
 	
 	@Override
@@ -40,7 +40,7 @@ public class SearchHandler implements RequestHandler<SearchRequest, SearchRespon
 		logger.log(req.toString());
 		SearchResponse response;
 		try {
-			List<Video> list = search(req.keyword);
+			List<Video> list = search(req.keywordname, req.keywordsentence);
 			response = new SearchResponse(list, 200);
 		} catch (Exception e) {
 			response = new SearchResponse(403, e.getMessage());

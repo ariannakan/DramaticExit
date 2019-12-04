@@ -138,7 +138,7 @@ public class VideosDAO {
         }
     }
     //search by character
-    public List<Video> searchByName(String keyword)throws Exception{
+    public List<Video> search(String keywordname, String keywordsentence)throws Exception{
     	List<Video> searchvid = new ArrayList<>();
     	try {
             Statement statement = conn.createStatement();
@@ -147,7 +147,7 @@ public class VideosDAO {
             
             while (resultSet.next()) {
         		Video v = generateVideo(resultSet);
-            	if (v.characterName.toLowerCase().contains(keyword.toLowerCase())||v.sentence.toLowerCase().contains(keyword.toLowerCase())) {//matched character name 
+            	if (v.characterName.toLowerCase().contains(keywordname.toLowerCase())&&v.sentence.toLowerCase().contains(keywordsentence.toLowerCase())) {//matched character name 
                 	searchvid.add(v);
             	}
             }
@@ -159,27 +159,7 @@ public class VideosDAO {
             throw new Exception("Failed in searching videos: " + e);
         }
     }
-    //search by sentence
-    public List<Video> searchBySentence(String keyword)throws Exception{
-    	List<Video> searchvid = new ArrayList<>();
-    	try {
-            Statement statement = conn.createStatement();
-            String query = "SELECT * FROM Videos";
-            ResultSet resultSet = statement.executeQuery(query);
-            
-            while (resultSet.next()) {
-                Video v = generateVideo(resultSet);
-                if (v.sentence.contains(keyword)) {//matched sentence
-                	searchvid.add(v);
-                }
-            }
-            resultSet.close();
-            statement.close();
-            return searchvid;
-
-        } catch (Exception e) {
-            throw new Exception("Failed in searching videos: " + e);
-        }    }
+  
     private Video generateVideo(ResultSet resultSet) throws Exception {
         String videoID  = resultSet.getString("videoID");
         String characterName = resultSet.getString("characterName");
