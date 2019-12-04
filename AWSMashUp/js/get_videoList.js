@@ -48,7 +48,7 @@ function processListResponse(result) {
 		"<br><b><center>" + videoID + "</b>" +
   		"<br>(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
    		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
-   		"<div><b>" + characterName + ": </b>" + sentence + "</></div>";
+   		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
   }
   
   vidList.innerHTML = output;
