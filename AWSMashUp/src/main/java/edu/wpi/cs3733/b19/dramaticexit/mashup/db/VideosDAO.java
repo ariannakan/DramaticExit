@@ -58,7 +58,7 @@ public class VideosDAO {
         }
     }
 
-/**    
+   
     public boolean updateVideo(Video video) throws Exception {
         try {
         	String query = "UPDATE Videos SET availability=? WHERE videoID=?;";
@@ -73,7 +73,7 @@ public class VideosDAO {
             throw new Exception("Failed to update video: " + e.getMessage());
         }
     }
-**/
+
     public boolean deleteVideo(String videoID) throws Exception {
         try {
         	System.out.println("in deleteVideo DAO");
