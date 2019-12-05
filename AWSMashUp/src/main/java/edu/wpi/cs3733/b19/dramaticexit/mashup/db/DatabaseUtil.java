@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DatabaseUtil {
-	// These should never be stored directly in code.  I am doing this quickly complete the 
+	 // These should never be stored directly in code.  I am doing this quickly complete the 
 	// demonstration code. The appropriate solution is to store these values in environment
 	// variables that are accessed by the Lambda function at run time like this
 	//
@@ -15,6 +15,15 @@ public class DatabaseUtil {
 	// https://docs.aws.amazon.com/lambda/latest/dg/env_variables.html
 	//
 	// The above link shows how to do that.
+	static boolean useTestDB() {
+		if(System.getenv("TESTING") != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 	public final static String rdsMySqlDatabaseUrl = "mashupappdb.clmujmtzm5ut.us-east-2.rds.amazonaws.com";
 	public final static String dbUsername = "mashAdmin";
 	public final static String dbPassword = "mashPass";
@@ -23,7 +32,7 @@ public class DatabaseUtil {
 	public final static String rdsMySqlDatabasePort = "3306";
 	public final static String multiQueries = "?allowMultiQueries=true";
 	   
-	public final static String dbName = "innodb";    // default created from MySQL WorkBench
+	public static String dbName = "innodb";    // default created from MySQL WorkBench
 
 	// pooled across all usages.
 	static Connection conn;
@@ -37,6 +46,9 @@ public class DatabaseUtil {
 		try {
 //			System.out.println("\n in Database Utils start connecting......");
 			Class.forName("com.mysql.jdbc.Driver");
+			if(useTestDB()) {
+				dbName = "tmp";
+			}
 			conn = DriverManager.getConnection(
 					jdbcTag + rdsMySqlDatabaseUrl + ":" + rdsMySqlDatabasePort + "/" + dbName + multiQueries,
 					dbUsername,

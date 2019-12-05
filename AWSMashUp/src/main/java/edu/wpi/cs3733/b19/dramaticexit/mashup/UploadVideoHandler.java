@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.b19.dramaticexit.mashup;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
@@ -43,11 +44,9 @@ LambdaLogger logger;
 	 * 
 	 * @throws Exception 
 	 */
-	boolean uploadVideo(String oggFile, String videoID, String characterName, String sentence, boolean availability) throws Exception {
+	boolean uploadVideo(File oggFile, String videoID, String characterName, String sentence, boolean availability) throws Exception {
 		if(useTestDB()){ bucket = "3733dramaticexit"; }
-		System.out.printf("bucket: ", bucket);
 		if (logger != null) { logger.log("in uploadVideo"); }
-		System.out.println("in uploadVideo");
 		
 		if (s3 == null) {
 			logger.log("attach to S3 request");
@@ -90,6 +89,7 @@ LambdaLogger logger;
 		
 		Video video = new Video (videoID, characterName, sentence, availability, objectURL);
 		if (exist == null) {
+			System.out.println("adding video to RDS");
 			return dao.addVideo(video);
 		} else {
 			return false;
@@ -110,7 +110,7 @@ LambdaLogger logger;
 					response = new UploadVideoResponse(req.videoID, 422);
 				}
 			} else {			
-				if (uploadVideotoRDS(req.oggFile, req.videoID, req.characterName, req.sentence, req.availability)) {
+				if (uploadVideo(req.oggFile, req.videoID, req.characterName, req.sentence, req.availability)) {
 					response = new UploadVideoResponse(req.videoID, 200);
 				} else {
 					response = new UploadVideoResponse(req.videoID, 422);

@@ -40,7 +40,7 @@ public class uploadVideoTest extends LambdaTest{
 		String videoID = "vid1";
 		String characterName = "Spock";
 		String sentence = "Not again";
-		String oggFile = oggfile.getAbsolutePath();
+		File oggFile = oggfile;
 		System.out.println(oggFile);
 		boolean availability = true;
 		

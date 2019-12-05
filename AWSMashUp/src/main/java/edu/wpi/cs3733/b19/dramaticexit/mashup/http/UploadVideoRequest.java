@@ -1,10 +1,12 @@
 package edu.wpi.cs3733.b19.dramaticexit.mashup.http;
 
+import java.io.File;
+
 public class UploadVideoRequest {
 	public String videoID;
 	public String characterName;
 	public String sentence;
-	public String oggFile;
+	public File oggFile;
 	public boolean availability;
 	public boolean system;
 	
@@ -17,8 +19,8 @@ public class UploadVideoRequest {
 	public String getSentence() { return sentence; }
 	public void setSentence(String sentence) { this.sentence = sentence; }
 	
-	public String getoggFile() { return oggFile; }
-	public void setoggFile(String oggFile) { this.oggFile = oggFile; }
+	public File getoggFile() { return oggFile; }
+	public void setoggFile(File oggFile) { this.oggFile = oggFile; }
 	
 	public boolean getAvailability() { return availability; }
 	public void setAvailability(boolean availability) { this.availability = availability; }
@@ -30,7 +32,7 @@ public class UploadVideoRequest {
 		
 	}
 	
-	public UploadVideoRequest(String videoID, String characterName, String sentence, String oggFile, boolean availability) {
+	public UploadVideoRequest(String videoID, String characterName, String sentence, File oggFile, boolean availability) {
 		this.videoID = videoID;
 		this.characterName = characterName;
 		this.sentence = sentence;
@@ -38,7 +40,7 @@ public class UploadVideoRequest {
 		this.availability = availability;
 	}
 	
-	public UploadVideoRequest(String videoID, String characterName, String sentence, String oggFile, boolean availability, boolean system) {
+	public UploadVideoRequest(String videoID, String characterName, String sentence, File oggFile, boolean availability, boolean system) {
 		this.videoID = videoID;
 		this.characterName = characterName;
 		this.sentence = sentence;

@@ -132,6 +132,7 @@ public class VideosDAO {
             ps.setBoolean(4,  video.availability);
             ps.setString(5,  video.url);
             ps.execute();
+            System.out.println("successfully added video");
             return true;
 
         } catch (Exception e) {
