@@ -11,17 +11,17 @@ function handleCreateClick(e) {
   var form = document.uploadForm;
  
   var data = {};
-  data["characterName"] = form.cName.value;
+  data["characterName"] = form.characterName.value;
   data["sentence"] = form.sentence.value;
   
   // base64EncodedValue":"data:text/plain;base64,My4xND....."
-  var segments = document.createForm.base64Encoding.value.split(',');
-  data["base64EncodedValue"] = segments[1];  // skip first one 
+  var segments = document.createForm.oggFile.value.split(',');
+  data["oggFile"] = segments[0];  // skip first one 
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", add_video_url, true);
+  xhr.open("POST", upload_video_url, true);
 
   // send the collected data as JSON
   xhr.send(js);

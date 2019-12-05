@@ -43,14 +43,24 @@ function initialize() {
 <div class = "Library">
 	<h3>My Videos</h3>
 </div>
-
+<!--
+<div>
 <form name="createForm" method="post">
-	<!--  <input type = "button" class = "btn formButton" value = "Submit">-->
-	<input type = "button" class = "btn formButton" value = "Enter Video Details" onclick="openForm()">
+	<!--  <input type = "button" class = "btn formButton" value = "Submit">
+	<input name="characterName" placeholder="Enter Character Name..." value="" />
+	<input name="sentence" placeholder="Enter sentence..." ="" />
 	<input name="base64Encoding" hidden value =""/>
+	<input type="file" id="file" name="file">
+	<input type="button" id="uploadButton" value="Upload" disabled onClick="JavaScript:handleCreateClick(this)">
+	<!-- <input type = "button" class = "btn formButton" value = "Enter Video Details" onclick="openForm()">
 	<input type = "file" class = "browseButton" id="file" name="file" style = "font-size:13px;">
 </form>
+</div>
+</div>
 
+-->
+
+<!--
 <div class="form-popup" id="myForm">
 	<form name = "uploadForm" action="/action_page.php" class="form-container">
 		<h3 style = "text-align:center; color:black;">Enter <u>Character Name</u> and <u>Sentence</u> Below</h3>
@@ -62,6 +72,30 @@ function initialize() {
 		<button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
 	</form>
 </div>
+-->
+
+
+
+
+
+<form name="createForm" method="post">
+	<!--  <input type = "button" class = "btn formButton" value = "Submit">-->
+	<input type = "button" class = "btn formButton" value = "Enter Video Details" onclick="openForm()">
+	<input name="oggFile" hidden value =""/>
+	<input type = "file" class = "browseButton" id="file" name="file" style = "font-size:13px;">
+	
+	<div class="form-popup" id="myForm">
+	<form name = "uploadForm" action="/action_page.php" class="form-container">
+		<h3 style = "text-align:center; color:black;">Enter <u>Character Name</u> and <u>Sentence</u> Below</h3>
+		
+		<input type="text" placeholder="Enter Character Name..." name="cName"  required>
+		<input type="text" placeholder="Enter Sentence..." name="sentence" required>
+		
+		<button type="submit" id="uploadButton" class="btn" onClick="JavaScript:handleCreateClick(this)">Upload</button>
+		<button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+	</form>
+</div>
+</form>
 
 <script>
 	function openForm() {
@@ -72,6 +106,7 @@ function initialize() {
 	  document.getElementById("myForm").style.display = "none";
 	}
 </script>
+
 
 <script>
   // prepares the base64-encoded string and enabled button
