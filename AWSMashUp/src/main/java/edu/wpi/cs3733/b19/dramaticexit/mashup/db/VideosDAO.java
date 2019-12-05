@@ -37,7 +37,7 @@ public class VideosDAO {
     }
     //ListVideos
     public Video getVideo(String videoID) throws Exception {
-    	System.out.println("in getVideo");
+    	System.out.println("in getVideo"); 
         try {
             Video video = null;
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM Videos WHERE videoID=?;");

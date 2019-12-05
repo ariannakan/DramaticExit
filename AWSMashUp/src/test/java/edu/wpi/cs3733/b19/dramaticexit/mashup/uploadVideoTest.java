@@ -8,10 +8,12 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeleteVideoRequest;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeleteVideoResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoResponse;
 
-/**
+/** 
  * A simple test harness for locally invoking your Lambda function handler.
  */
 public class uploadVideoTest extends LambdaTest{
@@ -34,9 +36,17 @@ public class uploadVideoTest extends LambdaTest{
 	    Assert.assertEquals(failureCode, resp.statusCode);
 	}
 	
+	void testSuccessDelete(String incoming) throws IOException {
+		DeleteVideoHandler handler = new DeleteVideoHandler();
+		DeleteVideoRequest req = new Gson().fromJson(incoming, DeleteVideoRequest.class);
+	   
+	    DeleteVideoResponse resp = handler.handleRequest(req, createContext("create"));
+	    Assert.assertEquals(200, resp.statusCode);
+	}
+	
 	@Test
-	public void testShouldBeOk() {
-		System.out.println("Testing: testShouldBeOK");
+	public void testFirstUpload() {
+		System.out.println("Testing: testFirstUpload");
 		String videoID = "vid1";
 		String characterName = "Spock";
 		String sentence = "Not again";
@@ -44,8 +54,7 @@ public class uploadVideoTest extends LambdaTest{
 		System.out.println(oggFile);
 		boolean availability = true;
 		
-    	UploadVideoRequest testOK = new UploadVideoRequest(videoID, characterName, sentence, oggFile, availability);
-    	//String SAMPLE_INPUT_STRING = "{\"name\": \"" + var + "\", \"value\": \"Mi43MTgyODE4Mjg=\"}";
+    	UploadVideoRequest testOK = new UploadVideoRequest(characterName, sentence, oggFile);
         String SAMPLE_INPUT_STRING = new Gson().toJson(testOK);  
         
         
@@ -56,22 +65,64 @@ public class uploadVideoTest extends LambdaTest{
         }
     }
 	
-//	@Test
-//    public void testFailInput() {
-//		System.out.println("Testing: testFailInput");
-//		String videoID = "vid2";
-//		String characterName = "Kirk";
-//		String sentence = "Here we go again";
-//		String oggFile = resources.getAbsolutePath();
-//		boolean availability = false;
-//		
-//    	UploadVideoRequest testFalse = new UploadVideoRequest(videoID, characterName, sentence, oggFile, availability);
-//    	String SAMPLE_INPUT_STRING =  new Gson().toJson(testFalse);  
-//        
-//        try {
-//        	testFailInput(SAMPLE_INPUT_STRING, 400);
-//        } catch (IOException ioe) {
-//        	Assert.fail("Invalid:" + ioe.getMessage());
-//        }
-//    }
+	@Test
+    public void testSameUpload() {
+		System.out.println("Testing: test");
+		String videoID = "vid1";
+		String characterName = "Spock";
+		String sentence = "Not again";
+		File oggFile = oggfile;
+		System.out.println(oggFile);
+		boolean availability = true;
+		
+    	UploadVideoRequest testFalse = new UploadVideoRequest(characterName, sentence, oggFile);
+    	String SAMPLE_INPUT_STRING =  new Gson().toJson(testFalse);  
+        
+        try {
+        	testFailInput(SAMPLE_INPUT_STRING, 422);
+        } catch (IOException ioe) {
+        	Assert.fail("Invalid:" + ioe.getMessage());
+        }
+    }
+	
+	@Test
+    public void testEmptyUpload() {
+		System.out.println("Testing: Empty input");
+		
+    	UploadVideoRequest testInvalid = new UploadVideoRequest();
+    	String SAMPLE_INPUT_STRING =  new Gson().toJson(testInvalid);  
+        
+        try {
+        	testFailInput(SAMPLE_INPUT_STRING, 400);
+        } catch (IOException ioe) {
+        	Assert.fail("Invalid:" + ioe.getMessage());
+        }
+    }
+	
+	@Test
+	public void testDeleteVideo() {
+		System.out.println("Testing: Delete video");
+		String characterName = "testingDelete";
+		String sentence = "okie-dokie";
+		File oggFile = oggfile;
+		
+    	UploadVideoRequest input = new UploadVideoRequest(characterName, sentence, oggFile);
+    	String SAMPLE = new Gson().toJson(input);  
+    	UploadVideoHandler handler = new UploadVideoHandler();
+		UploadVideoRequest req = new Gson().fromJson(SAMPLE, UploadVideoRequest.class);
+	   
+	    UploadVideoResponse resp = handler.handleRequest(req, createContext("create"));
+	    
+	    System.out.println(resp.videoID);
+	
+		
+		DeleteVideoRequest testDelete = new DeleteVideoRequest(resp.videoID);
+		String SAMPLE_INPUT_STRING =  new Gson().toJson(testDelete); 
+		
+		try {
+        	testSuccessDelete(SAMPLE_INPUT_STRING);
+        } catch (IOException ioe) { 
+        	Assert.fail("Invalid:" + ioe.getMessage());
+        }
+	}
 }

@@ -46,15 +46,16 @@ LambdaLogger logger;
 	 * 
 	 * @throws Exception 
 	 */
-	boolean uploadVideo(File oggFile, String videoID, String characterName, String sentence, boolean availability) throws Exception {
+	boolean uploadVideo(File oggFile, String videoID, String characterName, String sentence) throws Exception {
 		if(useTestDB()){ bucket = "3733dramaticexit"; }
 		if (logger != null) { logger.log("in uploadVideo"); }
-		 
+		
 		if (s3 == null) {
 			logger.log("attach to S3 request");
 			s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
 			logger.log("attach to S3 succeed");
 		}
+		
 		
 		System.out.printf("Uploading %s to S3 bucket %s...\n", oggFile, "b19dramaticexit");
 		try {
@@ -72,7 +73,7 @@ LambdaLogger logger;
 				return false;
 			}
 			System.out.println(objectURL);
-			return uploadVideotoRDS(objectURL, videoID, characterName, sentence, availability);
+			return uploadVideotoRDS(objectURL, videoID, characterName, sentence, true);
 		} catch (AmazonServiceException e) {
 		    System.err.println(e.getErrorMessage());
 		    return false;
@@ -103,26 +104,17 @@ LambdaLogger logger;
 	public UploadVideoResponse handleRequest(UploadVideoRequest req, Context context)  {
 		logger = context.getLogger();
 		logger.log(req.toString());
-		
-		req.videoID = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-		req.availability = true;
+
 		UploadVideoResponse response;
-		try {
-			if (req.system) {
-				if (uploadVideo(req.oggFile, req.videoID, req.characterName, req.sentence, req.availability)) {
-					response = new UploadVideoResponse(req.videoID, 200);
+		String videoID = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+		try { 
+				if (uploadVideo(req.oggFile, videoID, req.characterName, req.sentence)) {
+					response = new UploadVideoResponse(videoID, 200);
 				} else {
-					response = new UploadVideoResponse(req.videoID, 422);
+					response = new UploadVideoResponse(videoID, 422);
 				}
-			} else {			
-				if (uploadVideo(req.oggFile, req.videoID, req.characterName, req.sentence, req.availability)) {
-					response = new UploadVideoResponse(req.videoID, 200);
-				} else {
-					response = new UploadVideoResponse(req.videoID, 422);
-				}
-			}
 		} catch (Exception e) {
-			response = new UploadVideoResponse("Unable to create video: " + req.videoID + "(" + e.getMessage() + ")", 400);
+			response = new UploadVideoResponse("Unable to upload video: " + videoID + "(" + e.getMessage() + ")", 400);
 		}
 
 		return response;

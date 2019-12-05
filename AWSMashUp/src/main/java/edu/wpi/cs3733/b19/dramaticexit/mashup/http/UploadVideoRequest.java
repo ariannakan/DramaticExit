@@ -11,7 +11,7 @@ public class UploadVideoRequest {
 	public boolean system;
 	
 	public String getVideoID() { return videoID; }
-	public void setVideoID(String videoID) { this.videoID = videoID; }
+	public void setVideoID(String videoID) { this.videoID = videoID; } 
 
 	public String getCharacterName() { return characterName; }
 	public void setCharacterName(String characterName) { this.characterName = characterName; }
@@ -32,12 +32,12 @@ public class UploadVideoRequest {
 		
 	}
 	
-	public UploadVideoRequest(String videoID, String characterName, String sentence, File oggFile, boolean availability) {
-		this.videoID = videoID;
+	public UploadVideoRequest(String characterName, String sentence, File oggFile) {
+		this.videoID = "";
 		this.characterName = characterName;
 		this.sentence = sentence;
 		this.oggFile = oggFile; 
-		this.availability = availability;
+		this.availability = true;
 	}
 	
 	public UploadVideoRequest(String videoID, String characterName, String sentence, File oggFile, boolean availability, boolean system) {
