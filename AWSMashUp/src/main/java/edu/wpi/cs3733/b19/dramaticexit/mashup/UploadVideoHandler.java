@@ -3,6 +3,8 @@ package edu.wpi.cs3733.b19.dramaticexit.mashup;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.regions.Regions;
@@ -47,13 +49,12 @@ LambdaLogger logger;
 	boolean uploadVideo(File oggFile, String videoID, String characterName, String sentence, boolean availability) throws Exception {
 		if(useTestDB()){ bucket = "3733dramaticexit"; }
 		if (logger != null) { logger.log("in uploadVideo"); }
-		
+		 
 		if (s3 == null) {
 			logger.log("attach to S3 request");
 			s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
 			logger.log("attach to S3 succeed");
 		}
-		
 		
 		System.out.printf("Uploading %s to S3 bucket %s...\n", oggFile, "b19dramaticexit");
 		try {
@@ -102,7 +103,9 @@ LambdaLogger logger;
 	public UploadVideoResponse handleRequest(UploadVideoRequest req, Context context)  {
 		logger = context.getLogger();
 		logger.log(req.toString());
-
+		
+		req.videoID = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+		req.availability = true;
 		UploadVideoResponse response;
 		try {
 			if (req.system) {
