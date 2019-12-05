@@ -54,12 +54,14 @@ LambdaLogger logger;
 			logger.log("attach to S3 succeed");
 		}
 		
-		InputStream inputstream = new FileInputStream(oggFile);
-		ObjectMetadata omd = new ObjectMetadata();
-		omd.setContentLength(oggFile.length());
 		
 		System.out.printf("Uploading %s to S3 bucket %s...\n", oggFile, "b19dramaticexit");
 		try {
+			InputStream inputstream = new FileInputStream(oggFile);
+			ObjectMetadata omd = new ObjectMetadata();
+			omd.setContentLength(oggFile.length());
+			omd.setContentType("application/ogg");
+			
 			//makes object publicly visible
 			PutObjectResult res = s3.putObject(new PutObjectRequest(bucket, "Videos/" + oggFile, inputstream, omd)
 				.withCannedAcl(CannedAccessControlList.PublicRead));

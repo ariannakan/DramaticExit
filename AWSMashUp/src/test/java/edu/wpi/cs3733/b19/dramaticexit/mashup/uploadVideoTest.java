@@ -16,7 +16,7 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoResponse;
  */
 public class uploadVideoTest extends LambdaTest{
 	
-	 File oggfile = new File("src/test/resources/videoseg2.ogg");
+	 File oggfile = new File("src/test/resources/videoseg2converted.ogg");
 
 	void testSuccessInput(String incoming) throws IOException {
 		UploadVideoHandler handler = new UploadVideoHandler();
