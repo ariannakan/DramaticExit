@@ -48,7 +48,10 @@ function initialize() {
 <div class = "playlists">
 	<div style = "border-bottom: 1px solid white;">
 		<h3>Playlists</h3>
-		<button class="newPlaylist">+ New Playlist</button>
+		<form name="createForm" method="post">
+		   <input name="constantName" value="constantName" />
+		   <input type="button" id="createButton" value="Create Constant" onClick="JavaScript:handleCreateClick(this)">
+		</form>
 	</div>
 	<div id="playlistList" style = "font-size:18px; margin-left:10px;">
 		<script src = "../js/get_playlistList.js"></script>
