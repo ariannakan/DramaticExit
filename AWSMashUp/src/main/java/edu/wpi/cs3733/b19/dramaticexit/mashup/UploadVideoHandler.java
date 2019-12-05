@@ -27,12 +27,27 @@ LambdaLogger logger;
 	// To access S3 storage
 	private AmazonS3 s3 = null;
 	
+	String bucket = "b19dramaticexit";
+	
+	boolean useTestDB() {
+		if(System.getenv("TESTING") != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	
 	/** Create S3 bucket
 	 * 
 	 * @throws Exception 
 	 */
 	boolean uploadVideo(String oggFile, String videoID, String characterName, String sentence, boolean availability) throws Exception {
+		if(useTestDB()){ bucket = "3733dramaticexit"; }
+		System.out.printf("bucket: ", bucket);
 		if (logger != null) { logger.log("in uploadVideo"); }
+		System.out.println("in uploadVideo");
 		
 		if (s3 == null) {
 			logger.log("attach to S3 request");
@@ -46,9 +61,15 @@ LambdaLogger logger;
 		
 		System.out.printf("Uploading %s to S3 bucket %s...\n", oggFile, "b19dramaticexit");
 		try {
-			PutObjectResult res = s3.putObject(new PutObjectRequest("b19dramaticexit", "Videos/" + oggFile, inputstream, omd)
+			//makes object publicly visible
+			PutObjectResult res = s3.putObject(new PutObjectRequest(bucket, "Videos/" + oggFile, inputstream, omd)
 				.withCannedAcl(CannedAccessControlList.PublicRead));
-			String objectURL = s3.getUrl("b19dramaticexit", "Videos/" + oggFile).toString();
+			String objectURL = s3.getUrl(bucket, "Videos/" + oggFile).toString();
+			if(objectURL == null) {
+				System.out.println("cannot put into s3");
+				return false;
+			}
+			System.out.println(objectURL);
 			return uploadVideotoRDS(objectURL, videoID, characterName, sentence, availability);
 		} catch (AmazonServiceException e) {
 		    System.err.println(e.getErrorMessage());
