@@ -14,7 +14,7 @@ function processSearch(keywordname, keywordsentence) {
   var js = JSON.stringify(data);
   console.log("JS:" + js);
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", search_url, true);  /
+  xhr.open("POST", search_video_url, true);  /
 
   // send the collected data as JSON
   xhr.send(js);
