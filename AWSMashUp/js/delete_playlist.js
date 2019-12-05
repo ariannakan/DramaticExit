@@ -4,7 +4,6 @@ function processDeleteResponse(result) {
   console.log("deleted:" + result);
   
   refreshPlaylistList();
-  //might need to include refresh playlistlist
   //refreshRemoteList();
 }
 
@@ -16,7 +15,7 @@ function requestPlaylistDelete(playlist) {
 
 function processDelete(playlist) {
   var data = {};
-  data["playlistID"] = playlist;
+  data["playlistName"] = playlist; //might need to use playlistName
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);

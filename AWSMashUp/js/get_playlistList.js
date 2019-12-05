@@ -6,7 +6,7 @@
  */
 function refreshPlaylistList() {
    var xhr = new XMLHttpRequest();
-   xhr.open("GET", list_playlists_url, true);
+   xhr.open("GET", list_playlists_url, true); //url might need to be edited
    xhr.send();
    
    console.log("sent");
@@ -39,15 +39,15 @@ function processListResponse(result) {
     var playlistJson = js.list[i];
     console.log(playlistJson);
     
-    var playlistID = playlistJson["playlistID"];
+    //var playlistID = playlistJson["playlistID"];
     var playlistName = playlistJson["playlistName"];
     
-    output = output + "<div id=\"" + playlistID + "\">" +
-		"<br>" + playlistName + "</b>" +
-  		" (<a href='javaScript:requestPlaylistDelete(\"" + playlistID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)" + "</><br></div>";
+    output = output + "<div id=\"" + playlistName + "\">" +
+		"<br><b>" + playlistName + "</b>     " +
+  		"(<a href='javaScript:requestPlaylistDelete(\"" + playlistName + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)" + "</><br></div>";
   }
   
-  plList.innerHTML = output;
+  playlistList.innerHTML = output;
   
   /*
   var list = JSON.parse(result).list
