@@ -1,21 +1,15 @@
-/**
- * 
- */
- 
- /**
-  * 
-  */
+
  function processUpdateVideoResponse(result) {
    // Can grab any DIV or SPAN HTML element and can then manipulate its
    // contents dynamically via javascript
    console.log("Update Availability:" + result);
    }
 
- function processUpdateVideoRequest(vid, availability) {
-    if (confirm("Request to delete " + vid)) {
-      processUpdateVideo(vid, availability);
-    }
- }
+// function requestUpdateVideo(vid, availability) {
+//    if (confirm("Request to update " + vid)) {
+//      processUpdateVideo(vid, availability);
+//    }
+// }
 
  function processUpdateVideo(vid, availability) {
    var data = {};
