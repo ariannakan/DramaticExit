@@ -9,20 +9,18 @@
    // Can grab any DIV or SPAN HTML element and can then manipulate its
    // contents dynamically via javascript
    console.log("Update Availability:" + result);
-   
-   refreshVideoList();
- }
+   }
 
- function processUpdateVideoRequest(vid, mark) {
+ function processUpdateVideoRequest(vid, availability) {
     if (confirm("Request to delete " + vid)) {
-      processUpdateVideo(vid, mark);
+      processUpdateVideo(vid, availability);
     }
  }
 
- function processUpdateVideo(vid, mark) {
+ function processUpdateVideo(vid, availability) {
    var data = {};
    data["videoID"] = vid; //form????
-   data["availability"] = mark;//form??
+   data["availability"] = availability;//form??
    
    var js = JSON.stringify(data);
    console.log("JS:" + js);
