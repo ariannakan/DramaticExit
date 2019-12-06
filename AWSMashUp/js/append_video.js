@@ -1,21 +1,13 @@
-/**
- * 
- */
 function processAppendVideoResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
   console.log("Append: " + result);
   
-  refreshPlayList();
+  refreshPlaylistVideoList();
   //might need to include refresh playlistlist
   //refreshRemoteList();
 }
 
-function processAppendVideoRequest(vid, playlist) {
-   if (confirm("Request to delete " + vid)) {
-     processAppendVideo(vid, playlist);
-   }
-}
 
 function processAppendVideo(vid, playlist) {
   var data = {};
