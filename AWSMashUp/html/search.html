@@ -10,10 +10,7 @@
 <script type="text/javascript">
 
 function initialize() {
-  
-   // get all constants
-   refreshVideoList();
-   
+
 }
 
 </script>
@@ -31,13 +28,15 @@ function initialize() {
 		<span class="door"><i class='fas fa-door-open' style = " background-color: inherit; border: none; color: white; padding: 4px 8px; font-size: 25px; cursor:pointer;"></i></span>	
 		<h2 style = "display:inline;">MashUpApp<br><span style = "font-size:12px; margin-left:30px;">A Dramatic Exit Group</span></h2>
 	</div>
-   <input type="text" placeholder="Character Name..." style = "margin-top:20px; border-radius:10px;">
-   <input type="text" placeholder="Sentence..." style = "margin-top:20px; border-radius:10px;">
-   <button class = "searchUserButton" style = "display: inline;"><i class="fa fa-search" onclick="window.location.href = 'search.html';"></i></button>      
+	<form name="searchForm" method="post">
+   <input type="text" placeholder="Character Name..." name="keywordname" style = "margin-top:20px; border-radius:10px;">
+   <input type="text" placeholder="Sentence..." name="keywordsentence" style = "margin-top:20px; border-radius:10px;">
+   <button type = 'button' class = "searchUserButton" style = "display: inline;"><i class="fa fa-search" onclick="JavaScript:handleSearchClick()"></i></button>      
    <button class = "btn switchToUser" onclick="window.location.href = 'user.html';">User</button>
    <p style = "font-size: 18px; position: absolute; bottom: 0; margin-left: 110px;">|</p>
    <button class = "btn switchToAdmin" onclick="window.location.href = 'admin.html';">Admin</button>
    <p style = "font-size: 16px; text-align:center; margin-top: 25px; line-height: 200%; width: 225px; background-color: #006600;">Search</p>
+   </form>
 </div>
 
 <div class = "Library">
@@ -46,6 +45,10 @@ function initialize() {
 
 <div style = "border-bottom: 1px solid white; margin-top:10px;"></div>
 
+	 
+	<div id="searchList" style = "font-size:18px; margin-left:10px;">
+		<script src = "../js/search.js"></script>
+	</div>
 
 </body>
 </html> 

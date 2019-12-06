@@ -1,3 +1,38 @@
+
+function handleSearchClick() {
+
+  var data = {};
+  data["keywordname"] = document.searchForm.keywordname.value;
+  data["keywordsentence"] = document.searchForm.keywordsentence.value;
+
+  var js = JSON.stringify(data);
+  console.log("JS:" + js);
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", search_video_url, true);  
+  
+  // send the collected data as JSON
+  xhr.send(js);
+  console.log("sent");
+  // This will process results and update HTML as appropriate. 
+  xhr.onloadend = function () {
+	  console.log(xhr);
+	  console.log(xhr.request);
+	  if (xhr.readyState == XMLHttpRequest.DONE) {
+		  if (xhr.status == 200) {
+			  console.log ("XHR:" + xhr.responseText);
+			  processSearchResponse(xhr.responseText);
+		  } else {
+			  console.log("actual:" + xhr.responseText)
+			  var js = JSON.parse(xhr.responseText);
+			  var err = js["error"];
+			  alert (err);
+		  }
+	  } else {
+		  processSearchResponse("N/A");
+	  }
+  };
+}
+
 //js for search function
 function processSearchResponse(result) {
 
@@ -18,7 +53,6 @@ function processSearchResponse(result) {
 	    
 	    output = output + "<div id=\"vid" + videoID + "\">" +
 			"<br><b><center>Video " + videoID + "</b>     " +
-	  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
 	   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
 	   		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
 	  }
@@ -26,39 +60,6 @@ function processSearchResponse(result) {
 	  searchList.innerHTML = output;
 	}
 
-function handleSearchClick() {
-
-  var data = {};
-  data["keywordname"] = document.searchForm.keywordname.value;
-  data["keywordsentence"] = document.searchForm.keywordsentence.value;
-
-  var js = JSON.stringify(data);
-  console.log("JS:" + js);
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", search_video_url, true);  
-
-  // send the collected data as JSON
-  xhr.send(js);
-
-  // This will process results and update HTML as appropriate. 
-  xhr.onloadend = function () {
-	  console.log(xhr);
-	  console.log(xhr.request);
-	  if (xhr.readyState == XMLHttpRequest.DONE) {
-		  if (xhr.status == 200) {
-			  console.log ("XHR:" + xhr.responseText);
-			  processSearchResponse(xhr.responseText);
-		  } else {
-			  console.log("actual:" + xhr.responseText)
-			  var js = JSON.parse(xhr.responseText);
-			  var err = js["error"];
-			  alert (err);
-		  }
-	  } else {
-		  processSearchResponse("N/A");
-	  }
-  };
-}
 
 
 
