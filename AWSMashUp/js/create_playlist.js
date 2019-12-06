@@ -8,8 +8,7 @@ function processCreateResponse(result) {
 }
 
 function handleCreateClick() {
-  var playlistName = document.createPlaylistForm.playlistName.value;
- 
+
   var data = {};
   data["playlistName"] = document.createPlaylistForm.playlistName.value;
   
