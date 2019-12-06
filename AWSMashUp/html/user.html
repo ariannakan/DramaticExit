@@ -20,6 +20,7 @@ function initialize() {
    
    refreshPlaylistVideoList();
 }
+
 </script>
 
 <title>User Library Page</title>
@@ -55,8 +56,8 @@ function initialize() {
 	<h3 style = "display:inline;">Playlists</h3>
 	
 	<form name="createPlaylistForm" method="post" style = "float:right;">
-		<input type="text" placeholder=" Enter Playlist Name..." name="pName" style = "font-size:14px; border-radius:10px;" required>
-		<button type="submit" id="uploadButton" class="btn" onClick="JavaScript:handleCreateClick(this)">+ New Playlist</button>
+		<input type=TEXT placeholder="Enter Playlist Name..." name="playlistName" style = "font-size:14px; border-radius:10px;" required>
+		<input type=BUTTON value="+ New Playlist" name="Create" onClick="JavaScript:handleCreateClick()"></button>
 	</form>
 	
 	<div style = "border-bottom: 1px solid white; margin-top:25px;"></div>

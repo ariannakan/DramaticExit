@@ -7,11 +7,11 @@ function processCreateResponse(result) {
   //refreshRemoteList();
 }
 
-function handleCreateClick(e) {
-  var form = document.createPlaylistForm;
+function handleCreateClick() {
+  var playlistName = document.createPlaylistForm.playlistName.value;
  
   var data = {};
-  data["playlistName"] = form.pName.value;
+  data["playlistName"] = document.createPlaylistForm.playlistName.value;
   
   /*
   if (form.system.checked) {  // be sure to flag system constant requests...
