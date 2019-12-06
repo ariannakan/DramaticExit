@@ -167,6 +167,16 @@ html, body {
   color:#944f00;
 }
 
+.switchToSearchMyLibrary {
+  font-size: 16px;
+  width: 225px;
+  margin-top: -10px;
+}
+
+.switchToSearchMyLibrary:hover {
+  color:#009933
+}
+
 .switchToAdminMyLibrary{
   font-size: 16px;
   width: 225px;
@@ -187,6 +197,16 @@ html, body {
   color:#944f00;
 }
 
+.switchToSearchVideos {
+  font-size: 16px;
+  margin-top:-5px;
+  width:225px;
+}
+
+.switchToSearchVideos:hover{
+  color:#009933
+}
+
 .searchUserButton {
   background-color: inherit;
   border: none; 
@@ -197,20 +217,7 @@ html, body {
 }
 
 .searchUserButton:hover {
-  color: #944f00;
-}
-
-.searchAdminButton {
-  background-color: inherit;
-  border: none; 
-  color: white;
-  padding: 4px 8px;
-  font-size: 16px; 
-  cursor: pointer;
-}
-
-.searchAdminButton:hover {
-  color: #0066cc;
+  color: #009933;
 }
 
 .formButton{
