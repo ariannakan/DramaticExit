@@ -7,7 +7,7 @@ function processUploadVideoResponse(result) {
   //refreshRemoteList();
 }
 
-function handleCreateClick(e) {
+function handleUploadClick(e) {
   //var form = document.uploadForm;
  
   var data = {};
@@ -15,14 +15,14 @@ function handleCreateClick(e) {
   data["sentence"] = document.uploadForm.sentence.value;
   
   /**
-  if (form.system.checked) {  // be sure to flag system constant requests...
+  if (document.uploadForm.system.checked) {  // be sure to flag system constant requests...
 	  data["system"] = true;
   }
   **/
-  
   // base64EncodedValue":"data:text/plain;base64,My4xND....."
   var segments = document.uploadForm.base64Encoding.value.split(',');
-  data["oggFile"] = segments[1];  // skip first one 
+  console.log(segments[0]);
+  data["video64"] = segments[1];  // skip first one 
 
   //data["oggFile"] = document.uploadForm.oggFile.value;
   console.log(data);
@@ -41,18 +41,15 @@ function handleCreateClick(e) {
     console.log(xhr.request);
     if (xhr.readyState == XMLHttpRequest.DONE) {
     	 if (xhr.status == 200) {
-    		 console.log("success");
 	      console.log ("XHR:" + xhr.responseText);
 	      processUploadVideoResponse(xhr.responseText);
     	 } else {
-    		 console.log("fail");
     		 console.log("actual:" + xhr.responseText)
 			  var js = JSON.parse(xhr.responseText);
 			  var err = js["response"];
 			  alert (err);
     	 }
     } else {
-    	console.log("here");
       processUploadVideoResponse("N/A");
     }
   };

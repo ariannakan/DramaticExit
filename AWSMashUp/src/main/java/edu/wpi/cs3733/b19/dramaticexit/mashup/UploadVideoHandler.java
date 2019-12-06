@@ -48,7 +48,7 @@ LambdaLogger logger;
 	 * 
 	 * @throws Exception 
 	 */
-	boolean uploadVideo(String video64, String videoID, String characterName, String sentence) throws Exception {
+	boolean uploadVideo(byte[] video64, String videoID, String characterName, String sentence) throws Exception {
 		if(useTestDB()){ bucket = "3733dramaticexit"; }
 		if (logger != null) { logger.log("in uploadVideo"); }
 		
@@ -110,7 +110,8 @@ LambdaLogger logger;
 		UploadVideoResponse response;
 		String videoID = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 		try { 
-				if (uploadVideo(req.video64, videoID, req.characterName, req.sentence)) {
+				byte[] encoded = java.util.Base64.getDecoder().decode(req.video64);
+				if (uploadVideo(encoded, videoID, req.characterName, req.sentence)) {
 					response = new UploadVideoResponse(videoID, 200);
 				} else {
 					response = new UploadVideoResponse(videoID, 422);

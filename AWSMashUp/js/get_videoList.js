@@ -16,13 +16,13 @@ function refreshVideoList() {
     if (xhr.readyState == XMLHttpRequest.DONE) {
      // console.log ("XHR:" + xhr.responseText);
       processListResponse(xhr.responseText);
-      processSegmentListResponse(xhr.responseText);
+      //processSegmentListResponse(xhr.responseText);
     } else {
       processListResponse("N/A");
     }
   };
 }
-
+/**
 function processSegmentListResponse(result) {
 	  //console.log("res:" , JSON.parse(result).list);
 	  console.log("segment result:" + result);
@@ -40,7 +40,7 @@ function processSegmentListResponse(result) {
 	    var sentence = videoJson["sentence"];
 	    var videoID = videoJson["videoID"];
 	    
-	    if(availability === "true"){
+	    if(availability == "true"){
 	    	output = output + "<div id=\"" + videoID + "\">" +
 			"<br><b>" + characterName + ": </b>" + sentence + "</b>" +
 			"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>Hide</a>)</center>" + "</><br></div>";
@@ -61,6 +61,7 @@ function processSegmentListResponse(result) {
 	  vidList.innerHTML = output;
 
 	}
+**/
 
 /**
  * Respond to server JSON object.
