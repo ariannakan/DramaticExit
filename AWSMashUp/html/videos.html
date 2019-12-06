@@ -65,7 +65,7 @@ function initialize() {
 		<input type="text" placeholder="Enter Character Name..." name="characterName" required/>
 		<input type="text" placeholder="Enter Sentence..." name="sentence" required/>
 		
-		<input type="button" id="uploadButton" class="btn" value="Upload" disabled onClick="JavaScript:handleUploadClick(this)">
+		<input type="button" id="uploadButton" class="btn" value="Upload" disabled onClick="JavaScript:handleUploadClick(this); closeForm()">
 		<button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
 	</form>
 </div>
