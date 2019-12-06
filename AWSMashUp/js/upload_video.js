@@ -3,7 +3,7 @@ function processUploadVideoResponse(result) {
   // contents dynamically via javascript
   console.log("result:" + result);
 
-  refreshVideosList();
+  refreshVideoList();
   //refreshRemoteList();
 }
 
@@ -22,7 +22,8 @@ function handleUploadClick(e) {
   // base64EncodedValue":"data:text/plain;base64,My4xND....."
   var segments = document.uploadForm.base64Encoding.value.split(',');
   console.log(segments[0]);
-  data["video64"] = segments[1];  // skip first one 
+  data["base64EncodedValue"] = segments[1];  // skip first one 
+  console.log(segments[2]);
 
   //data["oggFile"] = document.uploadForm.oggFile.value;
   console.log(data);
@@ -34,6 +35,7 @@ function handleUploadClick(e) {
 
   // send the collected data as JSON
   xhr.send(js);
+  console.log("sent js");
 
   // This will process results and update HTML as appropriate. 
   xhr.onloadend = function () {

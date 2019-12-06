@@ -48,8 +48,8 @@ LambdaLogger logger;
 	 * 
 	 * @throws Exception 
 	 */
-	boolean uploadVideo(byte[] video64, String videoID, String characterName, String sentence) throws Exception {
-		if(useTestDB()){ bucket = "3733dramaticexit"; }
+	boolean uploadVideo(String videoID, String characterName, String sentence, String base64EncodedValue) throws Exception {
+		if (useTestDB()) { bucket = "3733dramaticexit"; }
 		if (logger != null) { logger.log("in uploadVideo"); }
 		
 		if (s3 == null) {
@@ -58,24 +58,25 @@ LambdaLogger logger;
 			logger.log("attach to S3 succeed");
 		}
 		
+		System.out.printf("Uploading %s to S3 bucket %s...\n", base64EncodedValue, "b19dramaticexit");
 		
-		System.out.printf("Uploading %s to S3 bucket %s...\n", video64, "b19dramaticexit");
 		try {
-			byte[] videoByteArray = Base64.getDecoder().decode(video64);
+			byte[] videoByteArray = Base64.getDecoder().decode(base64EncodedValue);
 			InputStream inputstream = new ByteArrayInputStream(videoByteArray);
 			ObjectMetadata omd = new ObjectMetadata(); 
 			omd.setContentLength(videoByteArray.length);
 			
 			//makes object publicly visible
-			PutObjectResult res = s3.putObject(new PutObjectRequest(bucket, "Videos/" + sentence + ".ogg", inputstream, omd)
+			PutObjectResult res = s3.putObject(new PutObjectRequest(bucket, "Videos/" + videoID + ".ogg", inputstream, omd)
 				.withCannedAcl(CannedAccessControlList.PublicRead));
-			String objectURL = s3.getUrl(bucket, "Videos/" + sentence + ".ogg").toString();
-			if(objectURL == null) {
+			
+			String videoURL = s3.getUrl(bucket, "Videos/" + videoID + ".ogg").toString();
+			if(videoURL == null) {
 				System.out.println("cannot put into s3");
 				return false;
 			}
-			System.out.println(objectURL);
-			return uploadVideotoRDS(objectURL, videoID, characterName, sentence, true);
+			System.out.println(videoURL);
+			return uploadVideotoRDS(videoID, characterName, sentence, true, videoURL);
 		} catch (AmazonServiceException e) {
 		    System.err.println(e.getErrorMessage());
 		    return false;
@@ -86,14 +87,14 @@ LambdaLogger logger;
 	 * 
 	 * @throws Exception 
 	 */
-	boolean uploadVideotoRDS(String objectURL, String videoID, String characterName, String sentence, boolean availability) throws Exception {
+	boolean uploadVideotoRDS(String videoID, String characterName, String sentence, boolean availability, String url) throws Exception {
 		if (logger != null) { logger.log("in uploadVideo"); }
 		VideosDAO dao = new VideosDAO();
 		
 		// check if present
-		Video exist = dao.getVideoByURL(objectURL);
+		Video exist = dao.getVideoByURL(url);
 		
-		Video video = new Video (videoID, characterName, sentence, availability, objectURL);
+		Video video = new Video (videoID, characterName, sentence, availability, url);
 		if (exist == null) {
 			System.out.println("adding video to RDS");
 			return dao.addVideo(video);
@@ -108,12 +109,15 @@ LambdaLogger logger;
 		logger.log(req.toString());
 
 		UploadVideoResponse response;
+		
 		String videoID = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+		
 		try { 
-				byte[] encoded = java.util.Base64.getDecoder().decode(req.video64);
-				if (uploadVideo(encoded, videoID, req.characterName, req.sentence)) {
+				if (uploadVideo(videoID, req.characterName, req.sentence, req.base64EncodedValue)) {
+					System.out.println("successful upload");
 					response = new UploadVideoResponse(videoID, 200);
 				} else {
+					System.out.println("failed upload");
 					response = new UploadVideoResponse(videoID, 422);
 				}
 		} catch (Exception e) {
