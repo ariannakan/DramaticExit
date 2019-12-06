@@ -26,7 +26,7 @@ function processSearch(keywordname, keywordsentence) {
 	  if (xhr.readyState == XMLHttpRequest.DONE) {
 		  if (xhr.status == 200) {
 			  console.log ("XHR:" + xhr.responseText);
-			  processDeleteResponse(xhr.responseText);
+			  processSearchResponse(xhr.responseText);
 		  } else {
 			  console.log("actual:" + xhr.responseText)
 			  var js = JSON.parse(xhr.responseText);
@@ -34,7 +34,7 @@ function processSearch(keywordname, keywordsentence) {
 			  alert (err);
 		  }
 	  } else {
-		  processDeleteResponse("N/A");
+		  processSearchResponse("N/A");
 	  }
   };
 }

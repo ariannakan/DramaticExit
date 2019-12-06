@@ -13,7 +13,7 @@ function processAppendVideoResponse(result) {
 
 function processAppendVideoRequest(vid, playlist) {
    if (confirm("Request to delete " + vid)) {
-     processDelete(vid, playlist);
+     processAppendVideo(vid, playlist);
    }
 }
 
@@ -37,7 +37,7 @@ function processAppendVideo(vid, playlist) {
 	  if (xhr.readyState == XMLHttpRequest.DONE) {
 		  if (xhr.status == 200) {
 			  console.log ("XHR:" + xhr.responseText);
-			  processDeleteResponse(xhr.responseText);
+			  processAppendVideoResponse(xhr.responseText);
 		  } else {
 			  console.log("actual:" + xhr.responseText)
 			  var js = JSON.parse(xhr.responseText);
@@ -45,7 +45,7 @@ function processAppendVideo(vid, playlist) {
 			  alert (err);
 		  }
 	  } else {
-		  processDeleteResponse("N/A");
+		  processAppendVideoResponse("N/A");
 	  }
   };
 }

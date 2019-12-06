@@ -1,7 +1,7 @@
 /**
  * 
  */
-function processDeleteResponse(result) {
+function processRemoveVideoResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
   console.log("deleted:" + result);
@@ -11,15 +11,16 @@ function processDeleteResponse(result) {
   //refreshRemoteList();
 }
 
-function requestVidDelete(vid) {
+function requestRemoveVideo(vid, playlist;) {
    if (confirm("Request to delete " + vid)) {
-     processDelete(vid);
+     processRemovePlaylistVideo(vid, playlist);
    }
 }
 
-function processDelete(vid) {
+function processRemovePlaylistVideo(vid, playlist) {
   var data = {};
   data["videoID"] = vid;
+  data["playlistName"] = playlist;
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);
@@ -36,7 +37,7 @@ function processDelete(vid) {
 	  if (xhr.readyState == XMLHttpRequest.DONE) {
 		  if (xhr.status == 200) {
 			  console.log ("XHR:" + xhr.responseText);
-			  processDeleteResponse(xhr.responseText);
+			  processRemoveVideoResponse(xhr.responseText);
 		  } else {
 			  console.log("actual:" + xhr.responseText)
 			  var js = JSON.parse(xhr.responseText);
@@ -44,7 +45,7 @@ function processDelete(vid) {
 			  alert (err);
 		  }
 	  } else {
-		  processDeleteResponse("N/A");
+		  processRemoveVideoResponse("N/A");
 	  }
   };
 }
