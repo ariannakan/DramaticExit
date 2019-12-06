@@ -19,7 +19,7 @@ var delete_video_url 	= base_url + "library/video/{videoID}"	//POST / DELETE
 var update_video_url	= base_url + "library/video/updatevideo"	//POST
 var create_playlist_url	= base_url + "playlist"				//POST
 var get_playlist_videos_url	= base_url + "playlist/{playlistID}"	//GET
-var append_video_url	= base_url + "playlist/{playlistID}"	//PUT
+var append_video_url	= base_url + "playlist/appendvideo"	//POST
 var delete_playlist_url	= base_url + "playlist/{playlistID}"	//POST / DELETE
 var delete_playlist_video_url	= base_url + "playlist/{playlistID}/video/{videoID}"	//POST / DELETE
 

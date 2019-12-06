@@ -17,7 +17,7 @@ function processAppendVideo(vid, playlist) {
   var js = JSON.stringify(data);
   console.log("JS:" + js);
   var xhr = new XMLHttpRequest();
-  xhr.open("PUT", append_video_url, true);  // Can't be DELETE since then no data sent via JSON
+  xhr.open("POST", append_video_url, true);  // Can't be DELETE since then no data sent via JSON
 
   // send the collected data as JSON
   xhr.send(js);
