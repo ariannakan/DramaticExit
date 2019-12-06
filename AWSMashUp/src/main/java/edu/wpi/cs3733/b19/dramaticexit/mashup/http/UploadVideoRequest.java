@@ -6,7 +6,6 @@ public class UploadVideoRequest {
 	public String videoID;
 	public String characterName;
 	public String sentence;
-	public File oggFile;
 	public boolean availability;
 	public boolean system;
 /*NR*/
@@ -27,9 +26,6 @@ public class UploadVideoRequest {
 	public String getSentence() { return sentence; }
 	public void setSentence(String sentence) { this.sentence = sentence; }
 	
-	public File getoggFile() { return oggFile; }
-	public void setoggFile(File oggFile) { this.oggFile = oggFile; }
-	
 	public boolean getAvailability() { return availability; }
 	public void setAvailability(boolean availability) { this.availability = availability; }
 	
@@ -40,25 +36,8 @@ public class UploadVideoRequest {
 		
 	}
 	
-	public UploadVideoRequest(String characterName, String sentence, File oggFile) {
-		this.videoID = "";
-		this.characterName = characterName;
-		this.sentence = sentence;
-		this.oggFile = oggFile; 
-		this.availability = true;
-	}
-	
-	public UploadVideoRequest(String videoID, String characterName, String sentence, File oggFile, boolean availability, boolean system) {
-		this.videoID = videoID;
-		this.characterName = characterName;
-		this.sentence = sentence;
-		this.oggFile = oggFile; 
-		this.availability = availability;
-		this.system = system;
-	}
-	
 	public String toString() {
-		return "UploadVideo(" + videoID + "," + characterName + "," + sentence + "," + oggFile + "," + availability + ")";
+		return "UploadVideo(" + videoID + "," + characterName + "," + sentence + "," + video64 + "," + availability + ")";
 	}
 	
 /* -- begin NR*/	
