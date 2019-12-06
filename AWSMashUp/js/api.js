@@ -9,7 +9,7 @@ var list_url   = base_url + "constants";    // GET
 **/
 
 var list_playlists_url	= base_url + "library/playlist";	//GET
-var register_site_url	 	= base_url + "library/site";		//POST
+var register_site_url	= base_url + "library/site";		//POST
 var get_sites_url	 	= base_url + "library/site";		//GET
 var delete_site_url	 	= base_url + "library/site/{url}";	//POST / DELETE
 var add_video_url 	 	= base_url + "library/video";		//POST

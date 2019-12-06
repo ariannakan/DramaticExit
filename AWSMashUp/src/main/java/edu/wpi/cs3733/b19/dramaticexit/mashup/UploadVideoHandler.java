@@ -60,7 +60,7 @@ LambdaLogger logger;
 		System.out.printf("Uploading %s to S3 bucket %s...\n", oggFile, "b19dramaticexit");
 		try {
 			InputStream inputstream = new FileInputStream(oggFile);
-			ObjectMetadata omd = new ObjectMetadata();
+			ObjectMetadata omd = new ObjectMetadata(); 
 			omd.setContentLength(oggFile.length());
 			omd.setContentType("application/ogg");
 			
