@@ -127,7 +127,7 @@ html, body {
   font-size: 18px; 
   position: absolute; 
   bottom: 0; 
-  margin-left: -100px; 
+  margin-left: 120px; 
   margin-bottom: 3px;
 }
 
@@ -139,7 +139,7 @@ html, body {
   font-size: 18px; 
   position: absolute; 
   bottom: 0; 
-  margin-left: -200px; 
+  margin-left:15px; 
   margin-bottom: 3px;
 }
 
