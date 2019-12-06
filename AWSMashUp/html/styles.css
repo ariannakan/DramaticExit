@@ -11,7 +11,7 @@ body {
 }
 
 .door{
-	cursor:pointer;
+  cursor:pointer;
 }
 
 .door:hover .fa-door-open:before{
@@ -92,7 +92,7 @@ html, body {
   display: inline-block;
   color: rgba(255, 255, 255, 0.9);
   font-family: 'proxima-nova', sans-serif;
-  margin-top:-37px;
+  margin-top:-11px;
 }
 
 .newPlaylist:hover{
