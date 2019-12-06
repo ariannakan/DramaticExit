@@ -20,6 +20,7 @@ public class Video {
 	public Video (String videoID, String url) {
 		this.videoID = videoID;
 		this.url = url;
+		this.availability = true;
 	}
 	
 	public Video() {

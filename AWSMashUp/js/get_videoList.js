@@ -16,11 +16,50 @@ function refreshVideoList() {
     if (xhr.readyState == XMLHttpRequest.DONE) {
      // console.log ("XHR:" + xhr.responseText);
       processListResponse(xhr.responseText);
+      processSegmentListResponse(xhr.responseText);
     } else {
       processListResponse("N/A");
     }
   };
 }
+
+function processSegmentListResponse(result) {
+	  //console.log("res:" , JSON.parse(result).list);
+	  console.log("segment result:" + result);
+	  // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
+	  var js = JSON.parse(result);
+	  var vidList = document.getElementById('segmentVideoList');
+	  
+	  var output = "";
+	  for (var i = 0; i < js.list.length; i++) {
+	    var videoJson = js.list[i];
+	    console.log(videoJson);
+	    
+	    var availability = videoJson["availability"];
+	    var characterName = videoJson["characterName"];
+	    var sentence = videoJson["sentence"];
+	    var videoID = videoJson["videoID"];
+	    
+	    if(availability === "true"){
+	    	output = output + "<div id=\"" + videoID + "\">" +
+			"<br><b>" + characterName + ": </b>" + sentence + "</b>" +
+			"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>hide</a>)</center>" + "</><br></div>";
+	    } else {
+	    	output = output + "<div id=\"" + videoID + "\">" +
+			"<br><b>" + characterName + ": </b>" + sentence + "</b>" +
+			"(<a href='javaScript:processShowVideo(\"" + videoID + "\")'>show</a>)</center>" + "</><br></div>";
+	    }
+	    
+//	    output = output + "<div id=\"" + videoID + "\">" +
+//		"<br><b>" + characterName + ": </b>" + sentence + "</b>" +
+//		"(<a href='javaScript:processShowVideo(\"" + videoID + "\")'>show</a>)</center>" + 
+//		"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>hide</a>)</center>" + "</><br></div>";
+//			
+	  }
+	  
+	  vidList.innerHTML = output;
+
+	}
 
 /**
  * Respond to server JSON object.
@@ -48,7 +87,6 @@ function processListResponse(result) {
     output = output + "<div id=\"vid" + videoID + "\">" +
 		"<br><b><center>Video " + videoID + "</b>     " +
   		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
-  		//"(<a href='javaScript:processUpdateVideo(\"" + videoID + "," + availability + "\")'>"
    		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
    		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
   }
