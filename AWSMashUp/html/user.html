@@ -35,19 +35,17 @@ function initialize() {
 	<div class = "MashUpAppTitle" id = "MashTitle">
 		<span class="door"><i class='fas fa-door-open' style = " background-color: inherit; border: none; color: white; padding: 4px 8px; font-size: 25px; cursor:pointer;"></i></span>	
 		<h2 style = "display:inline;">MashUpApp<br><span style = "font-size:12px; margin-left:30px;">A Dramatic Exit Group</span></h2>
+		<div style = "border-bottom: 1px solid white; margin-top:10px; margin-left:-30px;"></div>
 	</div>
 	
    <form name="searchForm" method="post">
-  	 	<input type="text" placeholder="Character Name..." name="keywordname" style = "margin-top:20px; border-radius:10px;">
-  		<input type="text" placeholder="Sentence..." name="keywordsentence" style = "margin-top:20px; border-radius:10px;">
-  	  	<button type='button' class = "searchUserButton" style = "display: inline;" onclick="JavaScript:handleSearchClick(); window.location.href = 'search.html'"><i class="fa fa-search"></i></button>      
-  	 
-  	
- 	<p style = "font-size: 18px; font-weight: bold; color: #944f00; position: absolute; bottom: 0; margin-left: 35px;">User</p>
- 	<p style = "font-size: 18px; position: absolute; bottom: 0; margin-left: 110px;">|</p>
- 	<button type='button' class = "btn switchToAdmin" onclick="window.location.href = 'admin.html';">Admin</button>
- 	<p style = "font-size: 16px; text-align:center; margin-top: 25px; line-height: 200%; width: 225px; background-color: #6b3900;">My Library</p>
-	<button type='button' class = "btn switchToVideos" onclick="window.location.href = 'videos.html';">My Videos</button>
+	  	<button type='button' class = "searchUserButton" style = "display: inline; margin-top:10px;" onclick="JavaScript:handleSearchClick(); window.location.href = 'search.html'">Search <i class="fa fa-search"></i></button>      
+	  	<div style = "border-bottom: 1px solid white; margin-top:10px;"></div>
+	 	<p style = "font-size: 18px; font-weight: bold; color: #944f00; position: absolute; bottom: 0; margin-left: 35px;">User</p>
+	 	<p style = "font-size: 18px; position: absolute; bottom: 0; margin-left: 110px;">|</p>
+	 	<button type='button' class = "btn switchToAdmin" onclick="window.location.href = 'admin.html';">Admin</button>
+	 	<p style = "font-size: 16px; text-align:center; margin-top: 30px; line-height: 200%; width: 225px; background-color: #6b3900;">My Library</p>
+		<button type='button' class = "btn switchToVideos" onclick="window.location.href = 'videos.html';">My Videos</button>
   </form> 
    
 </div>
@@ -64,7 +62,7 @@ function initialize() {
 		<input type=button class = "btn newPlaylist" value="+ New Playlist" name="Create" onClick="JavaScript:handleCreateClick()">
 	</form>
 	
-	<div style = "border-bottom: 1px solid white; margin-top:25px;"></div>
+	<div style = "border-bottom: 1px solid white; margin-top:25px; margin-left:-30px;"></div>
 	 
 	<div id="playlistList" style = "font-size:18px; margin-left:10px;">
 		<script src = "../js/get_playlistList.js"></script>
