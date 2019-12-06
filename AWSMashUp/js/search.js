@@ -4,7 +4,7 @@ function processSearchResponse(result) {
 	  console.log("search:" + result);
 	  
 	  var js = JSON.parse(result);
-	  var vidList = document.getElementById('searchvidList');
+	  var searchList = document.getElementById('searchList');
 	  
 	  var output = "";
 	  for (var i = 0; i < js.list.length; i++) {
@@ -23,7 +23,7 @@ function processSearchResponse(result) {
 	   		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
 	  }
 	  
-	  searchvidList.innerHTML = output;
+	  searchList.innerHTML = output;
 	}
 
 function handleSearchClick() {
@@ -35,7 +35,7 @@ function handleSearchClick() {
   var js = JSON.stringify(data);
   console.log("JS:" + js);
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", search_video_url, true);  /
+  xhr.open("POST", search_video_url, true);  
 
   // send the collected data as JSON
   xhr.send(js);
