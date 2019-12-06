@@ -1,15 +1,36 @@
 //js for search function
+function processSearchResponse(result) {
 
-function processSearchRequest(keywordname, keywordsentence) {
-   if (confirm("Request to search")) {
-     processSearch(keywordname, keywordsentence);
-   }
-}
+	  console.log("search:" + result);
+	  
+	  var js = JSON.parse(result);
+	  var vidList = document.getElementById('searchvidList');
+	  
+	  var output = "";
+	  for (var i = 0; i < js.list.length; i++) {
+	    var videoJson = js.list[i];
+	    console.log(videoJson);
+	    
+	    var videoID = videoJson["videoID"];
+	    var url = videoJson["url"];
+	    var characterName = videoJson["characterName"];
+	    var sentence = videoJson["sentence"];
+	    
+	    output = output + "<div id=\"vid" + videoID + "\">" +
+			"<br><b><center>Video " + videoID + "</b>     " +
+	  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
+	   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+	   		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
+	  }
+	  
+	  searchvidList.innerHTML = output;
+	}
 
-function processSearch(keywordname, keywordsentence) {
+function handleSearchClick() {
+
   var data = {};
-  data["keywordname"] = keywordname;
-  data["keywordsentence"] = keywordsentence
+  data["keywordname"] = document.searchForm.keywordname.value;
+  data["keywordsentence"] = document.searchForm.keywordsentence.value;
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);
@@ -39,31 +60,6 @@ function processSearch(keywordname, keywordsentence) {
   };
 }
 
-function processSearchResponse(result) {
 
-	  console.log("search:" + result);
-	  
-	  var js = JSON.parse(result);
-	  var vidList = document.getElementById('videoList');
-	  
-	  var output = "";
-	  for (var i = 0; i < js.list.length; i++) {
-	    var videoJson = js.list[i];
-	    console.log(videoJson);
-	    
-	    var videoID = videoJson["videoID"];
-	    var url = videoJson["url"];
-	    var characterName = videoJson["characterName"];
-	    var sentence = videoJson["sentence"];
-	    
-	    output = output + "<div id=\"vid" + videoID + "\">" +
-			"<br><b><center>Video " + videoID + "</b>     " +
-	  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
-	   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
-	   		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
-	  }
-	  
-	  vidList.innerHTML = output;
-	}
 
 
