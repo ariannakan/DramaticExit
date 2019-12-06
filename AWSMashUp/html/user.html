@@ -56,13 +56,12 @@ function initialize() {
 	<h3 style = "display:inline;">Playlists</h3>
 	
 	<form name="createPlaylistForm" method="post" style = "float:right;">
-		<input type=TEXT placeholder="Enter Playlist Name..." name="playlistName" style = "font-size:14px; border-radius:10px;" required>
-		<input type=BUTTON value="+ New Playlist" name="Create" onClick="JavaScript:handleCreateClick()"></button>
+		<input type=text placeholder=" Enter Playlist Name..." name="playlistName" style = "font-size:14px; border-radius:10px;" required>
+		<input type=button class="btn" value="+ New Playlist" name="Create" onClick="JavaScript:handleCreateClick()">
 	</form>
 	
 	<div style = "border-bottom: 1px solid white; margin-top:25px;"></div>
 	
-	  
 	<div id="playlistList" style = "font-size:18px; margin-left:10px;">
 		<script src = "../js/get_playlistList.js"></script>
 	</div>
