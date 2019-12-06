@@ -4,6 +4,7 @@ public class Site {
 
 	public String timestampID;
 	public String url;
+	public boolean system;
 	
 	public Site(String siteID, String url) {
 		this.timestampID = siteID;

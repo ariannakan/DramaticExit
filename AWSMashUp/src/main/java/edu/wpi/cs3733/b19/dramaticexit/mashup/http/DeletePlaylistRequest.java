@@ -2,8 +2,6 @@ package edu.wpi.cs3733.b19.dramaticexit.mashup.http;
 
 public class DeletePlaylistRequest {
 	public String playlistName;
-	public boolean system;
-
 	
 	public String getPlaylistName() {return playlistName;}
 	
