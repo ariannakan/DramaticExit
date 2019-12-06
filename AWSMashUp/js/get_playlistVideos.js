@@ -4,7 +4,13 @@
  *    GET list_url
  *    RESPONSE  list of [name, value] constants 
  */
-function refreshPlaylistVideoList() {
+function refreshPlaylistVideoList(playlistName) {
+
+   var data = {};
+   data["playlistName"] = playlistName;
+
+   var js = JSON.stringify(data);
+   console.log("JS:" + js);
    var xhr = new XMLHttpRequest();
    xhr.open("GET", get_playlist_videos_url, true); //url might need to be edited
    xhr.send();
@@ -15,9 +21,9 @@ function refreshPlaylistVideoList() {
   xhr.onloadend = function () {
     if (xhr.readyState == XMLHttpRequest.DONE) {
       //console.log ("XHR:" + xhr.responseText);
-      processListResponse(xhr.responseText);
+    	processPlaylistVideosResponse(xhr.responseText);
     } else {
-      processListResponse("N/A");
+    	processPlaylistVideosResponse("N/A");
     }
   };
 }
@@ -27,27 +33,49 @@ function refreshPlaylistVideoList() {
  *
  * Replace the contents of 'videoList' with a <br>-separated list of name,value pairs.
  */
-function processListResponse(result) {
+function processPlaylistVideosResponse(result) {
   //console.log("res:" + JSON.parse(result).list);
   console.log("res:" + result);
   // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
   var js = JSON.parse(result);
-  var plVidList = document.getElementById('playlistVideoList');
+  var playlistVideosList = document.getElementById('playlistVideosList');
   
   var output = "";
   for (var i = 0; i < js.list.length; i++) {
-    var playlistVidJson = js.list[i];
-    console.log(playlistVidJson);
+    var videoJson = js.list[i];
+    console.log(videoJson);
     
-    //var playlistID = playlistJson["playlistID"];
-    var playlistName = playlistVidJson["playlistName"];
-    var videoID = playlistVidJson["videoID"];
+    var availability = videoJson["availability"];
+    var characterName = videoJson["characterName"];
+    var sentence = videoJson["sentence"];
+    var videoID = videoJson["videoID"];
+    var url = videoJson["url"];
     
-    output = output + "<div id=\"" + playlistName + "\">" +
-  		"<br>(<a href='javaScript:removePlaylistVideo(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)" + "</><br></div>";
+    if(availability === true){
+	    output = output + "<div id=\"vid" + videoID + "\">" +
+			"<br><b><center>Video " + videoID + "</b>     " +
+	  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
+	   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+	   		"<br><b>" + characterName + ": </b>" + sentence + 
+	   		"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>hide</a>)</center>" + "</><br></div>";
+    } else {
+    	output = output + "<div id=\"vid" + videoID + "\">" +
+		"<br><b><center>Video " + videoID + "</b>     " +
+  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
+   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+   		"<br><b>" + characterName + ": </b>" + sentence + 
+   		"(<a href='javaScript:processShowVideo(\"" + videoID + "\")'>show</a>)</center>" + "</><br></div>";
+    }
+    
+//    output = output + "<div id=\"" + videoID + "\">" +
+//	"<br><b>" + characterName + ": </b>" + sentence + "</b>" +
+//	"(<a href='javaScript:processShowVideo(\"" + videoID + "\")'>show</a>)</center>" + 
+//	"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>hide</a>)</center>" + "</><br></div>";
+//		
   }
   
-  plVidList.innerHTML = output;
+  
+  playlistVideosList.innerHTML = output;
   
   /*
   var list = JSON.parse(result).list

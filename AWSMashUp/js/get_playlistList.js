@@ -39,12 +39,13 @@ function processListResponse(result) {
     var playlistJson = js.list[i];
     console.log(playlistJson);
     
-    //var playlistID = playlistJson["playlistID"];
     var playlistName = playlistJson["playlistName"];
-    
+    	
     output = output + "<div id=\"" + playlistName + "\">" +
 		"<br><b>" + playlistName + "</b>     " +
-  		"(<a href='javaScript:requestPlaylistDelete(\"" + playlistName + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)" + "</><br></div>";
+  		"(<a href='javaScript:requestPlaylistDelete(\"" + playlistName + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)" + "</><br></div>" +
+  		"<element onload='JavaScript:refreshPlaylistVideoList(\"" + playlistName + "\")'>"
+  		
   }
   
   playlistList.innerHTML = output;
