@@ -3,7 +3,7 @@ function processDeleteResponse(result) {
   // contents dynamically via javascript
   console.log("deleted:" + result);
   
-  refreshSitesList();
+  refreshSiteList();
   //refreshRemoteList();
 }
 
@@ -15,7 +15,7 @@ function requestSiteDelete(site) {
 
 function processDelete(site) {
   var data = {};
-  data["url"] = url; //might need to use playlistName
+  data["url"] = site; //might need to use playlistName
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);

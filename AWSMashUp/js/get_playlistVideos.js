@@ -4,7 +4,7 @@
  *    GET list_url
  *    RESPONSE  list of [name, value] constants 
  */
-function refreshPlaylistVideosList() {
+function refreshPlaylistVideoList() {
    var xhr = new XMLHttpRequest();
    xhr.open("GET", get_playlist_videos_url, true); //url might need to be edited
    xhr.send();
@@ -32,7 +32,7 @@ function processListResponse(result) {
   console.log("res:" + result);
   // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
   var js = JSON.parse(result);
-  var plVidList = document.getElementById('playlistVideosList');
+  var plVidList = document.getElementById('playlistVideoList');
   
   var output = "";
   for (var i = 0; i < js.list.length; i++) {

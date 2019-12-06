@@ -4,7 +4,7 @@
  *    GET list_url
  *    RESPONSE  list of [name, value] constants 
  */
-function refreshSitesList() {
+function refreshSiteList() {
    var xhr = new XMLHttpRequest();
    xhr.open("GET", get_sites_url, true);
    xhr.send();
@@ -32,20 +32,20 @@ function processListResponse(result) {
   console.log("res:" + result);
   // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
   var js = JSON.parse(result);
-  var sitesList = document.getElementById('sitesList');
+  var sitesList = document.getElementById('siteList');
   
   var output = "";
   for (var i = 0; i < js.list.length; i++) {
-    var sitesJson = js.list[i];
-    console.log(sitesJson);
+    var siteJson = js.list[i];
+    console.log(siteJson);
     
-    var url = sitesJson["url"];
+    var url = siteJson["url"];
     
     output = output + "<div id=\"" + url + "\">" +
 	"<br><b>" + url + "</b>     " +
 		"(<a href='javaScript:requestSiteDelete(\"" + url + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)" + "</><br></div>";
 }
   
-  vidList.innerHTML = output;
+  sitesList.innerHTML = output;
 
 }

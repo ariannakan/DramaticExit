@@ -11,16 +11,16 @@ function handleCreateClick(e) {
   var form = document.createPlaylistForm;
  
   var data = {};
-  data["playlistName"]               = form.playlistName.value;
+  data["playlistName"] = form.pName.value;
   
-  /**
+  
   if (form.system.checked) {  // be sure to flag system constant requests...
      data["system"] = true;
-  }*/
+  }
   
   // base64EncodedValue":"data:text/plain;base64,My4xND....."
-  var segments = document.createPlaylistForm.base64Encoding.value.split(',');
-  data["base64EncodedValue"] = segments[1];  // skip first one 
+  //var segments = document.createPlaylistForm.base64Encoding.value.split(',');
+  //data["base64EncodedValue"] = segments[1];  // skip first one 
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);
