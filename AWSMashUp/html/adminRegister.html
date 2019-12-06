@@ -4,13 +4,15 @@
 <meta charset="utf-8">
 <!-- relative path-name to access js -->
 <script type='text/javascript' src='../js/api.js'></script>
-<script type='text/javascript' src='../js/get_videoLists.js'></script>
+<script type='text/javascript' src='../js/get_siteList.js'></script>
+<script type='text/javascript' src='../js/register_site.js'></script>
+<script type='text/javascript' src='../js/delete_site.js'></script>
 
 <script type="text/javascript">
 function initialize() {
   
-   // get all constants
-   refreshVideoList();
+   // get all sites
+   refreshSitesList();
 }
 </script>
 
@@ -43,14 +45,13 @@ function initialize() {
 	<h3>Register Site</h3>
 </div>
 
-<div class = "videos">
+<div class = "sites">
 	<div style = "border-bottom: 1px solid white;">
 		<h3>Registered Sites</h3>
 	</div>
-	<p>Site 1</p>
-	<p>Site 2</p>
-	<p>Site 3</p>
-</div>
+	<div id="sitesList" style = "font-size:18px; margin-left:10px;">
+		<script src = "../js/get_siteList.js"></script>
+	</div>
 
 <div class = "register">
 	<input type="text" placeholder="https://">

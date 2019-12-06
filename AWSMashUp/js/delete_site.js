@@ -1,29 +1,26 @@
-/**
- * 
- */
 function processDeleteResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
   console.log("deleted:" + result);
   
-  refreshPlaylistList();
+  refreshSitesList();
   //refreshRemoteList();
 }
 
-function requestPlaylistDelete(playlist) {
-   if (confirm("Request to delete " + playlist)) {
-     processDelete(playlist);
+function requestSiteDelete(site) {
+   if (confirm("Request to delete " + site)) {
+     processDelete(site);
    }
 }
 
-function processDelete(playlist) {
+function processDelete(site) {
   var data = {};
-  data["playlistName"] = playlist; //might need to use playlistName
+  data["url"] = url; //might need to use playlistName
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", delete_playlist_url, true);  // Can't be DELETE since then no data sent via JSON
+  xhr.open("POST", delete_site_url, true);  // Can't be DELETE since then no data sent via JSON
 
   // send the collected data as JSON
   xhr.send(js);

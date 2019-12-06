@@ -1,34 +1,26 @@
-/**
- * 
- */
-function processCreateResponse(result) {
+function processRegisterResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
-  console.log("result:" + result);
+  console.log("registered:" + result);
 
-  refreshPlaylistList();
+  refreshSitesList();
   //refreshRemoteList();
 }
 
-function handleCreateClick(e) {
-  var form = document.createPlaylistForm;
+function processRegister(e) {
+  var form = document.registerSiteForm;
  
   var data = {};
-  data["playlistName"]               = form.playlistName.value;
+  data["url"]               = form.url.value;
   
   /**
   if (form.system.checked) {  // be sure to flag system constant requests...
      data["system"] = true;
   }*/
-  
-  // base64EncodedValue":"data:text/plain;base64,My4xND....."
-  var segments = document.createPlaylistForm.base64Encoding.value.split(',');
-  data["base64EncodedValue"] = segments[1];  // skip first one 
-
   var js = JSON.stringify(data);
   console.log("JS:" + js);
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", create_playlist_url, true);
+  xhr.open("POST", register_site_url, true);
 
   // send the collected data as JSON
   xhr.send(js);
@@ -40,7 +32,7 @@ function handleCreateClick(e) {
     if (xhr.readyState == XMLHttpRequest.DONE) {
     	 if (xhr.status == 200) {
 	      console.log ("XHR:" + xhr.responseText);
-	      processCreateResponse(xhr.responseText);
+	      processRegisterResponse(xhr.responseText);
     	 } else {
     		 console.log("actual:" + xhr.responseText)
 			  var js = JSON.parse(xhr.responseText);
@@ -48,7 +40,7 @@ function handleCreateClick(e) {
 			  alert (err);
     	 }
     } else {
-      processCreateResponse("N/A");
+      processRegisterResponse("N/A");
     }
   };
 }
