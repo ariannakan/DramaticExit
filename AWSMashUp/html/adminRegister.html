@@ -29,8 +29,8 @@ function initialize() {
 		<span class="door"><i class='fas fa-door-open' style = " background-color: inherit; border: none; color: white; padding: 4px 8px; font-size: 25px; cursor:pointer;"></i></span>	
 		<h2 style = "display:inline;">MashUpApp<br><span style = "font-size:12px; margin-left:30px;">A Dramatic Exit Group</span></h2>
 	</div>
-   <input type="text" placeholder="Character Name..." style = "margin-top:20px;">
-   <input type="text" placeholder="Sentence..." style = "margin-top:20px;">
+   <input type="text" placeholder="Character Name..." style = "margin-top:20px; border-radius:10px;">
+   <input type="text" placeholder="Sentence..." style = "margin-top:20px; border-radius:10px;">
    <button class = "searchUserButton" style = "display: inline;"><i class="fa fa-search"></i></button>      
    <p style = "font-size: 18px; position: absolute; bottom: 0; margin-left: 110px;">|</p>
    <button class = "btn switchToUser" onclick="window.location.href = 'user.html';">User</button>
@@ -46,7 +46,7 @@ function initialize() {
 </div>
 
 <div class = "sites">
-	<div style = "border-bottom: 1px solid white;">
+	<div style = "border-bottom: 1px solid white; margin-top:-35px;">
 		<h3>Registered Sites</h3>
 	</div>
 	<div id="siteList" style = "font-size:18px; margin-left:240px;">
@@ -55,8 +55,10 @@ function initialize() {
 </div>	
 
 <div class = "register">
-	<input type="text" placeholder="https://">
-	<button class = "btn registerSite" style = "display:inline; font-size: 18px; margin-left:15px; font-weight: bold;">Register</button>
+	<form name="registerSiteForm" method="post" style = "float:right;">
+		<input type="text" placeholder="https://" name = "rName" style = "border-radius:10px;" required>
+		<button class = "btn registerSite" style = "display:inline; font-size: 18px; margin-left:10px; font-weight: bold;" onClick="JavaScript:processRegister(this)">Register</button>
+	</form>
 </div>
 
 </body>

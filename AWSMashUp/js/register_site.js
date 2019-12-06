@@ -3,7 +3,7 @@ function processRegisterResponse(result) {
   // contents dynamically via javascript
   console.log("registered:" + result);
 
-  refreshSitesList();
+  refreshSiteList();
   //refreshRemoteList();
 }
 
@@ -11,7 +11,7 @@ function processRegister(e) {
   var form = document.registerSiteForm;
  
   var data = {};
-  data["url"]               = form.url.value;
+  data["url"] = form.rName.value;
   
   /**
   if (form.system.checked) {  // be sure to flag system constant requests...

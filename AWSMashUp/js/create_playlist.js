@@ -13,10 +13,10 @@ function handleCreateClick(e) {
   var data = {};
   data["playlistName"] = form.pName.value;
   
-  
+  /*
   if (form.system.checked) {  // be sure to flag system constant requests...
      data["system"] = true;
-  }
+  }*/
   
   // base64EncodedValue":"data:text/plain;base64,My4xND....."
   //var segments = document.createPlaylistForm.base64Encoding.value.split(',');
