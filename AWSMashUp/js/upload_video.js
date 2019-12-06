@@ -8,11 +8,11 @@ function processUploadVideoResponse(result) {
 }
 
 function handleCreateClick(e) {
-  var form = document.uploadForm;
+  //var form = document.uploadForm;
  
   var data = {};
-  data["characterName"] = form.cName.value;
-  data["sentence"] = form.sentence.value;
+  data["characterName"] = uploadForm.cName.value;
+  data["sentence"] = uploadForm.sentence.value;
   
   // base64EncodedValue":"data:text/plain;base64,My4xND....."
   var segments = document.uploadForm.base64Encoding.value.split(',');

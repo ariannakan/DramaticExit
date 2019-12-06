@@ -51,16 +51,16 @@ function initialize() {
 
 <div class="form-popup" id="myForm">
 	
-	<form name = "uploadForm"  method="post" class="form-container">
+	<form name = "uploadForm" method="post" enctype="multipart/form-data" class="form-container">
 		<h3 style = "text-align:center; color:black;">Enter <u>Character Name</u> and <u>Sentence</u> Below</h3>
 		
 		<input name="base64Encoding" hidden value =""/>
-		<input type = "file" class = "browseButton" id="file" name="file" style = "font-size:13px; color:black; float:left;">
+		<input type = file class = "browseButton" id="file" name="file" style = "font-size:13px; color:black; float:left;">
 		
-		<input type="text" placeholder="Enter Character Name..." name="cName"  required>
-		<input type="text" placeholder="Enter Sentence..." name="sentence" required>
+		<input type=text placeholder="Enter Character Name..." name="cName"  required>
+		<input type=text placeholder="Enter Sentence..." name="sentence" required>
 		
-		<button type="submit" id="uploadButton" class="btn" onClick="JavaScript:handleCreateClick(this)">Upload</button>
+		<button type=submit id="uploadButton" class="btn" onClick="JavaScript:handleCreateClick(this)">Upload</button>
 		<button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
 	</form>
 	
