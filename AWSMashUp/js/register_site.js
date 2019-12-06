@@ -8,10 +8,9 @@ function processRegisterResponse(result) {
 }
 
 function processRegister(e) {
-  var form = document.registerSiteForm;
  
   var data = {};
-  data["url"] = form.rName.value;
+  data["url"] = document.registerSiteForm.url.value;
   
   /**
   if (form.system.checked) {  // be sure to flag system constant requests...
