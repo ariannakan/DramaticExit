@@ -135,6 +135,18 @@ html, body {
   color:#0066cc;
 }
 
+.switchToSearchAdmin {
+  font-size: 18px; 
+  position: absolute; 
+  bottom: 0; 
+  margin-left: -100px; 
+  margin-bottom: 3px;
+}
+
+.switchToSearchAdmin:hover{
+  color:#0066cc;
+}
+
 .switchToUser {
   font-size: 18px; 
   position: absolute; 
@@ -144,6 +156,18 @@ html, body {
 }
 
 .switchToUser:hover{
+	color:#944f00;
+}
+
+.switchToSearchUser {
+  font-size: 18px; 
+  position: absolute; 
+  bottom: 0; 
+  margin-left:-205px; 
+  margin-bottom: 3px;
+}
+
+.switchToSearchUser:hover{
 	color:#944f00;
 }
 
@@ -215,6 +239,19 @@ html, body {
   font-size: 16px; 
   cursor: pointer;
   width:225px;
+}
+
+.searchFunctionButton {
+  background-color: inherit;
+  border: none; 
+  color: white;
+  padding: 4px 8px;
+  font-size: 16px; 
+  cursor: pointer;
+}
+
+.searchFunctionButton:hover {
+  color: #009933;
 }
 
 .searchUserButton:hover {
