@@ -7,7 +7,7 @@ body {
   padding: 1px 10px;
   background: black;
   color: white;
-  width:205px;
+  width:225px;
 }
 
 .door{
@@ -214,6 +214,7 @@ html, body {
   padding: 4px 8px;
   font-size: 16px; 
   cursor: pointer;
+  width:225px;
 }
 
 .searchUserButton:hover {

@@ -3,6 +3,7 @@
    // Can grab any DIV or SPAN HTML element and can then manipulate its
    // contents dynamically via javascript
    console.log("Update Availability:" + result);
+   refreshVideoList("admin");
    }
 
 // function requestUpdateVideo(vid, availability) {
@@ -20,8 +21,7 @@
    var js = JSON.stringify(data);
    console.log("JS:" + js);
    var xhr = new XMLHttpRequest();
-   xhr.setRequestHeader('Access-Control-Allow-Origin', "*");
-   xhr.open("PUT", update_video_url, true);  // Can't be DELETE since then no data sent via JSON
+   xhr.open("POST", update_video_url, true);  // Can't be DELETE since then no data sent via JSON
 
    // send the collected data as JSON
    xhr.send(js);
@@ -54,7 +54,7 @@
 	   var js = JSON.stringify(data);
 	   console.log("JS:" + js);
 	   var xhr = new XMLHttpRequest();
-	   xhr.open("PUT", update_video_url, true);  // Can't be DELETE since then no data sent via JSON
+	   xhr.open("POST", update_video_url, true);  // Can't be DELETE since then no data sent via JSON
 
 	   // send the collected data as JSON
 	   xhr.send(js);
