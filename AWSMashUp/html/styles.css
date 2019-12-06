@@ -75,6 +75,10 @@ html, body {
   font-family: 'proxima-nova', sans-serif;
 }
 
+.registerSite {
+  font-size:18px;
+}
+
 .registerSite:hover{
   color:#0066cc;
 }
