@@ -4,7 +4,7 @@
  *    GET list_url
  *    RESPONSE  list of [name, value] constants 
  */
-function refreshVideoList() {
+function refreshVideoList(user) {
    var xhr = new XMLHttpRequest();
    xhr.open("GET", list_videos_url, true);
    xhr.send();
@@ -15,14 +15,19 @@ function refreshVideoList() {
   xhr.onloadend = function () {
     if (xhr.readyState == XMLHttpRequest.DONE) {
      // console.log ("XHR:" + xhr.responseText);
-      processListResponse(xhr.responseText);
+      if(user === "admin"){
+    	  processSegmentListResponse(xhr.responseText);
+      }
+      else{
+    	  processListResponse(xhr.responseText);
+      }
       //processSegmentListResponse(xhr.responseText);
     } else {
       processListResponse("N/A");
     }
   };
 }
-/**
+
 function processSegmentListResponse(result) {
 	  //console.log("res:" , JSON.parse(result).list);
 	  console.log("segment result:" + result);
@@ -39,16 +44,22 @@ function processSegmentListResponse(result) {
 	    var characterName = videoJson["characterName"];
 	    var sentence = videoJson["sentence"];
 	    var videoID = videoJson["videoID"];
+	    var url = videoJson["url"];
 	    
-	    if(availability == "true"){
-	    	output = output + "<div id=\"" + videoID + "\">" +
-			"<br><b>" + characterName + ": </b>" + sentence + "</b>" +
-			"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>Hide</a>)</center>" + "</><br></div>";
+	    if(availability === true){
+		    output = output + "<div id=\"vid" + videoID + "\">" +
+				"<br><b><center>Video " + videoID + "</b>     " +
+		  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
+		   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+		   		"<br><b>" + characterName + ": </b>" + sentence + 
+		   		"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>hide</a>)</center>" + "</><br></div>";
 	    } else {
-	    	output = output + "<div id=\"" + videoID + "\">" +
-			"<br>Video " + videoID + 
-			//"<br>" + characterName + ": " + sentence + 
-			" (<a href='javaScript:processShowVideo(\"" + videoID + "\")'>Show</a>)</center>" + "</><br></div>";
+	    	output = output + "<div id=\"vid" + videoID + "\">" +
+			"<br><b><center>Video " + videoID + "</b>     " +
+	  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
+	   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+	   		"<br><b>" + characterName + ": </b>" + sentence + 
+	   		"(<a href='javaScript:processShowVideo(\"" + videoID + "\")'>show</a>)</center>" + "</><br></div>";
 	    }
 	    
 //	    output = output + "<div id=\"" + videoID + "\">" +
@@ -61,7 +72,6 @@ function processSegmentListResponse(result) {
 	  vidList.innerHTML = output;
 
 	}
-**/
 
 /**
  * Respond to server JSON object.
@@ -86,11 +96,19 @@ function processListResponse(result) {
     var characterName = videoJson["characterName"];
     var sentence = videoJson["sentence"];
     
-    output = output + "<div id=\"vid" + videoID + "\">" +
+    if(availability === true){
+	    output = output + "<div id=\"vid" + videoID + "\">" +
+			"<br><b><center>Video " + videoID + "</b>     " +
+	  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
+	   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+	   		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
+    } else {
+    	output = output + "<div id=\"vid" + videoID + "\">" +
 		"<br><b><center>Video " + videoID + "</b>     " +
   		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
    		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
    		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
+    }
   }
   
   vidList.innerHTML = output;

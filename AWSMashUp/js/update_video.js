@@ -20,6 +20,7 @@
    var js = JSON.stringify(data);
    console.log("JS:" + js);
    var xhr = new XMLHttpRequest();
+   xhr.setRequestHeader('Access-Control-Allow-Origin', "*");
    xhr.open("PUT", update_video_url, true);  // Can't be DELETE since then no data sent via JSON
 
    // send the collected data as JSON
