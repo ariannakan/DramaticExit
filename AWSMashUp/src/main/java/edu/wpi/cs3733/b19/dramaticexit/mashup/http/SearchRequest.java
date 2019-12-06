@@ -7,6 +7,8 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 public class SearchRequest {
 	public String keywordname;
 	public String keywordsentence;
+	public boolean system;
+
 	
 	public String getKeywordName() {return keywordname;}
 	public String getKeywordSentence() {return keywordsentence;}

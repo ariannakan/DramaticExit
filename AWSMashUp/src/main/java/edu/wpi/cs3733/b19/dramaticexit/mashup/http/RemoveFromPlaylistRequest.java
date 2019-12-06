@@ -3,6 +3,8 @@ package edu.wpi.cs3733.b19.dramaticexit.mashup.http;
 public class RemoveFromPlaylistRequest {
 	public String playlistName;
 	public String videoID;
+	public boolean system;
+
 	
 	public RemoveFromPlaylistRequest(String playlistName, String videoID) {
 		this.playlistName = playlistName;

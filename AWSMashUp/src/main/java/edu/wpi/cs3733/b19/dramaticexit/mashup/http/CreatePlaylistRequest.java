@@ -4,6 +4,7 @@ public class CreatePlaylistRequest {
 	public String playlistName;
 	public boolean system;
 	
+	
 	public String getPlaylistName() { return playlistName; }
 	public void setPlaylistName(String name) { this.playlistName = name;}
 	

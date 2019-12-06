@@ -2,6 +2,8 @@ package edu.wpi.cs3733.b19.dramaticexit.mashup.http;
 
 public class DeleteSiteRequest {
 	public String url;
+	public boolean system;
+
 	
 	public void setSiteURL(String url) {this.url = url;}
 	public String getSiteURL() {return this.url;}
