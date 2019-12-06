@@ -28,6 +28,7 @@ public class SitesDAO {
             ps.setString(1, url);		//videoID is 1st index in database
             ResultSet resultSet = ps.executeQuery();
             
+
             while (resultSet.next()) {
                 site = generateSite(resultSet);
             }
@@ -83,6 +84,7 @@ public class SitesDAO {
             while (resultSet.next()) {
                 Site s = generateSite(resultSet);
                 resultSet.close();
+                System.out.println("site already present");
                 return false;
             }
 
@@ -90,6 +92,7 @@ public class SitesDAO {
             ps.setString(1,  site.timestampID);
             ps.setString(2, site.url);
             ps.execute();
+            System.out.println("site added");
             return true;
 
         } catch (Exception e) {

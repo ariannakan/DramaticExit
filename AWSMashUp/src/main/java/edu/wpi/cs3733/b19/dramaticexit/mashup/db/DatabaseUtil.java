@@ -47,6 +47,7 @@ public class DatabaseUtil {
 //			System.out.println("\n in Database Utils start connecting......");
 			Class.forName("com.mysql.jdbc.Driver");
 			if(useTestDB()) {
+				System.out.println("in tmp database");
 				dbName = "tmp";
 			}
 			conn = DriverManager.getConnection(
