@@ -37,11 +37,9 @@ function initialize() {
 		<span class="door"><i class='fas fa-door-open' style = " background-color: inherit; border: none; color: white; padding: 4px 8px; font-size: 25px; cursor:pointer;"></i></span>	
 		<h2 style = "display:inline;">MashUpApp<br><span style = "font-size:12px; margin-left:30px;">A Dramatic Exit Group</span></h2>
 	</div>
-   <form name="searchForm" method="post">
-  		<input type="text" placeholder="Character Name..." name="keywordname" style = "margin-top:20px; border-radius:10px;">
-   		<input type="text" placeholder="Sentence..." name="keywordsentence" style = "margin-top:20px; border-radius:10px;">
-   		<button class = "searchUserButton" style = "display: inline;" onClick="JavaScript:handleSearchClick()"><i class="fa fa-search"></i></button>   
-   </form>   
+   <input type="text" placeholder="Character Name..." style = "margin-top:20px; border-radius:10px;">
+   <input type="text" placeholder="Sentence..." style = "margin-top:20px; border-radius:10px;">
+   <button class = "searchUserButton" style = "display: inline;"><i class="fa fa-search"></i></button>      
    <p style = "font-size: 18px; font-weight: bold; color: #944f00; position: absolute; bottom: 0; margin-left: 35px;">User</p>
    <p style = "font-size: 18px; position: absolute; bottom: 0; margin-left: 110px;">|</p>
    <button class = "btn switchToAdmin" onclick="window.location.href = 'admin.html';">Admin</button>
@@ -58,12 +56,13 @@ function initialize() {
 	<h3 style = "display:inline;">Playlists</h3>
 	
 	<form name="createPlaylistForm" method="post" style = "float:right;">
-		<input type=text placeholder=" Enter Playlist Name..." name="playlistName" style = "font-size:14px; border-radius:10px;" required>
-		<input type=button class="btn newPlaylist" value="+ New Playlist" name="Create" onClick="JavaScript:handleCreateClick()">
+		<input type=TEXT placeholder="Enter Playlist Name..." name="playlistName" style = "font-size:14px; border-radius:10px;" required>
+		<input type=BUTTON value="+ New Playlist" name="Create" onClick="JavaScript:handleCreateClick()"></button>
 	</form>
 	
 	<div style = "border-bottom: 1px solid white; margin-top:25px;"></div>
 	
+	  
 	<div id="playlistList" style = "font-size:18px; margin-left:10px;">
 		<script src = "../js/get_playlistList.js"></script>
 	</div>
