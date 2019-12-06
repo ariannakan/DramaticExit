@@ -43,11 +43,12 @@ function processSegmentListResponse(result) {
 	    if(availability === "true"){
 	    	output = output + "<div id=\"" + videoID + "\">" +
 			"<br><b>" + characterName + ": </b>" + sentence + "</b>" +
-			"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>hide</a>)</center>" + "</><br></div>";
+			"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>Hide</a>)</center>" + "</><br></div>";
 	    } else {
 	    	output = output + "<div id=\"" + videoID + "\">" +
-			"<br><b>" + characterName + ": </b>" + sentence + "</b>" +
-			"(<a href='javaScript:processShowVideo(\"" + videoID + "\")'>show</a>)</center>" + "</><br></div>";
+			"<br>Video " + videoID + 
+			//"<br>" + characterName + ": " + sentence + 
+			" (<a href='javaScript:processShowVideo(\"" + videoID + "\")'>Show</a>)</center>" + "</><br></div>";
 	    }
 	    
 //	    output = output + "<div id=\"" + videoID + "\">" +
