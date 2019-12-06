@@ -1,9 +1,11 @@
 package edu.wpi.cs3733.b19.dramaticexit.mashup;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 
 import com.amazonaws.AmazonServiceException;
@@ -46,7 +48,7 @@ LambdaLogger logger;
 	 * 
 	 * @throws Exception 
 	 */
-	boolean uploadVideo(File oggFile, String videoID, String characterName, String sentence) throws Exception {
+	boolean uploadVideo(String video64, String videoID, String characterName, String sentence) throws Exception {
 		if(useTestDB()){ bucket = "3733dramaticexit"; }
 		if (logger != null) { logger.log("in uploadVideo"); }
 		
@@ -57,17 +59,17 @@ LambdaLogger logger;
 		}
 		
 		
-		System.out.printf("Uploading %s to S3 bucket %s...\n", oggFile, "b19dramaticexit");
+		System.out.printf("Uploading %s to S3 bucket %s...\n", video64, "b19dramaticexit");
 		try {
-			InputStream inputstream = new FileInputStream(oggFile);
+			byte[] videoByteArray = Base64.getDecoder().decode(video64);
+			InputStream inputstream = new ByteArrayInputStream(videoByteArray);
 			ObjectMetadata omd = new ObjectMetadata(); 
-			omd.setContentLength(oggFile.length());
-			omd.setContentType("application/ogg");
+			omd.setContentLength(videoByteArray.length);
 			
 			//makes object publicly visible
-			PutObjectResult res = s3.putObject(new PutObjectRequest(bucket, "Videos/" + oggFile, inputstream, omd)
+			PutObjectResult res = s3.putObject(new PutObjectRequest(bucket, "Videos/" + sentence + ".ogg", inputstream, omd)
 				.withCannedAcl(CannedAccessControlList.PublicRead));
-			String objectURL = s3.getUrl(bucket, "Videos/" + oggFile).toString();
+			String objectURL = s3.getUrl(bucket, "Videos/" + sentence + ".ogg").toString();
 			if(objectURL == null) {
 				System.out.println("cannot put into s3");
 				return false;
@@ -108,7 +110,7 @@ LambdaLogger logger;
 		UploadVideoResponse response;
 		String videoID = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 		try { 
-				if (uploadVideo(req.oggFile, videoID, req.characterName, req.sentence)) {
+				if (uploadVideo(req.video64, videoID, req.characterName, req.sentence)) {
 					response = new UploadVideoResponse(videoID, 200);
 				} else {
 					response = new UploadVideoResponse(videoID, 422);
