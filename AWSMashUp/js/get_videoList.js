@@ -48,14 +48,14 @@ function processSegmentListResponse(result) {
 	    
 	    if(availability === true){
 		    output = output + "<div id=\"vid" + videoID + "\">" +
-				"<br><b><center>Video " + videoID + "</b>" +
+				"<br><b><center>Video " + videoID + "</b> " +
 		  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
 		   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
 		   		"<br><b>" + characterName + ": </b>" + sentence + 
 		   		"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>hide</a>)</center>" + "</><br></div>";
 	    } else {
 	    	output = output + "<div id=\"vid" + videoID + "\">" +
-			"<br><b><center>Video " + videoID + "</b>" +
+			"<br><b><center>Video " + videoID + "</b> " +
 	  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
 	   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
 	   		"<br><b>" + characterName + ": </b>" + sentence + 

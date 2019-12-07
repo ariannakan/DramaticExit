@@ -9,10 +9,10 @@ public class UploadVideoRequest {
 	public boolean availability;
 	public boolean system;
 /*NR*/
-	public String video64;
+	public String base64EncodedValue;
 	
-	public String getVideo64() { return video64; }
-	public void setVideo64(String video64) { this.video64 = video64; }
+	public String getBase64EncodedValue() { return base64EncodedValue;}
+	public void setBase64EncodedValue(String base64EncodedValue) { this.base64EncodedValue = base64EncodedValue;}
 	/*--- NR*/
 	public String getVideoID() { return videoID; }
 	public void setVideoID(String videoID) { this.videoID = videoID; } 
@@ -33,26 +33,26 @@ public class UploadVideoRequest {
 		
 	}
 	
-/* -- begin NR*/
-	public UploadVideoRequest(String characterName, String sentence, String video64) {
+/* -- begin NR*/	
+	public UploadVideoRequest(String videoID, String characterName, String sentence, boolean availability, String encoding, boolean system) {
+		this.videoID = videoID;
+		this.characterName = characterName;
+		this.sentence = sentence; 
+		this.availability = availability;
+		this.base64EncodedValue = encoding;
+		this.system = system;
+	}
+	
+	public UploadVideoRequest(String characterName, String sentence, String encoding) {
 		this.videoID = "";
 		this.characterName = characterName;
 		this.sentence = sentence;
-		this.video64 = video64; 
 		this.availability = true;
-	}
-	
-	public UploadVideoRequest(String videoID, String characterName, String sentence, String video64, boolean availability, boolean system) {
-		this.videoID = videoID;
-		this.characterName = characterName;
-		this.sentence = sentence;
-		this.video64 = video64; 
-		this.availability = availability;
-		this.system = system;
+		this.base64EncodedValue = encoding;
 	}
 	/*end NR*/
 	
 	public String toString() {
-		return "UploadVideo(" + videoID + "," + characterName + "," + sentence + "," + video64 + "," + availability + ")";
+		return "UploadVideo(" + videoID + "," + characterName + "," + sentence + "," + availability + "," + base64EncodedValue + ")";
 	}
 }

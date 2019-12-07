@@ -35,7 +35,7 @@ function initialize() {
 	</div>
 	
 	<form name="searchForm" method="post">
-	   <button type='button' class = "searchUserButton" style = "display: inline; margin-top:10px;" onclick="window.location.href = 'search.html'">Search <i class="fa fa-search"></i></button>      
+	   <button type='button' class = "searchFunctionButton" style = "display: inline; margin-top:10px;" onclick="window.location.href = 'search.html'">Search <i class="fa fa-search"></i></button>      
 	   <div style = "border-bottom: 1px solid white; margin-top:10px;"></div>      
 	   <p style = "font-size: 18px; font-weight: bold; color: #944f00; position: absolute; bottom: 0; margin-left: 35px;">User</p>
 	   <p style = "font-size: 18px; position: absolute; bottom: 0; margin-left: 110px;">|</p>
@@ -60,15 +60,14 @@ function initialize() {
 		<h3 style = "text-align:center; color:black;">Enter <u>Character Name</u> and <u>Sentence</u> Below</h3>
 		
 		<input name="base64Encoding" hidden value =""/>
-		<input type = file class = "browseButton" id="oggFile" name="oggFile" style = "font-size:13px; color:black; float:left;">
+		<input type = "file" class = "browseButton" id="oggFile" name="oggFile" style = "font-size:13px; color:black; float:left;">
 		
-		<input type=text placeholder="Enter Character Name..." name="characterName"  required>
-		<input type=text placeholder="Enter Sentence..." name="sentence" required>
+		<input type="text" placeholder="Enter Character Name..." name="characterName" required/>
+		<input type="text" placeholder="Enter Sentence..." name="sentence" required/>
 		
-		<button type=submit id="uploadButton" class="btn" onClick="JavaScript:handleUploadClick(this)">Upload</button>
+		<input type="button" id="uploadButton" class="btn" value="Upload" disabled onClick="JavaScript:handleUploadClick(this); closeForm()">
 		<button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
 	</form>
-	
 </div>
 
 <script>
@@ -89,7 +88,7 @@ function initialize() {
 
 	reader.onload = function () {
 	  document.uploadForm.base64Encoding.value = reader.result;
-	  //document.createForm.createButton.disabled = false;
+	  document.uploadForm.uploadButton.disabled = false;
 	};
   }
 
