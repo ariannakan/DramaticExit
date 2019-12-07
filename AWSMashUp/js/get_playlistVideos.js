@@ -1,4 +1,27 @@
 var plName;
+var videoSource = new Array();
+var v = 0;
+
+function handlePlayClick(){
+	v = 0;
+	document.getElementById('videoPlayer').addEventListener('ended', handler);
+	playVideo(0);
+}
+
+function handler(){
+	if (v < (videoSource.length - 1)) {
+    	v++;
+    	playVideo(v);
+    }
+}
+
+function playVideo(videoNum) {
+	document.getElementById("videoPlayer").setAttribute("src", videoSource[v]);
+    document.getElementById("videoPlayer").load();
+    document.getElementById("videoPlayer").play();
+}
+
+
 
 function requestPlaylistVideos(playlistName){
 	var data = {};
@@ -47,23 +70,11 @@ function processPlaylistVideosResponse(result) {
     var characterName = videoJson["characterName"];
     var sentence = videoJson["sentence"];
     
+    videoSource[i] = url;
+    
     output = output + "<div id=\"" + videoID + "\">" + 
 		"<center>(<a href='javaScript:requestRemoveVideo(\"" + plName + "\",\"" + videoID + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)" +
 		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" + "</><br></center></div>";
-    
-//    if(availability === true){
-//	    output = output + "<div id=\"vid" + videoID + "\">" +
-//		"<br><b><center>Video " + videoID + "</b>     " +
-//  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
-//   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
-//   		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
-//    } else {
-//    	output = output + "<div id=\"vid" + videoID + "\">" +
-//		"<br><b><center>Video " + videoID + "</b>     " +
-//  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
-//   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
-//   		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
-//    }
 	
   }
   
@@ -90,24 +101,7 @@ function processPlaylistVideosResponse(result) {
   
   
   playlistVideosList.innerHTML = output;
-  
-  /*
-  var list = JSON.parse(result).list
-  
-  for (var I = 0; I < list.length; I++){
-	  playlist = "<div id=\"" + list[I].playlistID + "\"> <br>" +
-	  "(<img src='plus.png' height=" + 14 + "></img>) " +
-	  list[I].playlistName +  
-	  " (<img src='trashcan.png' height=" + 14 + "></img>)" +
-	  "</div>"
-      document.getElementById("playlistList").innerHTML += playlist;
-  }
-  
-  
-  for (var i = 0; i < js.list.length; i++) {
-    var list = js.list[i];
-    console.log(list);
-  }
-  */
+
 }
+
 
