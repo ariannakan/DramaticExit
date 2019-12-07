@@ -27,7 +27,7 @@ html, body {
 
 .grid-container {
   display:grid; 
-  grid-template-columns: 240px 240px 240px 240px;
+  grid-template-columns: 250px 250px 250px 250px;
   grid-template-rows: 250px 250px 250px 250px;
 }
 
@@ -294,6 +294,20 @@ html, body {
 
 .viewVideo:hover {
   color: #e17800;
+}
+
+.availButton {
+  border: none;
+  background-color: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'proxima-nova', sans-serif;
+}
+
+.availButton:hover {
+  color:#6666ff
 }
 
 .browseButton {
