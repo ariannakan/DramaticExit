@@ -11,8 +11,8 @@ function processAppendVideoResponse(result) {
 
 function processAppendVideo(vid, playlist) {
   var data = {};
+  data["playlistName"] = playlist
   data["videoID"] = vid;
-  data["playlistID"] = playlist
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);
