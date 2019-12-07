@@ -103,12 +103,14 @@ public class VideosDAO {
             ps.setString(1, videoID);
 
             PreparedStatement ps3 = conn.prepareStatement("DELETE * FROM PlaylistVideos WHERE videoID = ?;");
-            ps.setString(1, videoID);
+            ps3.setString(1, videoID);
             
             int numAffected = ps.executeUpdate();
+            int numAffected3 = ps3.executeUpdate();
+
             ps.close();
             
-            return (numAffected == 1);
+            return ((numAffected == 1) && (numAffected3 == 1));
 
         } catch (Exception e) {
             throw new Exception("Failed to delete video: " + e.getMessage());
