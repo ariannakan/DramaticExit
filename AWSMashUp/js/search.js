@@ -40,23 +40,29 @@ function processSearchResponse(result) {
 	  
 	  var js = JSON.parse(result);
 	  var searchList = document.getElementById('searchList');
-	  
 	  var output = "";
-	  for (var i = 0; i < js.list.length; i++) {
-	    var videoJson = js.list[i];
-	    console.log(videoJson);
+
+	  if (js.list == ""){
+		  console.log("search completed but no result");
+		  
+		  output = output + "<p style='text-indent: 250px'><b>No results match your search</b></p>"
+		  	
+	  } else {
+		  for (var i = 0; i < js.list.length; i++) {
+			  var videoJson = js.list[i];
+			  console.log(videoJson);
 	    
-	    var videoID = videoJson["videoID"];
-	    var url = videoJson["url"];
-	    var characterName = videoJson["characterName"];
-	    var sentence = videoJson["sentence"];
-	    
-	    output = output + "<div id=\"vid" + videoID + "\">" +
-			"<br><b><center>Video " + videoID + "</b>     " +
-	   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
-	   		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
+			  var videoID = videoJson["videoID"];
+			  var url = videoJson["url"];
+			  var characterName = videoJson["characterName"];
+			  var sentence = videoJson["sentence"];
+			  
+			  output = output + "<div id=\"vid" + videoID + "\">" +
+			  "<br><b><center>Video " + videoID + "</b>     " +
+	   			"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+	   			"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
+	  		}
 	  }
-	  
 	  searchList.innerHTML = output;
 	}
 
