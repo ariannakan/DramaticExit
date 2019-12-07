@@ -6,7 +6,9 @@ function processRemoveVideoResponse(result) {
   // contents dynamically via javascript
   console.log("deleted:" + result);
   
-  refreshPlaylistList();
+  var js = JSON.parse(result);
+  console.log("result.playlistName " + js.playlistName);
+  requestPlaylistVideos(js.playlistName);
   //might need to include refresh playlistlist
   //refreshRemoteList();
 }
