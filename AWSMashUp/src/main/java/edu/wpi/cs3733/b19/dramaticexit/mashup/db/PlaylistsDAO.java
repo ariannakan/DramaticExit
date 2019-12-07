@@ -23,7 +23,7 @@ public class PlaylistsDAO {
 	java.sql.Connection conn;
 
     public PlaylistsDAO() {
-    	try  {
+    	try  { 
     		conn = DatabaseUtil.connect();
     	} catch (Exception e) {
     		conn = null;
@@ -70,11 +70,13 @@ public class PlaylistsDAO {
 **/
     public boolean appendVideo(Playlist playlist, Video video) throws Exception {
         try {
-        	String query = "INSERT INTO PlaylistVideos (playlistName,videoID,url) values(?,?,?);";
+        	String query = "INSERT INTO PlaylistVideos (playlistName,videoID,url,characterName,sentence) values(?,?,?,?,?);";
         	PreparedStatement ps = conn.prepareStatement(query);
         	ps.setString(1, playlist.playlistName);
             ps.setString(2, video.videoID);
             ps.setString(3, video.url);
+            ps.setString(4,  video.characterName);
+            ps.setString(5, video.sentence);
             int numAffected = ps.executeUpdate();
             ps.close();
             
@@ -188,8 +190,10 @@ public List<Video> getPlaylistVideos(String playlistName) throws Exception {
     }
     
     private Video generateVideo(ResultSet resultSet) throws Exception {
-        String videoID  = resultSet.getString("videoID");
-        String url = resultSet.getString("url");
-        return new Video(videoID, url);
+    	 String videoID  = resultSet.getString("videoID");
+         String characterName = resultSet.getString("characterName");
+         String sentence = resultSet.getString("sentence");
+         String url = resultSet.getString("url");
+         return new Video(videoID, characterName, sentence, url);
     }
 }

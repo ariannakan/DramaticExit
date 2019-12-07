@@ -99,8 +99,12 @@ public class VideosDAO {
     public boolean deleteVideo(String videoID) throws Exception {
         try {
         	System.out.println("in deleteVideo DAO");
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM Videos WHERE videoID = ?;");
+            PreparedStatement ps = conn.prepareStatement("DELETE * FROM Videos WHERE videoID = ?;");
             ps.setString(1, videoID);
+
+            PreparedStatement ps3 = conn.prepareStatement("DELETE * FROM PlaylistVideos WHERE videoID = ?;");
+            ps.setString(1, videoID);
+            
             int numAffected = ps.executeUpdate();
             ps.close();
             

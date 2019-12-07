@@ -17,6 +17,14 @@ public class Video {
 		this.url = url;
 	}
 	
+	public Video (String videoID, String characterName, String sentence, String url) {
+		this.sentence = "";
+		this.videoID = videoID;
+		this.characterName = characterName;
+		this.sentence = sentence;
+		this.url = url;
+	}
+	
 	public Video (String videoID, String url) {
 		this.videoID = videoID;
 		this.url = url;
