@@ -79,8 +79,10 @@ function processPlaylistVideosResponse(result) {
     
     	output = output + "<div id=\"" + videoID + "\">" + 
 			"<center>(<a href='javaScript:requestRemoveVideo(\"" + plName + "\",\"" + videoID + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)" +
-			"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" + "</><br></center></div>";
+			"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" + 
+			"</><br></center></div>";
   		}
+	  output = output + "<br>(<a href='javaScript:requestDisplayAvailableVideos()' class = 'viewVideo'>Append New Video</a></center></br>";
   	}
   playlistVideosList.innerHTML = output;
 }
