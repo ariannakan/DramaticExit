@@ -18,6 +18,9 @@ function refreshVideoList(user) {
       if(user === "admin"){
     	  processSegmentListResponse(xhr.responseText);
       }
+      else if(user === "append"){
+    	  processAppendListResponse(xhr.responseText);
+      }
       else{
     	  processListResponse(xhr.responseText);
       }
@@ -27,6 +30,43 @@ function refreshVideoList(user) {
     }
   };
 }
+
+function processAppendListResponse(result) {
+	  //console.log("res:" , JSON.parse(result).list);
+	  console.log("append result:" + result);
+	  // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
+	  var js = JSON.parse(result);
+	  var vidList = document.getElementById('appendVideoList');
+	  
+	  var output = "";
+	  for (var i = 0; i < js.list.length; i++) {
+	    var videoJson = js.list[i];
+	    console.log(videoJson);
+	    
+	    var availability = videoJson["availability"];
+	    var characterName = videoJson["characterName"];
+	    var sentence = videoJson["sentence"];
+	    var videoID = videoJson["videoID"];
+	    var url = videoJson["url"];
+	    
+	    if(availability === true){
+	    	 output = output + "<div id=\"vid" + videoID + "\">" +
+		    	"<br><b>" + characterName + ": </b>" + sentence + "</><br></center></div>";
+	    } else {
+	    	 output = output + "<div id=\"vid" + videoID + "\">" +
+		    	"<br><b>" + characterName + ": </b>" + sentence + "</><br></center></div>";
+	    }
+	    
+//	    output = output + "<div id=\"" + videoID + "\">" +
+//		"<br><b>" + characterName + ": </b>" + sentence + "</b>" +
+//		"(<a href='javaScript:processShowVideo(\"" + videoID + "\")'>show</a>)</center>" + 
+//		"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>hide</a>)</center>" + "</><br></div>";
+//			
+	  }
+	  
+	  vidList.innerHTML = output;
+
+	}
 
 function processSegmentListResponse(result) {
 	  //console.log("res:" , JSON.parse(result).list);

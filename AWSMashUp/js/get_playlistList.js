@@ -42,10 +42,33 @@ function processListResponse(result) {
     var playlistName = playlistJson["playlistName"];
     	
     output = output + "<div id=\"" + playlistName + "\">" +
-		"<br><b>" + playlistName + "</b>     " +
-  		"(<a href='javaScript:requestPlaylistDelete(\"" + playlistName + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)" + 
-  		" (<a href='javaScript:requestPlaylistVideos(\"" + playlistName + "\")' class = 'viewVideo'>View Videos</a>)</center>" + "</><br></div>";
+		"<br><b>" + playlistName + "</b> " +
+		" (<a href='javaScript:requestPlaylistVideos(\"" + playlistName + "\")' class = 'viewVideo'>View Videos</a>)</center>" +
+		//"<div class='dropdown'><button onclick='appendDropdown()' class='dropbtn'>(Append)</button><div id='myDropdown' class='dropdown-content'><div id='appendVideoList'><script src = '../js/get_videoList.js'></script></div></div></div>" +
+  		"(<a href='javaScript:requestPlaylistDelete(\"" + playlistName + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)" + "</><br></div>";
+  
+    /* When the user clicks on the button, 
+    toggle between hiding and showing the dropdown content */
+    function appendDropdown() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  
   }
+  
   
   playlistList.innerHTML = output;
   
