@@ -104,9 +104,20 @@ public class PlaylistsDAO {
     public boolean deletePlaylist(String playlistName) throws Exception {
         try {
         	System.out.println("in deletePlaylist DAO");
-            PreparedStatement ps = conn.prepareStatement("DELETE FROM Playlists WHERE playlistName = ?;");
+        	//delete playlist from playlistVideos first
+        	PreparedStatement ps2 = conn.prepareStatement("DELETE FROM Playlists WHERE playlistName = ?;");
+            ps2.setString(1, playlistName);
+            ps2.executeUpdate();
+            
+            //delete playlist from playlist database
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM PlaylistVideos WHERE playlistName = ?;");
             ps.setString(1, playlistName);
+            
+          
+            
             int numAffected = ps.executeUpdate();
+            
+            
             ps.close();
             
             return (numAffected == 1);
