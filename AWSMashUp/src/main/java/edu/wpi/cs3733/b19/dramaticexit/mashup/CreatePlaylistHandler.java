@@ -28,7 +28,7 @@ public class CreatePlaylistHandler implements RequestHandler<CreatePlaylistReque
 		// check if present
 		Playlist exist = dao.getPlaylist(name);
 		Playlist playlist = new Playlist(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()),name);
-		if (exist == null) {
+		if (exist == null && name != "" && name != null) {
 			return dao.addPlaylist(playlist);
 		} else {
 			return false;
