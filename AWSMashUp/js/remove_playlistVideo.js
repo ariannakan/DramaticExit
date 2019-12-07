@@ -6,21 +6,22 @@ function processRemoveVideoResponse(result) {
   // contents dynamically via javascript
   console.log("deleted:" + result);
   
-  refreshVideoList();
+  refreshPlaylistList();
   //might need to include refresh playlistlist
   //refreshRemoteList();
 }
 
 function requestRemoveVideo(playlistName, video) {
+	console.log("playlist name: " + playlistName + " video: " + video);
    if (confirm("Request to remove " + video + "from playlist " + playlistName)) {
-     processRemovePlaylistVideo(video, playlistName);
+     processRemovePlaylistVideo(playlistName, video);
    }
 }
 
-function processRemovePlaylistVideo(vid, playlist) {
+function processRemovePlaylistVideo(playlistName, video) {
   var data = {};
-  data["videoID"] = vid;
-  data["playlistName"] = playlist;
+  data["videoID"] = video;
+  data["playlistName"] = playlistName;
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);

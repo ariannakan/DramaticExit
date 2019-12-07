@@ -48,7 +48,7 @@ function processPlaylistVideosResponse(result) {
     var url = videoJson["url"];
     
     output = output + "<div id=\"" + videoID + "\">" + 
-		"(<a href='javaScript:requestRemoveVideo(\"" + plName + ", " + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
+		"(<a href='javaScript:requestRemoveVideo(\"" + plName + "\",\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
 		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
 		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
     
