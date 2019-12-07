@@ -43,7 +43,7 @@ function processListResponse(result) {
     	
     output = output + "<div id=\"" + playlistName + "\">" +
 		"<br><b>" + playlistName + "</b>     " +
-  		"(<a href='javaScript:requestPlaylistDelete(\"" + playlistName + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)" + "</><br></div>" +
+  		"(<a href='javaScript:requestPlaylistDelete(\"" + playlistName + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)" + "</><br></div>" +
   		"<element onload='JavaScript:refreshPlaylistVideoList(\"" + playlistName + "\")'>" //idk how to make this code run automatically
   }
   
