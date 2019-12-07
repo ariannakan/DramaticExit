@@ -52,14 +52,14 @@ public class AppendtoPlaylistHandler implements RequestHandler<AppendToPlaylistR
 		AppendToPlaylistResponse response;
 		logger.log("in handleRequest");
 		try {
-			if (appendToPlaylist(req.playlistID, req.videoID)) {
-				response = new AppendToPlaylistResponse(req.playlistID, req.videoID);
+			if (appendToPlaylist(req.playlistName, req.videoID)) {
+				response = new AppendToPlaylistResponse(req.playlistName, req.videoID);
 			} else {
-				response = new AppendToPlaylistResponse(req.playlistID, req.videoID, 422, "Unable to append video to playlist");
+				response = new AppendToPlaylistResponse(req.playlistName, req.videoID, 422, "Unable to append video to playlist");
 			}
 			
 		} catch (Exception e) {
-			response = new AppendToPlaylistResponse("Unable to append " + req.videoID + " to playlist: " + req.playlistID + "(" + e.getMessage() + ")", 400);
+			response = new AppendToPlaylistResponse("Unable to append " + req.videoID + " to playlist: " + req.playlistName + "(" + e.getMessage() + ")", 400);
 		}
 
 		return response;
