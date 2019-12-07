@@ -48,7 +48,7 @@ function processPlaylistVideosResponse(result) {
     var sentence = videoJson["sentence"];
     
     output = output + "<div id=\"" + videoID + "\">" + 
-		"<center>Delete (<a href='javaScript:requestRemoveVideo(\"" + plName + "\",\"" + videoID + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)" +
+		"<center>(<a href='javaScript:requestRemoveVideo(\"" + plName + "\",\"" + videoID + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)" +
 		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" + "</><br></center></div>";
     
 //    if(availability === true){
