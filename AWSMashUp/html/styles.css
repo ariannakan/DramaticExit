@@ -296,6 +296,21 @@ html, body {
   color: #e17800;
 }
 
+.playAllVideos {
+  border: none;
+  padding: 5px 10px;
+  background-color: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'proxima-nova', sans-serif;
+}
+
+.playAllVideos:hover {
+  color: #e17800;
+}
+
 .availButton {
   border: none;
   background-color: inherit;

@@ -73,8 +73,23 @@ function initialize() {
 	
 	<div style = "border-bottom: 1px solid white; margin-top:15px; margin-left:-30px;"></div>
 	
-	<button type='button' class = "btn playAllVideos" onclick="JavaScript:handlePlayClick()">Play</button>
-	<video controls="controls" id="videoPlayer"></video>
+	<div style ="margin-top:20px;">
+		<center>
+			<video controls="controls" id="videoPlayer" style = "border-style:solid; border-width:1px; display:none;"></video><br>
+			<button type='button' class = "playAllVideos" style = "font-size:18px;" onclick="JavaScript:handlePlayClick(); playFunction();"><b>Play</b></button>
+		</center>
+	</div>
+	
+	<script>
+		function playFunction() {
+			  var x = document.getElementById("videoPlayer");
+			  if (x.style.display === "none") {
+			    x.style.display = "block";
+			  } else {
+			    x.style.display = "none";
+			  }
+			} 
+	</script>
 	
 	<div class = "grid-container" id="playlistVideosList" style = "margin-top: 25px; margin-left:-10px;">
 		<script src = "../js/get_playlistVideos.js"></script>
