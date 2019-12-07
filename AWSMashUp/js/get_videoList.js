@@ -49,17 +49,17 @@ function processSegmentListResponse(result) {
 	    if(availability === true){
 		    output = output + "<div id=\"vid" + videoID + "\">" +
 				"<br><b><center>Video " + videoID + "</b> " +
-		  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
+		  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
 		   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
 		   		"<br><b>" + characterName + ": </b>" + sentence + 
-		   		"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>hide</a>)</center>" + "</><br></div>";
+		   		" (<a href='javaScript:processHideVideo(\"" + videoID + "\")' style = 'color:#6666ff'>Hide</a>)</center>" + "</><br></div>";
 	    } else {
 	    	output = output + "<div id=\"vid" + videoID + "\">" +
-			"<br><b><center>Video " + videoID + "</b> " +
-	  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
-	   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
-	   		"<br><b>" + characterName + ": </b>" + sentence + 
-	   		"(<a href='javaScript:processShowVideo(\"" + videoID + "\")'>show</a>)</center>" + "</><br></div>";
+				"<br><b><center>Video " + videoID + "</b> " +
+		  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
+		   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+		   		"<br><b>" + characterName + ": </b>" + sentence + 
+		   		" (<a href='javaScript:processShowVideo(\"" + videoID + "\")' style = 'color:#6666ff'>Show</a>)</center>" + "</><br></div>";
 	    }
 	    
 //	    output = output + "<div id=\"" + videoID + "\">" +
@@ -99,13 +99,13 @@ function processListResponse(result) {
     if(availability === true){
 	    output = output + "<div id=\"vid" + videoID + "\">" +
 			"<br><b><center>Video " + videoID + "</b>     " +
-	  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
+	  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
 	   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
 	   		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
     } else {
     	output = output + "<div id=\"vid" + videoID + "\">" +
 		"<br><b><center>Video " + videoID + "</b>     " +
-  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
+  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
    		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
    		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
     }

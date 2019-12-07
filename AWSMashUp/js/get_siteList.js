@@ -43,7 +43,7 @@ function processListResponse(result) {
     
     output = output + "<div id=\"" + url + "\">" +
 	"<br><b>" + url + "</b>     " +
-		"(<a href='javaScript:requestSiteDelete(\"" + url + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)" + "</><br></div>";
+		"(<a href='javaScript:requestSiteDelete(\"" + url + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)" + "</><br></div>";
 }
   
   sitesList.innerHTML = output;
