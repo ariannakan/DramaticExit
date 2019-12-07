@@ -275,6 +275,7 @@ html, body {
 
 .formButton{
   float:right;
+  margin-top:-20px;
 }
 
 .formButton:hover {
