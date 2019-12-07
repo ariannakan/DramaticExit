@@ -9,10 +9,10 @@ function processAppendVideoResponse(result) {
 }
 
 
-function processAppendVideo(vid, playlist) {
+function processAppendVideo() {
   var data = {};
-  data["playlistName"] = playlist
-  data["videoID"] = vid;
+  data["playlistName"] = document.appendForm.playlistName.value;
+  data["videoID"] = document.appendForm.videoID.value;
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);
