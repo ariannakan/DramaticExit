@@ -1,6 +1,9 @@
+var plName;
+
 function requestPlaylistVideos(playlistName){
 	var data = {};
 	data["playlistName"] = playlistName;
+	plName = playlistName;
 	
 	var js = JSON.stringify(data);
 	console.log(get_playlist_videos_url);
@@ -45,7 +48,7 @@ function processPlaylistVideosResponse(result) {
     var url = videoJson["url"];
     
     output = output + "<div id=\"" + videoID + "\">" + 
-		"(<a href='javaScript:requestRemoveVideo(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
+		"(<a href='javaScript:requestRemoveVideo(\"" + plName + ", " + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
 		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
 		"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
     

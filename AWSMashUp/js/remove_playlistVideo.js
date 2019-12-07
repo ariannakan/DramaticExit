@@ -11,9 +11,9 @@ function processRemoveVideoResponse(result) {
   //refreshRemoteList();
 }
 
-function requestRemoveVideo(vid, playlist;) {
-   if (confirm("Request to delete " + vid)) {
-     processRemovePlaylistVideo(vid, playlist);
+function requestRemoveVideo(playlistName, video) {
+   if (confirm("Request to remove from playlist " + video)) {
+     processRemovePlaylistVideo(video, playlist);
    }
 }
 
