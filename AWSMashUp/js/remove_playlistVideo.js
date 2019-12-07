@@ -12,8 +12,8 @@ function processRemoveVideoResponse(result) {
 }
 
 function requestRemoveVideo(playlistName, video) {
-   if (confirm("Request to remove from playlist " + video)) {
-     processRemovePlaylistVideo(video, playlist);
+   if (confirm("Request to remove " + video + "from playlist " + playlistName)) {
+     processRemovePlaylistVideo(video, playlistName);
    }
 }
 
