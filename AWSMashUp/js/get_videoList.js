@@ -52,14 +52,14 @@ function processSegmentListResponse(result) {
 		  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
 		   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
 		   		"<br><b>" + characterName + ": </b>" + sentence + 
-		   		"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>hide</a>)</center>" + "</><br></div>";
+		   		" (<a href='javaScript:processHideVideo(\"" + videoID + "\")' style = 'color:#cc6600'>Hide</a>)</center>" + "</><br></div>";
 	    } else {
 	    	output = output + "<div id=\"vid" + videoID + "\">" +
-			"<br><b><center>Video " + videoID + "</b> " +
-	  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
-	   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
-	   		"<br><b>" + characterName + ": </b>" + sentence + 
-	   		"(<a href='javaScript:processShowVideo(\"" + videoID + "\")'>show</a>)</center>" + "</><br></div>";
+				"<br><b><center>Video " + videoID + "</b> " +
+		  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")'><img src='trashcan.png' height=" + 14 + "></img></a>)</center>" +
+		   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+		   		"<br><b>" + characterName + ": </b>" + sentence + 
+		   		" (<a href='javaScript:processShowVideo(\"" + videoID + "\")' style = 'color:#cc6600'>Show</a>)</center>" + "</><br></div>";
 	    }
 	    
 //	    output = output + "<div id=\"" + videoID + "\">" +
