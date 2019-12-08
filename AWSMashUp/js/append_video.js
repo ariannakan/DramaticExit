@@ -4,6 +4,7 @@ function processAppendVideoResponse(result, playlistName) {
   console.log("Append: " + result);
   
   requestPlaylistVideos(playlistName);
+  requestDisplayAvailableVideos(playlistName)
   //might need to include refresh playlistlist
   //refreshRemoteList();
 }

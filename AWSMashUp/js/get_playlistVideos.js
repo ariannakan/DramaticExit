@@ -64,7 +64,8 @@ function processPlaylistVideosResponse(result) {
 
   if (js.list == ""){
 	  console.log("no videos in playlist");
-	  output = output + "<p style='text-indent: 20px'><b>No videos in this playlist</b></p>"
+	  output = output + "<p style='text-indent: 20px'><b>No videos in this playlist</b></p>" +
+	  		"<a href='javaScript:requestDisplayAvailableVideos(\"" + plName + "\")' class = 'appendButton' style = 'margin-left:10px'>Append New Video</a></b></br>	<div style = 'border-bottom: 1px solid white; margin-top:15px; margin-left:-30px;'></div>";
   } else {
 	  for (var i = 0; i < js.list.length; i++) {
 		var videoJson = js.list[i];
