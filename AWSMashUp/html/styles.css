@@ -316,10 +316,6 @@ html, body {
   font-family: 'proxima-nova', sans-serif;
 }
 
-.appendButton:hover {
-  color: #e17800;
-}
-
 .viewAppendVideo {
   border: none;
   background-color: inherit;
