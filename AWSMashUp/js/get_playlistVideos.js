@@ -24,6 +24,7 @@ function playVideo(videoNum) {
 
 
 function requestPlaylistVideos(playlistName){
+	requestDisplayAvailableVideos(playlistName);
 	var data = {};
 	data["playlistName"] = playlistName;
 	plName = playlistName;

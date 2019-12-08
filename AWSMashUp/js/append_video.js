@@ -3,8 +3,9 @@ function processAppendVideoResponse(result, playlistName) {
   // contents dynamically via javascript
   console.log("Append: " + result);
   
+  //refreshPlaylistList();
   requestPlaylistVideos(playlistName);
-  requestDisplayAvailableVideos(playlistName)
+  //requestDisplayAvailableVideos(playlistName)
   //might need to include refresh playlistlist
   //refreshRemoteList();
 }
