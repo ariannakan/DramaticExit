@@ -1,14 +1,14 @@
-function processAppendVideoResponse(result) {
+function processAppendVideoResponse(result, playlistName) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
   console.log("Append: " + result);
   
-  refreshPlaylistVideoList();
+  requestPlaylistVideos(playlistName);
   //might need to include refresh playlistlist
   //refreshRemoteList();
 }
 
-function requestDisplayAvailableVideos(){
+function requestDisplayAvailableVideos(playlistName){
 	var xhr = new XMLHttpRequest();
 	   xhr.open("GET", list_videos_url, true);
 	   xhr.send();
@@ -19,14 +19,14 @@ function requestDisplayAvailableVideos(){
 	  xhr.onloadend = function () {
 	    if (xhr.readyState == XMLHttpRequest.DONE) {
 	     console.log ("XHR:" + xhr.responseText);
-	     processAppendListResponse(xhr.responseText);
+	     processAppendListResponse(playlistName, xhr.responseText);
 	    } else {
 	      processListResponse("N/A");
 	    }
 	  };
 }
 
-function processAppendListResponse(result) {
+function processAppendListResponse(playlistName, result) {
 	  //console.log("res:" , JSON.parse(result).list);
 	  console.log("append result:" + result);
 	  // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
@@ -44,19 +44,10 @@ function processAppendListResponse(result) {
 	    var videoID = videoJson["videoID"];
 	    var url = videoJson["url"];
 	    
-	    if(availability === true){
-	    	 output = output + "<div id=\"vid" + videoID + "\">" +
-		    	"<br><b>" + characterName + ": </b>" + sentence + "</> (<a href='javaScript:processAppendListResponse(\"" + videoID + "\")' class = 'viewAppendVideo'>Append</a>)<br></div>";
-	    } else {
-	    	 output = output + "<div id=\"vid" + videoID + "\">" +
-		    	"<br><b>" + characterName + ": </b>" + sentence + "</> (<a href='javaScript:processAppendListResponse(\"" + videoID + "\")' class = 'viewAppendVideo'>Append</a>)<br></div>";
-	    }
+		 output = output + "<div id=\"vid" + videoID + "\">" +
+	    	"<br><b>" + characterName + ": </b>" + sentence + "</> (<a href='javaScript:processAppendVideoRequest(\"" + playlistName + "\",\"" + videoID + "\")' class = 'viewAppendVideo'>Append</a>)<br></div>";
 	    
-//	    output = output + "<div id=\"" + videoID + "\">" +
-//		"<br><b>" + characterName + ": </b>" + sentence + "</b>" +
-//		"(<a href='javaScript:processShowVideo(\"" + videoID + "\")'>show</a>)</center>" + 
-//		"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>hide</a>)</center>" + "</><br></div>";
-//			
+			
 	  }
 	  
 	  vidList.innerHTML = output;
@@ -64,10 +55,10 @@ function processAppendListResponse(result) {
 	}
 
 
-function processAppendVideoList() {
+function processAppendVideoRequest(playlistName, videoID) {
   var data = {};
-  data["playlistName"] = document.appendForm.playlistName.value;
-  data["videoID"] = document.appendForm.videoID.value;
+  data["playlistName"] = playlistName
+  data["videoID"] = videoID;
 
   var js = JSON.stringify(data);
   console.log("JS:" + js);
@@ -84,7 +75,7 @@ function processAppendVideoList() {
 	  if (xhr.readyState == XMLHttpRequest.DONE) {
 		  if (xhr.status == 200) {
 			  console.log ("XHR:" + xhr.responseText);
-			  processAppendVideoResponse(xhr.responseText);
+			  processAppendVideoResponse(xhr.responseText, playlistName);
 		  } else {
 			  console.log("actual:" + xhr.responseText)
 			  var js = JSON.parse(xhr.responseText);
