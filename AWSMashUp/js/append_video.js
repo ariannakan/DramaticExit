@@ -46,10 +46,10 @@ function processAppendListResponse(result) {
 	    
 	    if(availability === true){
 	    	 output = output + "<div id=\"vid" + videoID + "\">" +
-		    	"<br><b>" + characterName + ": </b>" + sentence + "</><br></center></div>";
+		    	"<br><b>" + characterName + ": </b>" + sentence + "</> (<a href='javaScript:processAppendListResponse(\"" + videoID + "\")' class = 'viewAppendVideo'>Append</a>)<br></div>";
 	    } else {
 	    	 output = output + "<div id=\"vid" + videoID + "\">" +
-		    	"<br><b>" + characterName + ": </b>" + sentence + "</><br></center></div>";
+		    	"<br><b>" + characterName + ": </b>" + sentence + "</> (<a href='javaScript:processAppendListResponse(\"" + videoID + "\")' class = 'viewAppendVideo'>Append</a>)<br></div>";
 	    }
 	    
 //	    output = output + "<div id=\"" + videoID + "\">" +

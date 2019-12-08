@@ -82,7 +82,7 @@ function processPlaylistVideosResponse(result) {
 			"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" + 
 			"</><br></center></div>";
   		}
-	  output = output + "<br>(<a href='javaScript:requestDisplayAvailableVideos()' class = 'viewVideo'>Append New Video</a></center></br>";
+	  	output = output + "<br><b><a href='javaScript:requestDisplayAvailableVideos()' class = 'appendButton'>Append New Video</a></b></br>	<div style = 'border-bottom: 1px solid white; margin-top:15px; margin-left:-30px;'></div>";
   	}
   playlistVideosList.innerHTML = output;
 }
