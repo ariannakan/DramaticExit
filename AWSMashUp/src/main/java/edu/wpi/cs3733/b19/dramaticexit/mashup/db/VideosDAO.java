@@ -168,7 +168,7 @@ public class VideosDAO {
             throw new Exception("Failed in getting videos: " + e);
         }
     }
-    //search by character
+    //search by character // sentence
     public List<Video> search(String keywordname, String keywordsentence)throws Exception{
     	List<Video> searchvid = new ArrayList<>();
     	try {
@@ -185,6 +185,29 @@ public class VideosDAO {
             resultSet.close();
             statement.close();
             return searchvid;
+
+        } catch (Exception e) {
+            throw new Exception("Failed in searching videos: " + e);
+        }
+    }
+    
+  //search by character // sentence
+    public List<Video> AvailableForRemote()throws Exception{
+    	List<Video> vid = new ArrayList<>();
+    	try {
+            Statement statement = conn.createStatement();
+            String query = "SELECT * FROM Videos";
+            ResultSet resultSet = statement.executeQuery(query);
+            
+            while (resultSet.next()) {
+        		Video v = generateVideo(resultSet);
+            	if (v.availability) {//filter availability
+                	vid.add(v);
+            	}
+            }
+            resultSet.close();
+            statement.close();
+            return vid;
 
         } catch (Exception e) {
             throw new Exception("Failed in searching videos: " + e);
