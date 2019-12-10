@@ -37,7 +37,7 @@ function handleSearchClick() {
 function processSearchResponse(result) {
 
 	  console.log("search:" + result);
-	  
+	  	  
 	  var js = JSON.parse(result);
 	  var searchList = document.getElementById('searchList');
 	  var output = "";
@@ -58,7 +58,7 @@ function processSearchResponse(result) {
 			  var sentence = videoJson["sentence"];
 			  
 			  output = output + "<div id=\"vid" + videoID + "\">" +
-			  "<br><b><center>Video " + videoID + "</b>     " +
+			  "<br><b><center>Video " + videoID + "</b>" +
 	   			"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
 	   			"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
 	  		}

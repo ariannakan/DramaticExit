@@ -46,10 +46,11 @@ function processAppendListResponse(playlistName, result) {
 	    var videoID = videoJson["videoID"];
 	    var url = videoJson["url"];
 	    
+//		 output = output + "<div id=\"vid" + videoID + "\">" +
+//	    	"<br><b>" + characterName + ": </b>" + sentence + "</> (<a href='javaScript:processAppendVideoRequest(\"" + playlistName + "\",\"" + videoID + "\")' class = 'viewAppendVideo'>Append</a>)<br></div>";
+
 		 output = output + "<div id=\"vid" + videoID + "\">" +
-	    	"<br><b>" + characterName + ": </b>" + sentence + "</> (<a href='javaScript:processAppendVideoRequest(\"" + playlistName + "\",\"" + videoID + "\")' class = 'viewAppendVideo'>Append</a>)<br></div>";
-	    
-			
+	    	"<br>(<a href='javaScript:processAppendVideoRequest(\"" + playlistName + "\",\"" + videoID + "\")' class = 'viewAppendVideo'>Append</a>) <b>" + characterName + ": </b>" + sentence + "</><br></div>";	
 	  }
 	  
 	  vidList.innerHTML = output;

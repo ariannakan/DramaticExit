@@ -5,12 +5,14 @@
 <!-- relative path-name to access js -->
 <script type='text/javascript' src='../js/api.js'></script>
 <script type='text/javascript' src='../js/search.js'></script>
-
+<script type='text/javascript' src='../js/get_playlistList.js'></script>
 
 <script type="text/javascript">
 
 function initialize() {
-
+	
+	refreshPlaylistList("search");
+	
 }
 
 </script>
@@ -45,10 +47,19 @@ function initialize() {
 	<h3>Search</h3>
 </div>
 
-<div style = "border-bottom: 1px solid white; margin-top:10px;"></div>
+<div style = "border-bottom: 1px solid white; margin-top:23.5px;"></div>
 
- <div class = "grid-container" id="searchList" style = "margin-top: 10px; margin-left:240px;">
+ <div class = "grid-container-videos" id="searchList" style = "margin-top: 10px; margin-left:240px;">
 	<script src = "../js/search.js"></script>
+</div>
+
+<div>
+	<b class = 'appendButton' style = 'margin-left:240px'>Append To Playlist</b></br>
+	<div style = 'border-bottom: 1px solid white; margin-top:15px; margin-left:-30px;'></div>
+</div>
+
+<div id="appendPlaylistList" style = "font-size:18px; margin-left:240px; margin-bottom:20px;">
+	<script src = "../js/get_playlistList.js"></script>
 </div>
 
 
