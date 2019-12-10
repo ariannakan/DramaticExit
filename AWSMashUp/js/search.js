@@ -37,7 +37,9 @@ function handleSearchClick() {
 function processSearchResponse(result) {
 
 	  console.log("search:" + result);
-	  	  
+	  
+	  refreshPlaylistList("search");
+	  	  	  	  
 	  var js = JSON.parse(result);
 	  var searchList = document.getElementById('searchList');
 	  var output = "";
@@ -58,13 +60,37 @@ function processSearchResponse(result) {
 			  var sentence = videoJson["sentence"];
 			  
 			  output = output + "<div id=\"vid" + videoID + "\">" +
-			  "<br><b><center>Video " + videoID + "</b>" +
-	   			"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
-	   			"<br><b>" + characterName + ": </b>" + sentence + "</><br></div>";
+			  "<br><b><center>Video " + videoID + "</b><br>" +
+   			  "<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+   			  "<br><b>" + characterName + ": </b>" + sentence + 
+			  "<div class='dropdown'><button onclick='myFunction()' class='dropbtn'>(Append To Playlist)</button><div id='myDropdown' class='dropdown-content'><div id='appendPlaylistList' style = 'font-size:14px; margin-left:-600px;'><script src = '../js/get_playlistList.js'></script></div></div></div>" +
+			  "</><br></div>";
+			  
 	  		}
 	  }
 	  searchList.innerHTML = output;
+
 	}
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+} 
 
 
 

@@ -42,7 +42,7 @@ function processAppendPlaylistListResponse(result) {
 	    var playlistName = playlistJson["playlistName"];
 	    	
 	    output = output + "<div id=\"" + playlistName + "\">" +
-			"<br>(<a class = 'viewAppendPlaylist'>Append</a>) <b>" + playlistName + "</b> " +
+			"<br><b>" + playlistName + "</b> (<a class = 'viewAppendPlaylist'>Append</a>)" +			
 	  		"</><br></div>";
 	  }
 	  
