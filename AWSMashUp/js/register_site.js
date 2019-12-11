@@ -22,6 +22,7 @@ function processRegister(e) {
   console.log("JS:" + js);
   var xhr = new XMLHttpRequest();
   xhr.open("POST", register_site_url, true);
+  xhr.setRequestHeader("x-api-key", apikey);
 
   // send the collected data as JSON
   xhr.send(js);
