@@ -235,10 +235,10 @@ public class VideosDAO {
             //search from remote videos
             Statement statement2 = conn.createStatement();
             String query2 = "SELECT * FROM RemoteVideos";
-            ResultSet resultSet2 = statement2.executeQuery(query);
+            ResultSet resultSet2 = statement2.executeQuery(query2);
             //add videos
             while (resultSet2.next()) {
-        		Video v2 = generateVideo(resultSet2);
+        		Video v2 = generateRemoteVideo(resultSet2);
             	if (v2.characterName.toLowerCase().contains(keywordname.toLowerCase())&&
             		v2.sentence.toLowerCase().contains(keywordsentence.toLowerCase())) {//matched character name 
                 	searchvid.add(v2);

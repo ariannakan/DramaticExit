@@ -88,3 +88,4 @@ function processRemoteListResponse(result) {
   remoteVidList.innerHTML = output;
   
 }
+}

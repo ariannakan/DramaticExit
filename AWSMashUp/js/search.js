@@ -53,8 +53,14 @@ function processSearchResponse(result) {
 		  for (var i = 0; i < js.list.length; i++) {
 			  var videoJson = js.list[i];
 			  console.log(videoJson);
-	    
+			  console.log("videoID: "+ videoJson["videoID"])
+			  if (videoJson["videoID"] == null){
+				  
+				  var videoID = "remote";
+
+			  } else{
 			  var videoID = videoJson["videoID"];
+			  }
 			  var url = videoJson["url"];
 			  var characterName = videoJson["characterName"];
 			  var sentence = videoJson["sentence"];
@@ -65,7 +71,6 @@ function processSearchResponse(result) {
    			  "<br><b>" + characterName + ": </b>" + sentence +  
 			  //"<div class='dropdown'><button onclick='myFunction()' class='dropbtn'>(Append To Playlist)</button><div id='myDropdown' class='dropdown-content'><div id='appendPlaylistList' style = 'font-size:14px; margin-left:-600px;'><script src = '../js/get_playlistList.js'></script></div></div></div>" +
 			  "</><br></div>";
-			  
 	  		}
 	  }
 	  searchList.innerHTML = output;
