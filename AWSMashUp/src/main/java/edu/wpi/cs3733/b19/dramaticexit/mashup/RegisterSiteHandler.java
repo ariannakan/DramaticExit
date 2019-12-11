@@ -8,6 +8,7 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import edu.wpi.cs3733.b19.dramaticexit.mashup.db.SitesDAO;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.db.VideosDAO;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.RegisterSiteRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.RegisterSiteResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Site;
@@ -37,20 +38,19 @@ public class RegisterSiteHandler implements RequestHandler<RegisterSiteRequest,R
 		}
 	}
 	
-	boolean addRemoteVideos(String url) throws Exception {
-		if (logger != null) { logger.log("in registerSite"); }
+	boolean addRemoteVideos(String url) throws Exception {		//url == apikey
+		if (logger != null) { logger.log("in registerSite - in addRemoteVideos"); }
 		SitesDAO dao = new SitesDAO();
+		VideosDAO vdao = new VideosDAO();
 		
 		// check if present
 		Site exist = dao.getSiteURL(url);
-		System.out.println("checked if site is present");
-		Site site = new Site (new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()), url);
 		if (exist == null) {
-			System.out.println("site does not exist - adding");
-			return dao.addSite(site);
-		} else {
-			System.out.println("site exists");
+			System.out.println("site does not exist - cannot add remote videos");
 			return false;
+		} else {
+			System.out.println("site exists - adding remote videos");
+			return vdao.addRemoteVideos(url);
 		}
 	}
 	

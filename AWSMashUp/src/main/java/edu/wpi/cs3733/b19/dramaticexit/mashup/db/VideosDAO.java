@@ -254,6 +254,34 @@ public class VideosDAO {
             throw new Exception("Failed in searching videos: " + e);
         }
     }
+    
+    public boolean addRemoteVideos(String url) throws Exception {
+        try {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Videos WHERE videoID = ?;");
+            ps.setString(1, video.videoID);
+            ResultSet resultSet = ps.executeQuery();
+            
+            // already present?
+            while (resultSet.next()) {
+                Video v = generateVideo(resultSet);
+                resultSet.close();
+                return false;
+            }
+
+            ps = conn.prepareStatement("INSERT INTO Videos (apikey,url,characterName,sentence) values(?,?,?,?);");
+            ps.setString(1,  url);
+            ps.setString(2, video.characterName);
+            ps.setString(3, video.sentence);
+            ps.setBoolean(4,  video.availability);
+            ps.setString(5,  video.url);
+            ps.execute();
+            System.out.println("successfully added video");
+            return true;
+
+        } catch (Exception e) {
+            throw new Exception("Failed to add video: " + e.getMessage());
+        }
+    }
   
   //generate videos from videos database
     private Video generateVideo(ResultSet resultSet) throws Exception {
