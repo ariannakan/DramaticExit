@@ -1,38 +1,24 @@
 //
 //RETURN SEGMENTS AND APIURL WHEN INPUT APIKEY
 //
-function processRemoteResponse(result, apikey) {
-  // Can grab any DIV or SPAN HTML element and can then manipulate its
-  // contents dynamically via javascript
-  console.log("registered:" + result);
-  //*********************************************************
-  //THIS IS WHERE WE SEND THE FORMATION TO REGISTER_SITE.JS
-  //*********************************************************
-  var js = JSON.parse(result);
-//  var remoteConstList = document.getElementById('remoteConstantList');
-  
-  for (var i = 0; i < js.list.length; i++) {
-    var constantJson = js.list[i];
-    
-    console.log(constantJson["url"]);
-    //processRegister(apikey, constantJson["url"], constantJson["character"], constantJson["text"])
-    
-  	}
-    	
-  refreshSiteList();
-  //refreshRemoteList();
-}
 
 function processRemote() {
  
   var data = {};
-  var apikey = document.registerSiteForm.url.value;
+  var input = document.registerSiteForm.url.value.split("?apikey=");
+  var apikey = input[1];
+  console.log("apikey:" + apikey);
+  var remote_url = input[0];
+  console.log("remote_url" + remote_url);
+
+
   var js = JSON.stringify(data);
+  
   console.log("JS:" + js);
   console.log("apikey: " + apikey);
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", search_remote_url, true);//pretty sure this is the only thing that's wrong
-  xhr.setRequestHeader("x-api-key", apikey);
+  xhr.open("GET", remote_url , true);//pretty sure this is the only thing that's wrong
+  xhr.setRequestHeader("x-api-key", apikey); 
 
   // send the collected data as JSON
   xhr.send(js);
@@ -56,3 +42,27 @@ function processRemote() {
     }
   };
 }
+
+function processRemoteResponse(result, apikey) {
+	  // Can grab any DIV or SPAN HTML element and can then manipulate its
+	  // contents dynamically via javascript
+	  console.log("res:" + result);
+	  //*********************************************************
+	  //THIS IS WHERE WE SEND THE FORMATION TO REGISTER_SITE.JS
+	  //*********************************************************
+	  var js = JSON.parse(result);
+	//  var remoteConstList = document.getElementById('remoteConstantList');
+	  console.log("js: " + js);
+
+	  for (var i = 0; i < js.segments.length; i++) {
+	    var segmentJson = js.segments[i];
+	    console.log(segmentJson);
+	    console.log("url: " + segmentJson["url"]);
+	    processRegister(apikey, segmentJson["url"], segmentJson["character"], segmentJson["text"])
+	    
+	  	}
+	    	
+	  refreshSiteList();
+	  //refreshRemoteList();
+	}
+
