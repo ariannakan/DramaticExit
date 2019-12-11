@@ -8,6 +8,7 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import java.util.*;
 
 import edu.wpi.cs3733.b19.dramaticexit.mashup.db.DatabaseUtil;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Segment;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 
 /**
@@ -191,9 +192,9 @@ public class VideosDAO {
         }
     }
     
-  //search by character // sentence
-    public List<Video> AvailableForRemote()throws Exception{
-    	List<Video> vid = new ArrayList<>();
+  //return remotely available videos and return in segments 
+    public List<Segment> AvailableForRemote()throws Exception{
+    	List<Segment> seg = new ArrayList<>();
     	try {
             Statement statement = conn.createStatement();
             String query = "SELECT * FROM Videos";
@@ -202,12 +203,12 @@ public class VideosDAO {
             while (resultSet.next()) {
         		Video v = generateVideo(resultSet);
             	if (v.availability) {//filter availability
-                	vid.add(v);
+                	seg.add(new Segment(v.url, v.characterName, v.sentence));
             	}
             }
             resultSet.close();
             statement.close();
-            return vid;
+            return seg;
 
         } catch (Exception e) {
             throw new Exception("Failed in searching videos: " + e);

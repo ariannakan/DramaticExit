@@ -9,6 +9,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.RemoteSegmentsResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.SearchResponse;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Segment;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.db.VideosDAO;
 
@@ -16,7 +17,7 @@ public class RemoteSiteHandler implements RequestHandler<Object,RemoteSegmentsRe
 
 	public LambdaLogger logger;
 	
-	List<Video> AvailableForRemote() throws Exception {
+	List<Segment> AvailableForRemote() throws Exception {
 		VideosDAO dao = new VideosDAO();
 
 		return dao.AvailableForRemote();
@@ -29,7 +30,7 @@ public class RemoteSiteHandler implements RequestHandler<Object,RemoteSegmentsRe
 
 		RemoteSegmentsResponse response;
 		try {
-			List<Video> list = AvailableForRemote();
+			List<Segment> list = AvailableForRemote();
 			response = new RemoteSegmentsResponse(list, 200);
 		} catch (Exception e) {
 			response = new RemoteSegmentsResponse(403, e.getMessage());
@@ -37,14 +38,5 @@ public class RemoteSiteHandler implements RequestHandler<Object,RemoteSegmentsRe
 		
 		return response;
 	}
-//		Segment one = new Segment("https://cs3733wpi.s3.amazonaws.com/segments/output1.ogg", "worker", "one to beam up");
-//		Segment two = new Segment("https://cs3733wpi.s3.amazonaws.com/segments/output2.ogg", "bones", "he's dead, Jim.");
-//		Segment three = new Segment("https://cs3733wpi.s3.amazonaws.com/segments/output3.ogg", "worker", "Kirk, Out.");
-//		
-//		List<Segment> list = new ArrayList<Segment>();
-//		list.add(one);
-//		list.add(two);
-//		list.add(three);
-//		
-//		RemoteSegmentsResponse response = new RemoteSegmentsResponse(list, 200);
+
 }
