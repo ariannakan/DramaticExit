@@ -10,6 +10,8 @@ function processRegisterResponse(result) {
 function processRegister(e) {
  
   var data = {};
+  data["characterName"] = document.registerSiteForm.characterName.value;
+  data["sentence"] = document.registerSiteForm.sentence.value;
   data["url"] = document.registerSiteForm.url.value;
   
   /**
