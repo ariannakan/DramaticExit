@@ -6,6 +6,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import edu.wpi.cs3733.b19.dramaticexit.mashup.db.PlaylistsDAO;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.db.SitesDAO;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.db.VideosDAO;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeletePlaylistRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeletePlaylistResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeleteSiteRequest;
@@ -23,7 +24,7 @@ public class DeleteSiteHandler implements RequestHandler<DeleteSiteRequest,Delet
 	boolean deleteSite(String url) throws Exception {
 		logger.log("in deleteSite");
 		SitesDAO dao = new SitesDAO();
-		
+		VideosDAO vdao = new VideosDAO();
 		// check if present
 		System.out.println("checking if site exists before deleting");
 		Site exist = dao.getSiteURL(url);
@@ -32,7 +33,7 @@ public class DeleteSiteHandler implements RequestHandler<DeleteSiteRequest,Delet
 			return false;
 		} else {
 			System.out.println("site exists --> deleting");
-			return dao.deleteSite(url);
+			return dao.deleteSite(url)&&vdao.remRemoteVideos(url);
 		}
 	}
 	

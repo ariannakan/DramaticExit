@@ -80,6 +80,28 @@ public class VideosDAO {
             throw new Exception("Failed in getting video: " + e.getMessage());
         }
     }
+    
+    public Video getRemoteVideoByURL(String url) throws Exception {
+    	System.out.println("in getVideobyURL");
+        try {
+            Video video = null;
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM RemoteVideos WHERE url=?;");
+            ps.setString(1, url);		//videoID is 1st index in database
+            ResultSet resultSet = ps.executeQuery();
+            
+            while (resultSet.next()) {
+                video = generateVideo(resultSet);
+            }
+            resultSet.close();
+            ps.close();
+            
+            return video;
+
+        } catch (Exception e) {
+        	System.out.println("unable to get video in VideosDAO");
+            throw new Exception("Failed in getting video: " + e.getMessage());
+        }
+    }
 
    
     public boolean updateVideo(String videoID, boolean availability) throws Exception {
@@ -255,31 +277,41 @@ public class VideosDAO {
         }
     }
     
-    public boolean addRemoteVideos(String url) throws Exception {
-        try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Videos WHERE videoID = ?;");
-            ps.setString(1, video.videoID);
-            ResultSet resultSet = ps.executeQuery();
-            
-            // already present?
-            while (resultSet.next()) {
-                Video v = generateVideo(resultSet);
-                resultSet.close();
-                return false;
-            }
+    //add remote video into remotevideos database 
+    public boolean addRemoteVideo(Video video, String apikey) throws Exception {
+    	try {
 
-            ps = conn.prepareStatement("INSERT INTO Videos (apikey,url,characterName,sentence) values(?,?,?,?);");
-            ps.setString(1,  url);
-            ps.setString(2, video.characterName);
-            ps.setString(3, video.sentence);
-            ps.setBoolean(4,  video.availability);
-            ps.setString(5,  video.url);
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO RemoteVideos (apikey,url,characterName,sentence) values(?,?,?,?);");
+            ps.setString(1,  apikey);
+            ps.setString(2, video.url);
+            ps.setString(3, video.characterName);
+            ps.setString(4,  video.sentence);
             ps.execute();
             System.out.println("successfully added video");
             return true;
 
         } catch (Exception e) {
             throw new Exception("Failed to add video: " + e.getMessage());
+        }
+    }
+    
+  //remove remote video into remotevideos database 
+    public boolean remRemoteVideos(String apikey) throws Exception {
+    	try {
+        	System.out.println("in deleteRemoteVideo DAO");
+            
+            //deleting from videos database
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM RemoteVideos WHERE apikey = ?;");
+            ps.setString(1, apikey);
+
+            int numAffected = ps.executeUpdate();
+            
+            ps.close();
+            
+            return (numAffected == 1);
+
+        } catch (Exception e) {
+            throw new Exception("Failed to delete video: " + e.getMessage());
         }
     }
   
