@@ -37,6 +37,23 @@ public class RegisterSiteHandler implements RequestHandler<RegisterSiteRequest,R
 		}
 	}
 	
+	boolean addRemoteVideos(String url) throws Exception {
+		if (logger != null) { logger.log("in registerSite"); }
+		SitesDAO dao = new SitesDAO();
+		
+		// check if present
+		Site exist = dao.getSiteURL(url);
+		System.out.println("checked if site is present");
+		Site site = new Site (new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()), url);
+		if (exist == null) {
+			System.out.println("site does not exist - adding");
+			return dao.addSite(site);
+		} else {
+			System.out.println("site exists");
+			return false;
+		}
+	}
+	
 	
 	@Override
 	public RegisterSiteResponse handleRequest(RegisterSiteRequest req, Context context) {
@@ -52,6 +69,7 @@ public class RegisterSiteHandler implements RequestHandler<RegisterSiteRequest,R
 			}
 			
 		} catch (Exception e) {
+			System.out.println("Unable to create site: " + req.url + "(" + e.getMessage() + ")");
 			response = new RegisterSiteResponse("Unable to create site: " + req.url + "(" + e.getMessage() + ")", 400);
 		}
 

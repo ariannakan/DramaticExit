@@ -130,18 +130,18 @@ public class PlaylistsDAO {
 
     public boolean addPlaylist(Playlist pl) throws Exception {
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Playlists WHERE playlistName = ?;");
-            ps.setString(1, pl.playlistName);
-            ResultSet resultSet = ps.executeQuery();
-            
-            // already present?
-            while (resultSet.next()) {
-                Playlist p = generatePlaylist(resultSet);
-                resultSet.close();
-                return false;
-            }
+//            PreparedStatement ps = conn.prepareStatement("SELECT * FROM Playlists WHERE playlistName = ?;");
+//            ps.setString(1, pl.playlistName);
+//            ResultSet resultSet = ps.executeQuery();
+//            
+//            // already present?
+//            while (resultSet.next()) {
+//                Playlist p = generatePlaylist(resultSet);
+//                resultSet.close();
+//                return false;
+//            }
 
-            ps = conn.prepareStatement("INSERT INTO Playlists (playlistID,playlistName) values(?,?);");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO Playlists (playlistID,playlistName) values(?,?);");
             ps.setString(1, pl.playlistID);
             ps.setString(2, pl.playlistName);
             ps.execute();

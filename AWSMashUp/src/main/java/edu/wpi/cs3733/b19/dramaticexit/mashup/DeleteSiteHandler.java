@@ -25,10 +25,13 @@ public class DeleteSiteHandler implements RequestHandler<DeleteSiteRequest,Delet
 		SitesDAO dao = new SitesDAO();
 		
 		// check if present
+		System.out.println("checking if site exists before deleting");
 		Site exist = dao.getSiteURL(url);
 		if (exist == null) {
+			System.out.println("site does not exist");
 			return false;
 		} else {
+			System.out.println("site exists --> deleting");
 			return dao.deleteSite(url);
 		}
 	}
@@ -41,8 +44,10 @@ public class DeleteSiteHandler implements RequestHandler<DeleteSiteRequest,Delet
 		DeleteSiteResponse response;
 		try {
 			if (deleteSite(req.url)) {
+				System.out.println("site deleted");
 				response = new DeleteSiteResponse(req.url, 200);
 			} else {
+				System.out.println("site does not exist -- cannot delete");
 				response = new DeleteSiteResponse(req.url, 422);
 			}
 			

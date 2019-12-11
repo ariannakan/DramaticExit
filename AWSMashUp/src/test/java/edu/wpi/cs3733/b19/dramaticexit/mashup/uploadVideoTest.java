@@ -1,6 +1,6 @@
+//tests both upload and delete
 package edu.wpi.cs3733.b19.dramaticexit.mashup;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -46,17 +46,20 @@ public class uploadVideoTest extends LambdaTest{
 	    Assert.assertEquals(200, resp.statusCode);
 	}
 	
+	void testFailDelete(String incoming, int failureCode) throws IOException {
+		DeleteVideoHandler handler = new DeleteVideoHandler();
+		DeleteVideoRequest req = new Gson().fromJson(incoming, DeleteVideoRequest.class);
+	   
+	    DeleteVideoResponse resp = handler.handleRequest(req, createContext("create"));
+	    Assert.assertEquals(failureCode, resp.statusCode);
+	}
+	
 	@Test
 	public void testFirstUpload() {
 		System.out.println("Testing: testFirstUpload");
-		String videoID = "vid1";
 		String characterName = "Spock";
 		String sentence = "Not again";
-		//File oggFile = oggfile;
-		//System.out.println(oggFile);
-		boolean availability = true;
-		
-		/*new code*/
+
 		try {
 			byte[] fileContent = Files.readAllBytes(Paths.get("src/test/resources/videoseg2converted.ogg"));
 			String encoded = java.util.Base64.getEncoder().encodeToString(fileContent);
@@ -69,65 +72,80 @@ public class uploadVideoTest extends LambdaTest{
         	Assert.fail("Invalid:" + ioe.getMessage());
         }
     }
+		
+	@Test
+    public void testEmptyUpload() {
+		System.out.println("Testing: Empty input");
+		
+    	UploadVideoRequest testInvalid = new UploadVideoRequest();
+    	String SAMPLE_INPUT_STRING =  new Gson().toJson(testInvalid);  
+        
+        try {
+        	testFailInput(SAMPLE_INPUT_STRING, 400);
+        } catch (IOException ioe) {
+        	Assert.fail("Invalid:" + ioe.getMessage());
+        }
+    }
 	
-//	@Test
-//    public void testSameUpload() {
-//		System.out.println("Testing: test");
-//		String videoID = "vid1";
-//		String characterName = "Spock";
-//		String sentence = "Not again";
-//		File oggFile = oggfile;
-//		System.out.println(oggFile);
-//		boolean availability = true;
-//		
-//    	UploadVideoRequest testFalse = new UploadVideoRequest(characterName, sentence, oggFile);
-//    	String SAMPLE_INPUT_STRING =  new Gson().toJson(testFalse);  
-//        
-//        try {
-//        	testFailInput(SAMPLE_INPUT_STRING, 422);
-//        } catch (IOException ioe) {
-//        	Assert.fail("Invalid:" + ioe.getMessage());
-//        }
-//    }
-//	
-//	@Test
-//    public void testEmptyUpload() {
-//		System.out.println("Testing: Empty input");
-//		
-//    	UploadVideoRequest testInvalid = new UploadVideoRequest();
-//    	String SAMPLE_INPUT_STRING =  new Gson().toJson(testInvalid);  
-//        
-//        try {
-//        	testFailInput(SAMPLE_INPUT_STRING, 400);
-//        } catch (IOException ioe) {
-//        	Assert.fail("Invalid:" + ioe.getMessage());
-//        }
-//    }
-//	
-//	@Test
-//	public void testDeleteVideo() {
-//		System.out.println("Testing: Delete video");
-//		String characterName = "testingDelete";
-//		String sentence = "okie-dokie";
-//		File oggFile = oggfile;
-//		
-//    	UploadVideoRequest input = new UploadVideoRequest(characterName, sentence, oggFile);
-//    	String SAMPLE = new Gson().toJson(input);  
-//    	UploadVideoHandler handler = new UploadVideoHandler();
-//		UploadVideoRequest req = new Gson().fromJson(SAMPLE, UploadVideoRequest.class);
-//	   
-//	    UploadVideoResponse resp = handler.handleRequest(req, createContext("create"));
-//	    
-//	    System.out.println(resp.videoID);
-//	
-//		
-//		DeleteVideoRequest testDelete = new DeleteVideoRequest(resp.videoID);
-//		String SAMPLE_INPUT_STRING =  new Gson().toJson(testDelete); 
-//		
-//		try {
-//        	testSuccessDelete(SAMPLE_INPUT_STRING);
-//        } catch (IOException ioe) { 
-//        	Assert.fail("Invalid:" + ioe.getMessage());
-//        }
-//	}
+	@Test
+	public void testDeleteVideo() {
+		System.out.println("Testing: Delete video");
+		String characterName = "testingDelete";
+		String sentence = "okie-dokie";
+		
+		byte[] fileContent;
+		try {
+			fileContent = Files.readAllBytes(Paths.get("src/test/resources/videoseg2converted.ogg"));
+			String encoded = java.util.Base64.getEncoder().encodeToString(fileContent);
+			
+	    	UploadVideoRequest testOK = new UploadVideoRequest(characterName, sentence, encoded);
+	        String SAMPLE_INPUT_STRING = new Gson().toJson(testOK);  
+	        
+	        UploadVideoHandler handler = new UploadVideoHandler();
+			UploadVideoRequest req = new Gson().fromJson(SAMPLE_INPUT_STRING, UploadVideoRequest.class);
+		   
+		    UploadVideoResponse resp = handler.handleRequest(req, createContext("create"));
+		    
+		    System.out.println(resp.response);
+		
+			
+			DeleteVideoRequest testDelete = new DeleteVideoRequest(resp.response);
+			String SAMPLE =  new Gson().toJson(testDelete); 
+			
+			testSuccessDelete(SAMPLE);
+		} catch (IOException ioe) {
+			Assert.fail("Invalid:" + ioe.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEmptyDeleteVideo() {
+		System.out.println("Testing: Delete video with incorrect input");
+		String characterName = "testingIncorrectInputDelete";
+		String sentence = "should fail";
+		
+		byte[] fileContent;
+		try {
+			fileContent = Files.readAllBytes(Paths.get("src/test/resources/videoseg2converted.ogg"));
+			String encoded = java.util.Base64.getEncoder().encodeToString(fileContent);
+			
+	    	UploadVideoRequest testOK = new UploadVideoRequest(characterName, sentence, encoded);
+	        String SAMPLE_INPUT_STRING = new Gson().toJson(testOK);  
+	        
+	        UploadVideoHandler handler = new UploadVideoHandler();
+			UploadVideoRequest req = new Gson().fromJson(SAMPLE_INPUT_STRING, UploadVideoRequest.class);
+		   
+		    UploadVideoResponse resp = handler.handleRequest(req, createContext("create"));
+		    
+		    System.out.println(resp.response);
+		
+			
+			DeleteVideoRequest testDelete = new DeleteVideoRequest(resp.toString());
+			String SAMPLE =  new Gson().toJson(testDelete); 
+			
+			testFailDelete(SAMPLE, 422);
+		} catch (IOException ioe) {
+			Assert.fail("Invalid:" + ioe.getMessage());
+		}
+	}
 }

@@ -1,10 +1,10 @@
-function processDeleteResponse(result) {
+function processDeleteResponse(result, playlistName) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
   console.log("deleted:" + result);
   
   refreshPlaylistList();
-  //refreshRemoteList();
+  requestPlaylistVideos(playlistName);
 }
 
 function requestPlaylistDelete(playlist) {
@@ -32,7 +32,7 @@ function processDelete(playlist) {
 	  if (xhr.readyState == XMLHttpRequest.DONE) {
 		  if (xhr.status == 200) {
 			  console.log ("XHR:" + xhr.responseText);
-			  processDeleteResponse(xhr.responseText);
+			  processDeleteResponse(xhr.responseText, playlist);
 		  } else {
 			  console.log("actual:" + xhr.responseText)
 			  var js = JSON.parse(xhr.responseText);
