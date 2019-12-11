@@ -169,22 +169,62 @@ public class VideosDAO {
             throw new Exception("Failed in getting videos: " + e);
         }
     }
+    
+    
+    public List<Video> getRemoteVideos() throws Exception {
+        
+        List<Video> allRemoteVideos = new ArrayList<>();
+        try {
+            Statement statement = conn.createStatement();
+            String query = "SELECT * FROM RemoteVideos";
+            ResultSet resultSet = statement.executeQuery(query);
+            
+            while (resultSet.next()) {
+            	Video v = generateRemoteVideo(resultSet);
+            	allRemoteVideos.add(v);
+            }
+            resultSet.close();
+            statement.close();
+            return allRemoteVideos;
+
+        } catch (Exception e) {
+            throw new Exception("Failed in getting Remote videos: " + e);
+        }
+    }
     //search by character // sentence
     public List<Video> search(String keywordname, String keywordsentence)throws Exception{
     	List<Video> searchvid = new ArrayList<>();
     	try {
+        	//search from videos
             Statement statement = conn.createStatement();
             String query = "SELECT * FROM Videos";
             ResultSet resultSet = statement.executeQuery(query);
-            
+            //add videos
             while (resultSet.next()) {
         		Video v = generateVideo(resultSet);
-            	if (v.characterName.toLowerCase().contains(keywordname.toLowerCase())&&v.sentence.toLowerCase().contains(keywordsentence.toLowerCase())) {//matched character name 
+            	if (v.characterName.toLowerCase().contains(keywordname.toLowerCase())&&
+            		v.sentence.toLowerCase().contains(keywordsentence.toLowerCase())) {//matched character name 
                 	searchvid.add(v);
             	}
             }
             resultSet.close();
             statement.close();
+            
+            //search from remote videos
+            Statement statement2 = conn.createStatement();
+            String query2 = "SELECT * FROM RemoteVideos";
+            ResultSet resultSet2 = statement2.executeQuery(query);
+            //add videos
+            while (resultSet2.next()) {
+        		Video v2 = generateVideo(resultSet2);
+            	if (v2.characterName.toLowerCase().contains(keywordname.toLowerCase())&&
+            		v2.sentence.toLowerCase().contains(keywordsentence.toLowerCase())) {//matched character name 
+                	searchvid.add(v2);
+            	}
+            }
+            resultSet2.close();
+            statement2.close();
+         
             return searchvid;
 
         } catch (Exception e) {
@@ -215,6 +255,7 @@ public class VideosDAO {
         }
     }
   
+  //generate videos from videos database
     private Video generateVideo(ResultSet resultSet) throws Exception {
         String videoID  = resultSet.getString("videoID");
         String characterName = resultSet.getString("characterName");
@@ -222,5 +263,13 @@ public class VideosDAO {
         boolean availability = resultSet.getBoolean("availability");
         String url = resultSet.getString("url");
         return new Video(videoID, characterName, sentence, availability, url);
+    }
+    
+  //generate videos from remote videos
+    private Video generateRemoteVideo(ResultSet resultSet) throws Exception {
+        String characterName = resultSet.getString("characterName");
+        String sentence = resultSet.getString("sentence");
+        String url = resultSet.getString("url");
+        return new Video(url, characterName, sentence);
     }
 }

@@ -25,6 +25,7 @@ public class Video {
 		this.url = url;
 	}
 	
+	//Video object creation for remote video database
 	public Video (String url, String characterName, String sentence) {
 		this.characterName = characterName;
 		this.url = url;
