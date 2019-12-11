@@ -62,7 +62,7 @@ function processSearchResponse(result) {
 			  output = output + "<div id=\"vid" + videoID + "\">" +
 			  "<br><b><center>Video " + videoID + "</b><br>" +
    			  "<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
-   			  "<br><b>" + characterName + ": </b>" + sentence + 
+   			  "<br><b>" + characterName + ": </b>" + sentence +  
 			  "<div class='dropdown'><button onclick='myFunction()' class='dropbtn'>(Append To Playlist)</button><div id='myDropdown' class='dropdown-content'><div id='appendPlaylistList' style = 'font-size:14px; margin-left:-600px;'><script src = '../js/get_playlistList.js'></script></div></div></div>" +
 			  "</><br></div>";
 			  

@@ -47,27 +47,29 @@ function initialize() {
 
 <div class = "Library">
 	<h3>My Videos</h3>
-</div>
-
-<form name="createForm" method="post">
-	<!--  <input type = "button" class = "btn formButton" value = "Submit">-->
-	<input type = "button" class = "btn formButton" value = "+ Upload Video" onclick="openForm()">
-</form>
-
-<div class="form-popup" id="myForm">
 	
-	<form name = "uploadForm" method="post" enctype="multipart/form-data" class="form-container">
-		<h3 style = "text-align:center; color:black;">Enter <u>Character Name</u> and <u>Sentence</u> Below</h3>
-		
-		<input name="base64Encoding" hidden value =""/>
-		<input type = "file" class = "browseButton" id="oggFile" name="oggFile" style = "font-size:13px; color:black; float:left;">
-		
-		<input type="text" placeholder="Enter Character Name..." name="characterName" required/>
-		<input type="text" placeholder="Enter Sentence..." name="sentence" required/>
-		
-		<input type="button" id="uploadButton" class="btn" value="Upload" disabled onClick="JavaScript:handleUploadClick(this); closeForm()">
-		<button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+	<form name="createForm" method="post">
+	<!--  <input type = "button" class = "btn formButton" value = "Submit">-->
+		<input type = "button" class = "btn formButton" value = "+ Upload Video" onclick="openForm()">
 	</form>
+
+	<div class="form-popup" id="myForm">
+		<form name = "uploadForm" method="post" enctype="multipart/form-data" class="form-container">
+			<h3 style = "text-align:center; color:black;">Enter <u>Character Name</u> and <u>Sentence</u> Below</h3>
+			
+			<input name="base64Encoding" hidden value =""/>
+			<input type = "file" class = "browseButton" id="oggFile" name="oggFile" style = "font-size:13px; color:black; float:left;">
+			
+			<input type="text" placeholder="Enter Character Name..." name="characterName" required/>
+			<input type="text" placeholder="Enter Sentence..." name="sentence" required/>
+			
+			<input type="button" id="uploadButton" class="btn" value="Upload" disabled onClick="JavaScript:handleUploadClick(this); closeForm()">
+			<button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+		</form>
+	</div>
+	
+	<div style = "border-bottom: 1px solid white; margin-top:23.5px;"></div>
+	
 </div>
 
 <script>
@@ -107,7 +109,6 @@ function initialize() {
   document.getElementById('oggFile').addEventListener('change', handleFileSelect, false);
 </script>
 
-<div style = "border-bottom: 1px solid white; margin-top:23.5px;"></div>
 
 <div class = "grid-container" id="videoList" style = "margin-top: 10px; margin-left:240px;">
 	<script src = "../js/get_videoList.js"></script>
