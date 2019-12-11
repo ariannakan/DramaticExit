@@ -1,18 +1,19 @@
+//
+//TAKES IN SEGMENT AND APIKEY TO REGISTER WEBSITE AND REQUEST TO PUT IN THE REMOTE VIDEO DATABASE
+//
 function processRegisterResponse(result) {
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
   console.log("registered:" + result);
-
-  refreshSiteList();
-  //refreshRemoteList();
 }
 
-function processRegister(e) {
+function processRegister(apikey, url, characterName, sentence) {
  
   var data = {};
-  data["characterName"] = document.registerSiteForm.characterName.value;
-  data["sentence"] = document.registerSiteForm.sentence.value;
-  data["url"] = document.registerSiteForm.url.value;
+  data["apikey"] = apikey;
+  data["url"] = url;
+  data["characterName"] = characterName;
+  data["sentence"] = sentence;
   
   /**
   if (form.system.checked) {  // be sure to flag system constant requests...
@@ -22,7 +23,6 @@ function processRegister(e) {
   console.log("JS:" + js);
   var xhr = new XMLHttpRequest();
   xhr.open("POST", register_site_url, true);
-  xhr.setRequestHeader("x-api-key", apikey);
 
   // send the collected data as JSON
   xhr.send(js);
