@@ -22,5 +22,6 @@ var get_playlist_videos_url	= base_url + "playlist/videos"	//POST
 var append_video_url	= base_url + "playlist/appendvideo"	//POST
 var delete_playlist_url	= base_url + "playlist/{playlistID}"	//POST / DELETE
 var delete_playlist_video_url	= base_url + "playlist/{playlistID}/video/{videoID}"	//POST / DELETE
+var get_remote_videos_url	= base_url + "library/remotevideos"	//POST
 
 //var update_video_url	= base_url + "library/uploadvideo/{videoID}"	//POST
