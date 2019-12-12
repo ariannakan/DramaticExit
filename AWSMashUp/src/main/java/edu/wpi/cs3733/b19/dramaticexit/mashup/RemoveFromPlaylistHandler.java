@@ -36,7 +36,7 @@ public class RemoveFromPlaylistHandler implements RequestHandler<RemoveFromPlayl
 			return pdao.removeVideo(playlistName, videoID);
 		}
 	}
-	
+	//tests
 	@Override
 	public RemoveFromPlaylistResponse handleRequest(RemoveFromPlaylistRequest req, Context context) {
 		logger = context.getLogger();
