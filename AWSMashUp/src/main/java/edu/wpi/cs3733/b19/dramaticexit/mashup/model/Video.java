@@ -18,18 +18,10 @@ public class Video {
 	}
 	
 	public Video (String videoID, String characterName, String sentence, String url) {
-		this.sentence = "";
 		this.videoID = videoID;
 		this.characterName = characterName;
 		this.sentence = sentence;
 		this.url = url;
-	}
-	
-	//Video object creation for remote video database
-	public Video (String url, String characterName, String sentence) {
-		this.characterName = characterName;
-		this.url = url;
-		this.sentence = sentence;
 	}
 	
 	public Video (String videoID, String url) {

@@ -15,7 +15,7 @@ function requestDisplayAvailableRemoteVideos(playlistName){
 	   xhr.open("POST", get_remote_videos_url, true);
 	   xhr.send();
 	   
-	   console.log("sent");
+	   console.log("sent empty js for append remote video");
 
 	  // This will process results and update HTML as appropriate. 
 	  xhr.onloadend = function () {
@@ -40,7 +40,6 @@ function processAppendRemoteListResponse(playlistName, result) {
 	    var videoJson = js.list[i];
 	    console.log(videoJson);
 	    
-	    var availability = videoJson["availability"];
 	    var characterName = videoJson["characterName"];
 	    var sentence = videoJson["sentence"];
 	    var videoID = videoJson["videoID"];
@@ -62,7 +61,8 @@ function processAppendRemoteVideoRequest(playlistName, videoID) {
   var data = {};
   data["playlistName"] = playlistName
   data["videoID"] = videoID;
-
+  
+  console.log("append remote video request:" + data);
   var js = JSON.stringify(data);
   console.log("JS:" + js);
   var xhr = new XMLHttpRequest();

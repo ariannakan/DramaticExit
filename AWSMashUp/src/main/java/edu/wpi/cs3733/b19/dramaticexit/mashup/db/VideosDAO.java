@@ -81,6 +81,28 @@ public class VideosDAO {
         }
     }
     
+    public Video getRemoteVideoByID(String videoID) throws Exception {
+    	System.out.println("in getVideobyID");
+        try {
+            Video video = null;
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM RemoteVideos WHERE videoID=?;");
+            ps.setString(1, videoID);		//videoID is 1st index in database
+            ResultSet resultSet = ps.executeQuery();
+            
+            while (resultSet.next()) {
+                video = generateVideo(resultSet);
+            }
+            resultSet.close();
+            ps.close();
+            
+            return video;
+
+        } catch (Exception e) {
+        	System.out.println("unable to get video in VideosDAO");
+            throw new Exception("Failed in getting video by ID: " + e.getMessage());
+        }
+    }
+    
     public Video getRemoteVideoByURL(String url) throws Exception {
     	System.out.println("in getVideobyURL");
         try {
@@ -99,7 +121,7 @@ public class VideosDAO {
 
         } catch (Exception e) {
         	System.out.println("unable to get video in VideosDAO");
-            throw new Exception("Failed in getting video: " + e.getMessage());
+            throw new Exception("Failed in getting video by URL: " + e.getMessage());
         }
     }
 
@@ -281,11 +303,12 @@ public class VideosDAO {
     public boolean addRemoteVideo(Video video, String apikey) throws Exception {
     	try {
 
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO RemoteVideos (apikey,url,characterName,sentence) values(?,?,?,?);");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO RemoteVideos (apikey,videoID,url,characterName,sentence) values(?,?,?,?,?);");
             ps.setString(1,  apikey);
-            ps.setString(2, video.url);
-            ps.setString(3, video.characterName);
-            ps.setString(4,  video.sentence);
+            ps.setString(2,  video.videoID);
+            ps.setString(3, video.url);
+            ps.setString(4, video.characterName);
+            ps.setString(5,  video.sentence);
             ps.execute();
             System.out.println("successfully added video");
             return true;
@@ -330,6 +353,8 @@ public class VideosDAO {
         String characterName = resultSet.getString("characterName");
         String sentence = resultSet.getString("sentence");
         String url = resultSet.getString("url");
-        return new Video(url, characterName, sentence);
+        String videoID = resultSet.getString("videoID");
+
+        return new Video(videoID, characterName, sentence, url);
     }
 }

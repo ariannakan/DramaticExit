@@ -39,19 +39,13 @@ function processAppendRemoteListResponse(result) {
 	    var videoJson = js.list[i];
 	    console.log(videoJson);
 	    
-	    var availability = videoJson["availability"];
 	    var characterName = videoJson["characterName"];
 	    var sentence = videoJson["sentence"];
 	    var videoID = videoJson["videoID"];
 	    var url = videoJson["url"];
 	    
-	    if(availability === true){
-	    	 output = output + "<div id=\"vid" + videoID + "\">" +
-		    	"<br><b>" + characterName + ": </b>" + sentence + "</><br></center></div>";
-	    } else {
-	    	 output = output + "<div id=\"vid" + videoID + "\">" +
-		    	"<br><b>" + characterName + ": </b>" + sentence + "</><br></center></div>";
-	    }
+	    output = output + "<div id=\"vid" + videoID + "\">" +
+    	"<br><b>" + characterName + ": </b>" + sentence + "</><br></center></div>";
 	    
 //	    output = output + "<div id=\"" + videoID + "\">" +
 //		"<br><b>" + characterName + ": </b>" + sentence + "</b>" +

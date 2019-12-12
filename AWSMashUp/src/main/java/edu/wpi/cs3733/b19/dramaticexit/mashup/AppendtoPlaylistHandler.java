@@ -30,17 +30,23 @@ public class AppendtoPlaylistHandler implements RequestHandler<AppendToPlaylistR
 		VideosDAO vdao = new VideosDAO();
 		
 		// check if video is present
-		Video vExist = vdao.getVideo(videoID);
+		Video video = null;
+		if (vdao.getVideo(videoID) != null) {
+			video = vdao.getVideo(videoID);
+		} else if (vdao.getRemoteVideoByID(videoID) != null) {
+			video = vdao.getRemoteVideoByID(videoID);
+		} 
+		
 		
 		// check if playlist exists
 		Playlist pExist = dao.getPlaylist(playlistName);
 		
-		if (vExist == null) {
+		if (video == null) {
 			return false;
 		} else if (pExist == null) {
 			return false;
 		} else {
-			return dao.appendVideo(pExist, vExist);
+			return dao.appendVideo(pExist, video);
 		}
 	}
 
@@ -55,7 +61,7 @@ public class AppendtoPlaylistHandler implements RequestHandler<AppendToPlaylistR
 			if (appendToPlaylist(req.playlistName, req.videoID)) {
 				response = new AppendToPlaylistResponse(req.playlistName, req.videoID);
 			} else {
-				response = new AppendToPlaylistResponse(req.playlistName, req.videoID, 422, "Unable to append video to playlist");
+				response = new AppendToPlaylistResponse(req.playlistName, req.videoID, 422, "Unable to append remote video to playlist");
 			}
 			
 		} catch (Exception e) {
