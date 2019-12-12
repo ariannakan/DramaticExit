@@ -16,22 +16,22 @@ function refreshRemoteVideoList(user) {
     if (xhr.readyState == XMLHttpRequest.DONE) {
      // console.log ("XHR:" + xhr.responseText);
       if(user === "admin"){
-    	  processRemoteListResponse("N/A");
+    	  processRemoteSegmentListResponse(xhr.responseText);
       }
       else if(user === "append"){
-    	  processAppendListResponse(xhr.responseText);
+    	  processAppendRemoteListResponse(xhr.responseText);
       }
       else{
     	  processRemoteListResponse(xhr.responseText);
       }
       //processSegmentListResponse(xhr.responseText);
     } else {
-      processListResponse("N/A");
+      processRemoteListResponse("N/A");
     }
   };
 }
 
-function processAppendListResponse(result) {
+function processAppendRemoteListResponse(result) {
 	  //console.log("res:" , JSON.parse(result).list);
 	  console.log("append result:" + result);
 	  // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
@@ -43,19 +43,75 @@ function processAppendListResponse(result) {
 	    var videoJson = js.list[i];
 	    console.log(videoJson);
 	    
-	    var videoID = videoJson["videoID"];
+	    var availability = videoJson["availability"];
 	    var characterName = videoJson["characterName"];
 	    var sentence = videoJson["sentence"];
+	    var videoID = videoJson["videoID"];
 	    var url = videoJson["url"];
 	    
-	    output = output + "<div id=\"vid" + videoID + "\">" +
-    		"<br><b>" + characterName + ": </b>" + sentence + "</><br></center></div>";
+	    if(availability === true){
+	    	 output = output + "<div id=\"vid" + videoID + "\">" +
+		    	"<br><b>" + characterName + ": </b>" + sentence + "</><br></center></div>";
+	    } else {
+	    	 output = output + "<div id=\"vid" + videoID + "\">" +
+		    	"<br><b>" + characterName + ": </b>" + sentence + "</><br></center></div>";
+	    }
+	    
+//	    output = output + "<div id=\"" + videoID + "\">" +
+//		"<br><b>" + characterName + ": </b>" + sentence + "</b>" +
+//		"(<a href='javaScript:processShowVideo(\"" + videoID + "\")'>show</a>)</center>" + 
+//		"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>hide</a>)</center>" + "</><br></div>";
+//			
 	  }
 	  
 	  vidList.innerHTML = output;
 
 	}
 
+function processRemoteSegmentListResponse(result) {
+	  //console.log("res:" , JSON.parse(result).list);
+	  console.log("segment result:" + result);
+	  // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
+	  var js = JSON.parse(result);
+	  var vidList = document.getElementById('segmentVideoList');
+	  
+	  var output = "";
+	  for (var i = 0; i < js.list.length; i++) {
+	    var videoJson = js.list[i];
+	    console.log(videoJson);
+	    
+	    var availability = videoJson["availability"];
+	    var characterName = videoJson["characterName"];
+	    var sentence = videoJson["sentence"];
+	    var videoID = videoJson["videoID"];
+	    var url = videoJson["url"];
+	    
+	    if(availability === true){
+		    output = output + "<div id=\"vid" + videoID + "\">" +
+				"<br><b><center>Video " + videoID + "</b> " +
+		  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)" +
+		   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+		   		"<br><b>" + characterName + ": </b>" + sentence + 
+		   		"<br>(<a href='javaScript:processHideVideo(\"" + videoID + "\")' class = 'availButton'>Hide</a>)" + "</><br></center></div>";
+	    } else {
+	    	output = output + "<div id=\"vid" + videoID + "\">" +
+				"<br><b><center>Video " + videoID + "</b> " +
+		  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)" +
+		   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+		   		"<br><b>" + characterName + ": </b>" + sentence + 
+		   		"<br>(<a href='javaScript:processShowVideo(\"" + videoID + "\")' class = 'availButton'>Show</a>)" + "</><br></center></div>";
+	    }
+	    
+//	    output = output + "<div id=\"" + videoID + "\">" +
+//		"<br><b>" + characterName + ": </b>" + sentence + "</b>" +
+//		"(<a href='javaScript:processShowVideo(\"" + videoID + "\")'>show</a>)</center>" + 
+//		"(<a href='javaScript:processHideVideo(\"" + videoID + "\")'>hide</a>)</center>" + "</><br></div>";
+//			
+	  }
+	  
+	  vidList.innerHTML = output;
+
+	}
 
 /**
  * Respond to server JSON object.
@@ -67,25 +123,33 @@ function processRemoteListResponse(result) {
   console.log("res:" + result);
   // Can grab any DIV or SPAN HTML element and can then manipulate its contents dynamically via javascript
   var js = JSON.parse(result);
-  var remoteVidList = document.getElementById('remoteVideoList');
+  var vidList = document.getElementById('videoList');
   
   var output = "";
   for (var i = 0; i < js.list.length; i++) {
-    var remoteVideoJson = js.list[i];
-    console.log(remoteVideoJson);
+    var videoJson = js.list[i];
+    console.log(videoJson);
     
-    var videoID = remoteVideoJson["videoID"];
-    var characterName = remoteVideoJson["characterName"];
-    var sentence = remoteVideoJson["sentence"];
-    var url = remoteVideoJson["url"];
+    var availability = videoJson["availability"];
+    var videoID = videoJson["videoID"];
+    var url = videoJson["url"];
+    var characterName = videoJson["characterName"];
+    var sentence = videoJson["sentence"];
     
-    output = output + "<div id=\"vid" + videoID + "\">" +
+    if(availability === true){
+	    output = output + "<div id=\"vid" + videoID + "\">" +
+			"<br><b><center>Video " + videoID + "</b>     " +
+	  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)" +
+	   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+	   		"<br><b>" + characterName + ": </b>" + sentence + "</><br></center></div>";
+    } else {
+    	output = output + "<div id=\"vid" + videoID + "\">" +
 		"<br><b><center>Video " + videoID + "</b>     " +
-		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)" +
-		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
-		"<br><b>" + characterName + ": </b>" + sentence + "</><br></center></div>";
+  		"(<a href='javaScript:requestVidDelete(\"" + videoID + "\")' style = 'filter: invert(22%) sepia(95%) saturate(7454%) hue-rotate(360deg) brightness(100%) contrast(117%)'><img src='trashcan.png' height=" + 14 + "></img></a>)" +
+   		"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" +
+   		"<br><b>" + characterName + ": </b>" + sentence + "</><br></center></div>";
+    }
+  }
   
-  remoteVidList.innerHTML = output;
-  
-}
+  vidList.innerHTML = output;
 }
