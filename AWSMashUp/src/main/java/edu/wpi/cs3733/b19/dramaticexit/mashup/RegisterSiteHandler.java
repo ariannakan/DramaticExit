@@ -12,6 +12,7 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.db.VideosDAO;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.RegisterSiteRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.RegisterSiteResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Site;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 
 public class RegisterSiteHandler implements RequestHandler<RegisterSiteRequest,RegisterSiteResponse> {
 	
@@ -21,38 +22,51 @@ public class RegisterSiteHandler implements RequestHandler<RegisterSiteRequest,R
 	 * 
 	 * @throws Exception 
 	 */
-	boolean registerSite(String url) throws Exception {
+	boolean registerSite(String apikey, String url, String characterName, String sentence) throws Exception {
 		if (logger != null) { logger.log("in registerSite"); }
-		SitesDAO dao = new SitesDAO();
-		
-		// check if present
-		Site exist = dao.getSiteURL(url);
-		System.out.println("checked if site is present");
-		Site site = new Site (new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()), url);
-		if (exist == null) {
-			System.out.println("site does not exist - adding");
-			return dao.addSite(site);
-		} else {
-			System.out.println("site exists");
-			return false;
-		}
-	}
-	
-	boolean addRemoteVideos(String url) throws Exception {		//url == apikey
-		if (logger != null) { logger.log("in registerSite - in addRemoteVideos"); }
 		SitesDAO dao = new SitesDAO();
 		VideosDAO vdao = new VideosDAO();
 		
-		// check if present
-		Site exist = dao.getSiteURL(url);
+		// check if site present
+		Site exist = dao.getSiteURL(apikey);
+		System.out.println("checked if site is present");
+		//check if remote video exist
+		Video vexist = vdao.getRemoteVideoByURL(url);
+		System.out.println("checked if remote video is present");
+		Video video = new Video(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SS").format(new Date()), characterName, sentence, url);
+		Site site = new Site (new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SS").format(new Date()), apikey);
+		
 		if (exist == null) {
-			System.out.println("site does not exist - cannot add remote videos");
-			return false;
+			System.out.println("site does not exist - adding");
+			//this is where we also create videos and add to remote videos database
+			return dao.addSite(site)&&vdao.addRemoteVideo(video, apikey);
+		} else if (vexist == null ){
+			System.out.println("video does not exist - adding");
+			return vdao.addRemoteVideo(video, apikey);
 		} else {
-			System.out.println("site exists - adding remote videos");
-			return vdao.addRemoteVideos(url); // Error Test
+			System.out.println("site and video exist");
+			return false;
 		}
+		
+		
+
 	}
+	
+//	boolean addRemoteVideos(String url) throws Exception {		//url == apikey
+//		if (logger != null) { logger.log("in registerSite - in addRemoteVideos"); }
+//		SitesDAO dao = new SitesDAO();
+//		VideosDAO vdao = new VideosDAO();
+//		
+//		// check if present
+//		Site exist = dao.getSiteURL(url);
+//		if (exist == null) {
+//			System.out.println("site does not exist - cannot add remote videos");
+//			return false;
+//		} else {
+//			System.out.println("site exists - adding remote videos");
+//			return vdao.addRemoteVideos(url);
+//		}
+//	}
 	
 	
 	@Override
@@ -62,18 +76,21 @@ public class RegisterSiteHandler implements RequestHandler<RegisterSiteRequest,R
 
 		RegisterSiteResponse response;
 		try {
-			if (registerSite(req.url)) {
-				response = new RegisterSiteResponse(req.url);
+			if (registerSite(req.apikey, req.url, req.characterName, req.sentence)) {
+				response = new RegisterSiteResponse(req.apikey);
 			} else {
-				response = new RegisterSiteResponse(req.url, 422);
+				response = new RegisterSiteResponse(req.apikey, 422);
 			}
 			
 		} catch (Exception e) {
-			System.out.println("Unable to create site: " + req.url + "(" + e.getMessage() + ")");
-			response = new RegisterSiteResponse("Unable to create site: " + req.url + "(" + e.getMessage() + ")", 400);
+			System.out.println("Unable to create site: " + req.apikey + "(" + e.getMessage() + ")");
+			response = new RegisterSiteResponse("Unable to create site: " + req.apikey + "(" + e.getMessage() + ")", 400);
 		}
 
 		return response;
 	}
 
 }
+
+
+
