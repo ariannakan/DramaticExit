@@ -11,6 +11,7 @@
 <script type='text/javascript' src='../js/create_playlist.js'></script>
 <script type='text/javascript' src='../js/remove_playlistVideo.js'></script>
 <script type='text/javascript' src='../js/append_video.js'></script>
+<script type='text/javascript' src='../js/get_remoteVideoList.js'></script>
 
 <script type="text/javascript">
 
@@ -79,16 +80,6 @@ function initialize() {
 		</center>
 	</div>
 	
-	<!-- <script>
-		function playFunction() {
-			  var x = document.getElementById("videoPlayer");
-			  if (x.style.display === "none") {
-			    x.style.display = "block";
-			  } else {
-			    x.style.display = "none";
-			  }
-			} 
-	</script> -->
 	
 	<div id="playlistVideosList" style = "margin-top: 25px; margin-left:-10px;">
 		<script src = "../js/get_playlistVideos.js"></script>
@@ -98,8 +89,8 @@ function initialize() {
 		<script src = "../js/append_video.js"></script>
 	</div>
 	
-	<div id="remoteVideoList" style = "font-size:14px; margin-left:10px; margin-bottom:35px;">
-		<script src = "../js/get_remoteVideo.js"></script>
+	<div id="appendRemoteVideoList" style = "font-size:14px; margin-left:10px; margin-bottom:35px;">
+		<script src = "../js/append_remoteVideo.js"></script>
 	</div>
 
 </div>
