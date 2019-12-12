@@ -37,6 +37,12 @@ html, body {
   grid-template-rows: 250px 250px;
 }
 
+.grid-container-sites {
+  display:grid; 
+  grid-template-columns: 1000px;
+  grid-template-rows: 250px 250 250px 250px 250px 250px 250px;
+}
+
 .Library {
   margin-left: 235px;
   margin-top: -10px;

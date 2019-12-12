@@ -2,6 +2,7 @@
 //TAKES IN SEGMENT AND APIKEY TO REGISTER WEBSITE AND REQUEST TO PUT IN THE REMOTE VIDEO DATABASE
 //
 function processRegisterResponse(result) {
+  refreshSiteList();
   // Can grab any DIV or SPAN HTML element and can then manipulate its
   // contents dynamically via javascript
   console.log("registered:" + result);
