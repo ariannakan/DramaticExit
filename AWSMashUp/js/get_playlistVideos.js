@@ -67,8 +67,8 @@ function processPlaylistVideosResponse(result) {
   if (js.list == ""){
 	  console.log("no videos in playlist");
 	  output = output + "<p style='text-indent: 20px'><b>No videos in this playlist</b></p>" +
-	  		"<a href='javaScript:requestDisplayAvailableVideos(\"" + plName + "\")' class = 'appendButton' style = 'margin-left:10px'>Append New Video</a></b></br>	<div style = 'border-bottom: 1px solid white; margin-top:15px; margin-left:-30px;'>" +
-	  		"<a href='javaScript:requestDisplayAvailableRemoteVideos(\"" + plName + "\")' class = 'appendRemoteButton' style = 'margin-left:10px'></a></b></br><div style = 'border-bottom: 1px solid white; margin-top:15px; margin-left:-30px;'></div>";
+	  		"<a href='javaScript:requestDisplayAvailableVideos(\"" + plName + "\")' class = 'appendButton' style = 'margin-left:10px'>Append New Video</a></b></br>	<div style = 'border-bottom: 1px solid white; margin-top:5px; margin-left:-30px;'>" +
+	  		"<a href='javaScript:requestDisplayAvailableRemoteVideos(\"" + plName + "\")' class = 'appendButton' style = 'margin-left:10px'></a></b></br>";
   } else {
 	  for (var i = 0; i < js.list.length; i++) {
 		var videoJson = js.list[i];
@@ -86,8 +86,8 @@ function processPlaylistVideosResponse(result) {
 			"<br><video height=" + 150 + " controls>" + "<source src=\"" + url + "\" type=\"video/ogg\"></video>" + 
 			"</><br></center></div>";
   		}
-	  	output = output + "<br><b class = 'appendButton' style = 'margin-left:10px'>Append New Video</b></br><div style = 'border-bottom: 1px solid white; margin-top:15px; margin-left:-30px;'>" +
-	  			"<a href='javaScript:requestDisplayAvailableRemoteVideos(\"" + plName + "\")' class = 'appendRemoteButton' style = 'margin-left:10px'>Append New Remote Video</a></b></br><div style = 'border-bottom: 1px solid white; margin-top:15px; margin-left:-30px;'></div>";
+	  	output = output + "<br><b class = 'appendButton' style = 'margin-left:10px'>Append New Video</b></br><div style = 'border-bottom: 1px solid white; margin-top:5px; margin-left:-30px;'>" +
+	  			"<a href='javaScript:requestDisplayAvailableRemoteVideos(\"" + plName + "\")' class = 'appendButton' style = 'margin-left:10px'></a></b></br>";
   	}
   
   playlistVideosList.innerHTML = output;

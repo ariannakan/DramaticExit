@@ -49,7 +49,7 @@ function processAppendRemoteListResponse(playlistName, result) {
 //	    	"<br><b>" + characterName + ": </b>" + sentence + "</> (<a href='javaScript:processAppendVideoRequest(\"" + playlistName + "\",\"" + videoID + "\")' class = 'viewAppendVideo'>Append</a>)<br></div>";
 
 		 output = output + "<div id=\"vid" + videoID + "\">" +
-	    	"<br>(<a href='javaScript:processAppendRemoteVideoRequest(\"" + playlistName + "\",\"" + videoID + "\")' class = 'viewAppendRemoteVideo'>Append</a>) <b>" + characterName + ": </b>" + sentence + "</><br></div>";	
+	    	"<br>(<a href='javaScript:processAppendRemoteVideoRequest(\"" + playlistName + "\",\"" + videoID + "\")' class = 'viewAppendVideo'>Append</a>) <b>" + characterName + ": </b>" + sentence + "</><br></div>";	
 	  }
 	  
 	  vidList.innerHTML = output;
