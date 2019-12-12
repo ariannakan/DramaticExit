@@ -50,7 +50,7 @@ public class RegisterSiteHandler implements RequestHandler<RegisterSiteRequest,R
 			return false;
 		} else {
 			System.out.println("site exists - adding remote videos");
-			return vdao.addRemoteVideos(url);
+			return vdao.addRemoteVideos(url); // Error Test
 		}
 	}
 	
