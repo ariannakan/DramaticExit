@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.b19.dramaticexit.mashup;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,6 +32,7 @@ public class RemoteSegmentsTest extends LambdaTest {
         Assert.assertEquals(resp.segments.size(), 4); //one video is not available
         Assert.assertEquals(200, resp.statusCode);
     }
+    
     
     @Test
 	public void testCreateSegmentObject() {
