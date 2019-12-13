@@ -18,6 +18,7 @@ public class ListRemoteVideosTest extends LambdaTest {
 		ListAllRemoteVideosRequest req = new Gson().fromJson(incoming, ListAllRemoteVideosRequest.class);
 	   
 		ListAllRemoteVideosResponse resp = handler.handleRequest(req, createContext("create"));
+		System.out.println(resp.toString());
 	    Assert.assertEquals(200, resp.statusCode);
 	}
 
