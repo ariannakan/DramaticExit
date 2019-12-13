@@ -8,13 +8,13 @@ function processRegisterResponse(result) {
   console.log("registered:" + result);
 }
 
-function processRegister(apikey, url, characterName, sentence) {
+function processRegister(apikey, segmentJson) {
  
   var data = {};
   data["apikey"] = apikey;
-  data["url"] = url;
-  data["characterName"] = characterName;
-  data["sentence"] = sentence;
+  data["url"] = segmentJson["url"];
+  data["characterName"] = segmentJson["character"];
+  data["sentence"] = segmentJson["text"];
   
   /**
   if (form.system.checked) {  // be sure to flag system constant requests...
