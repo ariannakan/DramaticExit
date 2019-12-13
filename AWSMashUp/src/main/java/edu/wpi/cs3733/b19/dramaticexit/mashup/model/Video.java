@@ -72,7 +72,7 @@ public class Video {
 	}
 	
 	/**
-	 * Equality of Constants determined by name alone.
+	 * Equality of Videos determined by videoID alone.
 	 */
 	public boolean equals (Object o) {
 		if (o == null) { return false; }

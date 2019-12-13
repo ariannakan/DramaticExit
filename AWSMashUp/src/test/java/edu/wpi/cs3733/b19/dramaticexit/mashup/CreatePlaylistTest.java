@@ -21,6 +21,7 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.http.ListPlaylistVideosRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.ListPlaylistsRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.RemoveFromPlaylistRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.RemoveFromPlaylistResponse;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Playlist;
 
 public class CreatePlaylistTest extends LambdaTest{
 	
@@ -129,6 +130,19 @@ public class CreatePlaylistTest extends LambdaTest{
 		System.out.println(resp.toString());
 		
 		Assert.assertEquals(resp.list.size(), expected);
+	}
+	
+	@Test
+	public void testCreatePlaylistObject() {
+		System.out.println("Testing: create playlist object");
+
+		Playlist softeng = new Playlist("3733b19", "SoftEng");
+		Playlist csClass = new Playlist();
+		
+		csClass.setPlaylistID(softeng.getPlaylistID());
+		csClass.setPlaylistName(softeng.getPlaylistName());
+		
+		Assert.assertTrue(csClass.equals(softeng));
 	}
 	
 	@Test
