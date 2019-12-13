@@ -80,6 +80,8 @@ public class registerSiteTest extends LambdaTest{
 		myCollege.setUrl(wpi.getUrl());
 		
 		Assert.assertTrue(myCollege.equals(wpi));
+		Assert.assertFalse(myCollege.equals("yes"));
+		Assert.assertFalse(myCollege.equals(null));
 	}
 	
 	@Test

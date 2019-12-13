@@ -143,6 +143,8 @@ public class CreatePlaylistTest extends LambdaTest{
 		csClass.setPlaylistName(softeng.getPlaylistName());
 		
 		Assert.assertTrue(csClass.equals(softeng));
+		Assert.assertFalse(csClass.equals("here"));
+		Assert.assertFalse(csClass.equals(null));
 	}
 	
 	@Test

@@ -107,7 +107,8 @@ public class uploadVideoTest extends LambdaTest{
 	
 	@Test
 	public void testCreateVideoObject() {
-		System.out.println("Testing: testFirstUpload");
+		System.out.println("Testing: testCreateVideoObject");
+		
 		String characterName = "Pom";
 		String sentence = "Where are you, Pom?";
 		String videoID = "508-410-7005";
@@ -121,7 +122,49 @@ public class uploadVideoTest extends LambdaTest{
 		monoBoy.setVideoID(pom.getVideoID());
 		
 		Assert.assertTrue(pom.equals(monoBoy));
+		Assert.assertFalse(pom.equals("hello"));
+		Assert.assertFalse(pom.equals(null));
     }
+	
+	@Test
+	public void testCreateVideoObject2() {
+		System.out.println("Testing: testCreateVideoObject2");
+		
+		String videoID = "1234";
+		String url = "www.bye.com";
+		
+		Video ari = new Video(videoID, url);
+		Video hi = new Video();
+		hi.setVideoID(ari.getVideoID());
+		hi.setUrl(ari.getUrl());
+		
+		Assert.assertTrue(ari.equals(hi));
+    }
+	
+	@Test
+	public void testUploadVideoRequest() {
+		System.out.println("Testing: testUploadVideoRequest");
+		
+		String characterName = "Pom";
+		String sentence = "Where are you, Pom?";
+		String videoID = "508-410-7005";
+		boolean availability = true;
+		boolean system = false;
+		String encoding = "asdfasdgsdf";
+		
+		UploadVideoRequest pom = new UploadVideoRequest(videoID, characterName, sentence, availability, encoding, system);
+		UploadVideoRequest monoBoy = new UploadVideoRequest();
+		monoBoy.setCharacterName(pom.getCharacterName());
+		monoBoy.setSentence(pom.getSentence());
+		monoBoy.setAvailability(pom.getAvailability());
+		monoBoy.setVideoID(pom.getVideoID());
+		monoBoy.setBase64EncodedValue(pom.getBase64EncodedValue());
+		monoBoy.setSystem(pom.getSystem());
+		
+		
+		Assert.assertTrue(pom.equals(monoBoy));
+    }
+	
 	
 	@Test
 	public void testFirstUpload() {
