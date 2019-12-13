@@ -97,7 +97,7 @@ public class SearchTest extends LambdaTest{
 		String keyword = "";
 		
 		SearchRequest testName = new SearchRequest(name, keyword);
-	    String searchResult = new Gson().toJson(testName);  
+	    String searchResult = new Gson().toJson(testName);
 	    
 	    try {
 	    	testCorrectResponse(searchResult, 1);
@@ -113,10 +113,10 @@ public class SearchTest extends LambdaTest{
 		String keyword = "";
 		
 		SearchRequest testName = new SearchRequest(name, keyword);
-	    String searchResult = new Gson().toJson(testName);  
+	    String searchResult = new Gson().toJson(testName);
 	    
 	    try {
-	    	testCorrectResponse(searchResult, 5);
+	    	testCorrectResponse(searchResult, 7);
 	    } catch (IOException ioe) {
 	    	Assert.fail("Invalid:" + ioe.getMessage());
 	    }
