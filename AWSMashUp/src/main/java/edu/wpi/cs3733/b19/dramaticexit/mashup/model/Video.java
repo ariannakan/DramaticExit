@@ -17,14 +17,14 @@ public class Video {
 		this.url = url;
 	}
 	
-	public Video (String videoID, String characterName, String sentence, String url) {
+	public Video(String videoID, String characterName, String sentence, String url) {
 		this.videoID = videoID;
 		this.characterName = characterName;
 		this.sentence = sentence;
 		this.url = url;
 	}
 	
-	public Video (String videoID, String url) {
+	public Video(String videoID, String url) {
 		this.videoID = videoID;
 		this.url = url;
 		this.availability = true;
@@ -37,22 +37,5 @@ public class Video {
 		this.sentence = "";
 		this.availability = true;
 		this.url = "";
-	}
-	
-	public boolean getSystem() { return system; }
-	public void setSystem(boolean s) { system = s; }
-	
-	/**
-	 * Equality of Videos determined by videoID alone.
-	 */
-	public boolean equals (Object o) {
-		if (o == null) { return false; }
-		
-		if (o instanceof Video) {
-			Video other = (Video) o;
-			return videoID.equals(other.videoID);
-		}
-		
-		return false;  // not a Video
 	}
 }

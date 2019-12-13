@@ -20,25 +20,7 @@ public class Playlist {
 		this.playlistID = id;
 		this.playlistName = name;
 		this.system = system;
-	}
-	
-	public boolean getSystem() { return system; }
-	public void setSystem(boolean s) { system = s; }
-	
-
-	public boolean addVideo(Video video){
-		videos.add(video);
-		return true;
-	}
-	
-	public boolean remVideo(String searchID){
-		while (iterator.hasNext()) {
-			if (iterator.next().videoID.contains(searchID)) {
-				videos.remove(iterator.next());
-			}
-		}
-		return true;
-	}
+	}	
 	
 }
 

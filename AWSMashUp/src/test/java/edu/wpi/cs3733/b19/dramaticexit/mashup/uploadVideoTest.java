@@ -81,6 +81,14 @@ public class uploadVideoTest extends LambdaTest{
 	    Assert.assertEquals(200, resp.statusCode);
 	}
 	
+	void testFailUpdate(String incoming, int failureCode) throws IOException {
+		UpdateVideoHandler handler = new UpdateVideoHandler();
+		UpdateVideoRequest req = new Gson().fromJson(incoming, UpdateVideoRequest.class);
+	   
+		UpdateVideoResponse resp = handler.handleRequest(req, createContext("create"));
+	    Assert.assertEquals(failureCode, resp.statusCode);
+	}
+	
 	@Test
 	public void testFirstUpload() {
 		System.out.println("Testing: testFirstUpload");
@@ -113,6 +121,20 @@ public class uploadVideoTest extends LambdaTest{
         	Assert.fail("Invalid:" + ioe.getMessage());
         }
     }
+	
+//	@Test
+//    public void testFailUpload() {
+//		System.out.println("Testing: nonexisting video input");
+//		
+//    	UploadVideoRequest testInvalid = new UploadVideoRequest("I", "don't", "exist");
+//    	String SAMPLE_INPUT_STRING =  new Gson().toJson(testInvalid);  
+//        
+//        try {
+//        	testFailInput(SAMPLE_INPUT_STRING, 400);
+//        } catch (IOException ioe) {
+//        	Assert.fail("Invalid:" + ioe.getMessage());
+//        }
+//    }
 	
 	@Test
 	public void testDeleteVideo() {
@@ -175,7 +197,7 @@ public class uploadVideoTest extends LambdaTest{
     }
 	
 	@Test
-    public void testUpdateVideo() {
+    public void testUpdateVideoSuccess() {
 		System.out.println("Testing: update video");
 		String videoID = "2019.12.12.20.46.12";
 		
@@ -186,6 +208,22 @@ public class uploadVideoTest extends LambdaTest{
         
         try {
         	testSuccessUpdate(SAMPLE_INPUT_STRING);
+        } catch (IOException ioe) {
+        	Assert.fail("Invalid:" + ioe.getMessage());
+        }
+    }
+	
+	@Test
+    public void testUpdateVideoFail() {
+		System.out.println("Testing: update video with nonexisting video");
+		
+    	UpdateVideoRequest update = new UpdateVideoRequest("", false);
+    	String SAMPLE_INPUT_STRING =  new Gson().toJson(update);  
+    	
+    	System.out.println(SAMPLE_INPUT_STRING);
+        
+        try {
+        	testFailUpdate(SAMPLE_INPUT_STRING, 422);
         } catch (IOException ioe) {
         	Assert.fail("Invalid:" + ioe.getMessage());
         }

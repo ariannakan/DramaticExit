@@ -50,11 +50,6 @@ public class ListAllVideosHandler implements RequestHandler<ListVideosRequest,Al
 			// Note that user defined constants override system-defined constants.
 			List<Video> list = getVideos();
 		
-//			for (Video v : systemVideos()) {
-//				if (!list.contains(v)) {
-//					list.add(v);
-//				}
-//			}
 			response = new AllVideosResponse(list, 200);
 		} catch (Exception e) {
 			response = new AllVideosResponse(403, e.getMessage());

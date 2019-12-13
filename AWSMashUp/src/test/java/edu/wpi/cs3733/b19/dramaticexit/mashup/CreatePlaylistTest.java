@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.AllPlaylistVideosResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.AllPlaylistsResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.AppendToPlaylistRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.AppendToPlaylistResponse;
@@ -16,6 +17,7 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.http.CreatePlaylistRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.CreatePlaylistResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeletePlaylistRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeletePlaylistResponse;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.ListPlaylistVideosRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.ListPlaylistsRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.RemoveFromPlaylistRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.RemoveFromPlaylistResponse;
@@ -101,6 +103,14 @@ public class CreatePlaylistTest extends LambdaTest{
 	    Assert.assertEquals(failureCode, resp.statusCode);
 	}
 	
+	void testSuccessListPlaylistVideos(String incoming, int expected) throws IOException {
+		ListAllPlaylistVideosHandler handler = new ListAllPlaylistVideosHandler();
+		ListPlaylistVideosRequest req = new Gson().fromJson(incoming, ListPlaylistVideosRequest.class);
+		
+		AllPlaylistVideosResponse resp = handler.handleRequest(req, createContext("create"));
+		Assert.assertEquals(resp.list.size(), expected);
+	}
+	
 	@Test
 	public void testCreateNewPlaylist() {
 		System.out.println("Testing: create new playlist");
@@ -167,6 +177,20 @@ public class CreatePlaylistTest extends LambdaTest{
 	    
 	    try {
 	    	testSuccessDelete(deleteExisting);
+	    } catch (IOException ioe) {
+	    	Assert.fail("Invalid:" + ioe.getMessage());
+	    }
+	}
+	
+	@Test
+	public void testDeleteNonExistingPlaylist() {
+		System.out.println("Testing: delete nonexisting playlist");
+	    
+		DeletePlaylistRequest testExisting = new DeletePlaylistRequest("");
+	    String deleteExisting = new Gson().toJson(testExisting);  
+	    
+	    try {
+	    	testFailDelete(deleteExisting, 422);
 	    } catch (IOException ioe) {
 	    	Assert.fail("Invalid:" + ioe.getMessage());
 	    }
@@ -248,6 +272,48 @@ public class CreatePlaylistTest extends LambdaTest{
 	    
 	    try {
 	    	testFailRemove(removeFromPlaylist, 422);
+	    } catch (IOException ioe) {
+	    	Assert.fail("Invalid:" + ioe.getMessage());
+	    }
+	}
+	
+	@Test
+	public void testRemoveFromPlaylistFail2() {
+		System.out.println("Testing: fail to remove from playlist (playlist doesn't exist)");
+		
+		RemoveFromPlaylistRequest remove = new RemoveFromPlaylistRequest("bob", "2019.12.12.20.46.01");
+	    String removeFromPlaylist = new Gson().toJson(remove);  
+	    
+	    try {
+	    	testFailRemove(removeFromPlaylist, 422);
+	    } catch (IOException ioe) {
+	    	Assert.fail("Invalid:" + ioe.getMessage());
+	    }
+	}
+	
+	@Test
+	public void testListPlaylistVideosSuccess() {
+		System.out.println("Testing: listing playlist videos");
+		
+		AppendToPlaylistRequest append1 = new AppendToPlaylistRequest("Michelle", "2019.12.12.20.46.01");
+	    String appendToPlaylist1 = new Gson().toJson(append1);  
+	    System.out.println("append: " + appendToPlaylist1);
+	    AppendtoPlaylistHandler handler1 = new AppendtoPlaylistHandler();
+		AppendToPlaylistRequest req1 = new Gson().fromJson(appendToPlaylist1, AppendToPlaylistRequest.class);
+		AppendToPlaylistResponse resp1 = handler1.handleRequest(req1, createContext("create"));
+		
+		AppendToPlaylistRequest append2 = new AppendToPlaylistRequest("Michelle", "2019.12.12.20.51.09");
+	    String appendToPlaylist2 = new Gson().toJson(append2);  
+	    System.out.println("append: " + appendToPlaylist2);
+	    AppendtoPlaylistHandler handler2 = new AppendtoPlaylistHandler();
+		AppendToPlaylistRequest req2 = new Gson().fromJson(appendToPlaylist2, AppendToPlaylistRequest.class);
+		AppendToPlaylistResponse resp2 = handler2.handleRequest(req2, createContext("create"));
+		
+		ListPlaylistVideosRequest list = new ListPlaylistVideosRequest("Michelle");
+	    String listPlaylistVideos = new Gson().toJson(list);  
+	    
+	    try {
+	    	testSuccessListPlaylistVideos(listPlaylistVideos, 2);
 	    } catch (IOException ioe) {
 	    	Assert.fail("Invalid:" + ioe.getMessage());
 	    }
