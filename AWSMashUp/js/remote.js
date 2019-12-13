@@ -59,7 +59,7 @@ function processRemoteResponse(result, apikey) {
 	    
 	    processRegister(apikey, segmentJson)
 	    console.log("sleep for 1 second");
-	    sleep(100);
+	    sleep(45);
 	    console.log(i);
 	    console.log(i);
 
