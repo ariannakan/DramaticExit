@@ -11,7 +11,7 @@ public class DeleteSiteResponse {
 		this.error = "";
 	}
 	
-	// 200 = success
+	// 403 response
 	public DeleteSiteResponse(String url, int code, String errorMessage) {
 		this.siteURL = url;
 		this.statusCode = code;
