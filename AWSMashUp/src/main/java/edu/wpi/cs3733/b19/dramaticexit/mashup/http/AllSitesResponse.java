@@ -23,7 +23,7 @@ public class AllSitesResponse {
 	
 	public String toString() {
 		if(list == null) {return "EmptySites";}
-		return "AllSites(" + list.size() + ")";
+		return "AllSites size: " + list.size() + " statusCode: " + statusCode;
 	}
 
 }

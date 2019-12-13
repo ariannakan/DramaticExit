@@ -25,6 +25,8 @@ public class registerSiteTest extends LambdaTest{
 		RegisterSiteRequest req = new Gson().fromJson(incoming, RegisterSiteRequest.class);
 	   
 	    RegisterSiteResponse resp = handler.handleRequest(req, createContext("create"));
+	    System.out.println(resp.toString());
+	    
 	    Assert.assertEquals(200, resp.statusCode);
 	}
 	
@@ -33,6 +35,8 @@ public class registerSiteTest extends LambdaTest{
 		RegisterSiteRequest req = new Gson().fromJson(incoming, RegisterSiteRequest.class);
 	   
 	    RegisterSiteResponse resp = handler.handleRequest(req, createContext("create"));
+	    System.out.println(resp.toString());
+	    
 	    Assert.assertEquals(failureCode, resp.statusCode);
 	}
 	
@@ -41,6 +45,8 @@ public class registerSiteTest extends LambdaTest{
 		DeleteSiteRequest req = new Gson().fromJson(incoming, DeleteSiteRequest.class);
 	   
 	    DeleteSiteResponse resp = handler.handleRequest(req, createContext("create"));
+	    System.out.println(resp.toString());
+	    
 	    Assert.assertEquals(200, resp.statusCode);
 	}
 	
@@ -49,6 +55,8 @@ public class registerSiteTest extends LambdaTest{
 		DeleteSiteRequest req = new Gson().fromJson(incoming, DeleteSiteRequest.class);
 	   
 	    DeleteSiteResponse resp = handler.handleRequest(req, createContext("create"));
+	    System.out.println(resp.toString());
+	    
 	    Assert.assertEquals(failureCode, resp.statusCode);
 	}
 	
@@ -57,6 +65,8 @@ public class registerSiteTest extends LambdaTest{
 		ListSitesRequest req = new Gson().fromJson(incoming, ListSitesRequest.class);
 	   
 		AllSitesResponse resp = handler.handleRequest(req, createContext("create"));
+		System.out.println(resp.toString());
+		
 	    Assert.assertEquals(200, resp.statusCode);
 	}
 	

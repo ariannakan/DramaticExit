@@ -20,6 +20,8 @@ public class SearchTest extends LambdaTest{
 		SearchRequest req = new Gson().fromJson(incoming, SearchRequest.class);
 	   
 	    SearchResponse resp = handler.handleRequest(req, createContext("create"));
+	    System.out.println(resp.toString());
+	    
 	    Assert.assertEquals(200, resp.statusCode);
 	}
 	
@@ -28,6 +30,8 @@ public class SearchTest extends LambdaTest{
 		SearchRequest req = new Gson().fromJson(incoming, SearchRequest.class);
 	   
 	    SearchResponse resp = handler.handleRequest(req, createContext("create"));
+	    System.out.println(resp.toString());
+	    
 	    Assert.assertEquals(failureCode, resp.statusCode);
 	}
 	
@@ -36,8 +40,8 @@ public class SearchTest extends LambdaTest{
 		SearchRequest req = new Gson().fromJson(responseList, SearchRequest.class);
 	   
 	    SearchResponse resp = handler.handleRequest(req, createContext("create"));
-	    System.out.println(resp.list.size());
-	    //Video must = new Video("2019.12.12.20.46.01", "Trelane", "You must stay." , "https://3733dramaticexit.s3.us-east-2.amazonaws.com/Videos/2019.12.12.20.46.01.ogg");
+	    System.out.println(resp.toString());
+	    
 	    Assert.assertEquals(expected, resp.list.size());
 	}
 	

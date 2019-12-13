@@ -24,7 +24,7 @@ public class ListAllRemoteVideosResponse {
 	
 	public String toString() {
 		if (list == null) { return "EmptyVideos"; }
-		return "AllVideos(" + list.size() + ")";
+		return "AllVideos size: " + list.size() + " statusCode: " + statusCode;
 	}
 
 }

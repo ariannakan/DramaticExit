@@ -25,7 +25,7 @@ public class RemoteSegmentsResponse {
 	
 	public String toString() {
 		if (segments == null) { return "EmptyVideos"; }
-		return "SearchVideos(" + segments.size() + ")";
+		return "RemoteSegments size" + segments.size() + " statusCode: " + statusCode;
 	}
 
 }

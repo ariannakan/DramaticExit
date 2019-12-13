@@ -31,6 +31,8 @@ public class uploadVideoTest extends LambdaTest{
 		UploadVideoRequest req = new Gson().fromJson(incoming, UploadVideoRequest.class);
 	   
 	    UploadVideoResponse resp = handler.handleRequest(req, createContext("create"));
+	    System.out.println(resp.toString());
+	    
 	    Assert.assertEquals(200, resp.statusCode);
 	    
 	    DeleteVideoRequest deleteThis = new DeleteVideoRequest(resp.response);
@@ -39,6 +41,7 @@ public class uploadVideoTest extends LambdaTest{
 		DeleteVideoRequest dreq = new Gson().fromJson(SAMPLE, DeleteVideoRequest.class);
 	   
 	    DeleteVideoResponse dresp = deletehandler.handleRequest(dreq, createContext("create"));
+	    System.out.println(dresp.toString());
 	}
 	
 	void testFailInput(String incoming, int failureCode) throws IOException {
@@ -46,6 +49,8 @@ public class uploadVideoTest extends LambdaTest{
 		UploadVideoRequest req = new Gson().fromJson(incoming, UploadVideoRequest.class);
 	   
 	    UploadVideoResponse resp = handler.handleRequest(req, createContext("create"));
+	    System.out.println(resp.toString());
+	    
 	    Assert.assertEquals(failureCode, resp.statusCode);
 	}
 	
@@ -54,6 +59,8 @@ public class uploadVideoTest extends LambdaTest{
 		DeleteVideoRequest req = new Gson().fromJson(incoming, DeleteVideoRequest.class);
 	   
 	    DeleteVideoResponse resp = handler.handleRequest(req, createContext("create"));
+	    System.out.println(resp.toString());
+	    
 	    Assert.assertEquals(200, resp.statusCode);
 	}
 	
@@ -62,6 +69,8 @@ public class uploadVideoTest extends LambdaTest{
 		DeleteVideoRequest req = new Gson().fromJson(incoming, DeleteVideoRequest.class);
 	   
 	    DeleteVideoResponse resp = handler.handleRequest(req, createContext("create"));
+	    System.out.println(resp.toString());
+	    
 	    Assert.assertEquals(failureCode, resp.statusCode);
 	}
 	
@@ -70,6 +79,8 @@ public class uploadVideoTest extends LambdaTest{
 		ListVideosRequest req = new Gson().fromJson(incoming, ListVideosRequest.class);
 	   
 		AllVideosResponse resp = handler.handleRequest(req, createContext("create"));
+		System.out.println(resp.toString());
+		
 	    Assert.assertEquals(200, resp.statusCode);
 	}
 	
@@ -78,6 +89,8 @@ public class uploadVideoTest extends LambdaTest{
 		UpdateVideoRequest req = new Gson().fromJson(incoming, UpdateVideoRequest.class);
 	   
 		UpdateVideoResponse resp = handler.handleRequest(req, createContext("create"));
+		System.out.println(resp.toString());
+		
 	    Assert.assertEquals(200, resp.statusCode);
 	}
 	
@@ -86,8 +99,10 @@ public class uploadVideoTest extends LambdaTest{
 		UpdateVideoRequest req = new Gson().fromJson(incoming, UpdateVideoRequest.class);
 	   
 		UpdateVideoResponse resp = handler.handleRequest(req, createContext("create"));
+		System.out.println(resp.toString());
+		
 	    Assert.assertEquals(failureCode, resp.statusCode);
-	}
+	} 
 	
 	@Test
 	public void testFirstUpload() {

@@ -29,6 +29,8 @@ public class CreatePlaylistTest extends LambdaTest{
 		CreatePlaylistRequest req = new Gson().fromJson(incoming, CreatePlaylistRequest.class);
 	   
 		CreatePlaylistResponse resp = handler.handleRequest(req, createContext("create"));
+		System.out.println(resp.toString());
+		
 	    Assert.assertEquals(200, resp.statusCode);
 	}
 	
@@ -37,6 +39,8 @@ public class CreatePlaylistTest extends LambdaTest{
 		CreatePlaylistRequest req = new Gson().fromJson(incoming, CreatePlaylistRequest.class);
 	   
 		CreatePlaylistResponse resp = handler.handleRequest(req, createContext("create"));
+		System.out.println(resp.toString());
+		
 	    Assert.assertEquals(failureCode, resp.statusCode);
 	}
 	
@@ -45,6 +49,8 @@ public class CreatePlaylistTest extends LambdaTest{
 		DeletePlaylistRequest req = new Gson().fromJson(incoming, DeletePlaylistRequest.class);
 	   
 	    DeletePlaylistResponse resp = handler.handleRequest(req, createContext("create"));
+	    System.out.println(resp.toString());
+	    
 	    Assert.assertEquals(200, resp.statusCode);
 	}
 	
@@ -53,6 +59,8 @@ public class CreatePlaylistTest extends LambdaTest{
 		DeletePlaylistRequest req = new Gson().fromJson(incoming, DeletePlaylistRequest.class);
 	   
 	    DeletePlaylistResponse resp = handler.handleRequest(req, createContext("create"));
+	    System.out.println(resp.toString());
+	    
 	    Assert.assertEquals(failureCode, resp.statusCode);
 	}
 	
@@ -61,6 +69,8 @@ public class CreatePlaylistTest extends LambdaTest{
 		ListPlaylistsRequest req = new Gson().fromJson(incoming, ListPlaylistsRequest.class);
 	   
 		AllPlaylistsResponse resp = handler.handleRequest(req, createContext("create"));
+		System.out.println(resp.toString());
+		
 	    Assert.assertEquals(200, resp.statusCode);
 	}
 	
@@ -69,6 +79,7 @@ public class CreatePlaylistTest extends LambdaTest{
 		AppendToPlaylistRequest req = new Gson().fromJson(incoming, AppendToPlaylistRequest.class);
 	   
 		AppendToPlaylistResponse resp = handler.handleRequest(req, createContext("create"));
+		System.out.println(resp.toString());
 	    Assert.assertEquals(200, resp.statusCode);
 	    
 	    RemoveFromPlaylistRequest remove = new RemoveFromPlaylistRequest("Michelle", "2019.12.12.20.46.08");
@@ -77,6 +88,7 @@ public class CreatePlaylistTest extends LambdaTest{
 		RemoveFromPlaylistRequest rreq = new Gson().fromJson(removeFromPlaylist, RemoveFromPlaylistRequest.class);
 	   
 		RemoveFromPlaylistResponse rresp = removehandler.handleRequest(rreq, createContext("create"));
+		System.out.println(rresp.toString());
 	}
 	
 	void testFailAppend(String incoming, int failureCode) throws IOException {
@@ -84,6 +96,8 @@ public class CreatePlaylistTest extends LambdaTest{
 		AppendToPlaylistRequest req = new Gson().fromJson(incoming, AppendToPlaylistRequest.class);
 	   
 		AppendToPlaylistResponse resp = handler.handleRequest(req, createContext("create"));
+		System.out.println(resp.toString());
+		
 	    Assert.assertEquals(failureCode, resp.statusCode);
 	}
 	
@@ -92,6 +106,8 @@ public class CreatePlaylistTest extends LambdaTest{
 		RemoveFromPlaylistRequest req = new Gson().fromJson(incoming, RemoveFromPlaylistRequest.class);
 	   
 		RemoveFromPlaylistResponse resp = handler.handleRequest(req, createContext("create"));
+		System.out.println(resp.toString());
+		
 	    Assert.assertEquals(200, resp.statusCode);
 	}
 	
@@ -100,6 +116,8 @@ public class CreatePlaylistTest extends LambdaTest{
 		RemoveFromPlaylistRequest req = new Gson().fromJson(incoming, RemoveFromPlaylistRequest.class);
 	   
 		RemoveFromPlaylistResponse resp = handler.handleRequest(req, createContext("create"));
+		System.out.println(resp.toString());
+		
 	    Assert.assertEquals(failureCode, resp.statusCode);
 	}
 	
@@ -108,6 +126,8 @@ public class CreatePlaylistTest extends LambdaTest{
 		ListPlaylistVideosRequest req = new Gson().fromJson(incoming, ListPlaylistVideosRequest.class);
 		
 		AllPlaylistVideosResponse resp = handler.handleRequest(req, createContext("create"));
+		System.out.println(resp.toString());
+		
 		Assert.assertEquals(resp.list.size(), expected);
 	}
 	

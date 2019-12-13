@@ -28,7 +28,7 @@ public class RemoveFromPlaylistResponse {
 
 	public String toString() {
 		if (statusCode == 200) {  
-			return "Result(" + playlistName + ", " + videoID  + ")";
+			return "Result(" + playlistName + ", " + videoID  + ") statusCode: " + statusCode;
 		} else {
 			return "ErrorResult(" + statusCode + ", err=" + error + ")";
 		}

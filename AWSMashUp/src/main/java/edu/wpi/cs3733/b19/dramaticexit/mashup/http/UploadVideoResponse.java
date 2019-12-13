@@ -16,7 +16,7 @@ public class UploadVideoResponse {
 	}
 	
 	public String toString() {
-		return "Response(" + response + ")";
+		return "Response(" + response + ") statusCode: " + statusCode;
 	}
 
 }

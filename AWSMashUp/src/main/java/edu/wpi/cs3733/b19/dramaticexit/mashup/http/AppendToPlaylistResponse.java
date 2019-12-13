@@ -28,7 +28,7 @@ public class AppendToPlaylistResponse {
 
 	public String toString() {
 		if (statusCode == 200) {  
-			return "Result(" + playlistID + ", " + videoID  + ")";
+			return "Result(" + playlistID + ", " + videoID  + ") statusCode: " + statusCode;
 		} else {
 			return "ErrorResult(" + statusCode + ", err=" + error + ")";
 		}

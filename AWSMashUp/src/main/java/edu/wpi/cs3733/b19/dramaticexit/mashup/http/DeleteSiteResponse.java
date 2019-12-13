@@ -20,7 +20,7 @@ public class DeleteSiteResponse {
 	
 	public String toString() {
 		if(statusCode == 200) {
-			return "DeleteSite(" + siteURL + ")";
+			return "DeleteSite(" + siteURL + ") statusCode: " + statusCode;
 		} else {
 			return "ErrorResult(" + siteURL + ", statusCode=" + statusCode + ", err=" + error + ")";
 		}

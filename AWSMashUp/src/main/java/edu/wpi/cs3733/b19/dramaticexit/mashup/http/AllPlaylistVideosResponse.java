@@ -24,7 +24,7 @@ public class AllPlaylistVideosResponse {
 	
 	public String toString() {
 		if (list == null) { return "EmptyPlaylistVideos"; }
-		return "AllPlaylistVideos(" + list.size() + ")";
+		return "AllPlaylistVideos size: " + list.size() + " statusCode: " + statusCode;
 	}
 
 }

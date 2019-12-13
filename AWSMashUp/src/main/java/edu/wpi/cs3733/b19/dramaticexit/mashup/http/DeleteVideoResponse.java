@@ -20,7 +20,7 @@ public class DeleteVideoResponse {
 	
 	public String toString() {
 		if(statusCode == 200) {
-			return "DeleteResponse(" + videoID + ")";
+			return "DeleteResponse(" + videoID + ") statusCode: " + statusCode;
 		} else {
 			return "ErrorResult(" + videoID + ", statusCode = " + statusCode + ", err=" + error + ")";
 		}

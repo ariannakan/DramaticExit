@@ -24,7 +24,7 @@ public class SearchResponse {
 	
 	public String toString() {
 		if (list == null) { return "EmptyVideos"; }
-		return "SearchVideos(" + list.size() + ")";
+		return "SearchVideos size: " + list.size() + " statusCode: " + statusCode;
 	}
 
 }

@@ -17,7 +17,7 @@ public class RegisterSiteResponse {
 	
 	public String toString() {
 		if(statusCode == 200) {
-			return "Site(" + url + ")registered!";
+			return "Site(" + url + ") registered! StatusCode: " + statusCode;
 		} else {
 			return "ErrorResult(" + url + ", statusCode=" + statusCode + ")";
 		}

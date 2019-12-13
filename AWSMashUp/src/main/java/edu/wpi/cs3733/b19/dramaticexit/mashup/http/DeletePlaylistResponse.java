@@ -17,7 +17,7 @@ public class DeletePlaylistResponse {
 	
 	public String toString() {
 		if(statusCode == 200) {
-			return "DeletePlaylist(" + playlistID + ")";
+			return "Deleted Playlist " + playlistID + " statusCode: " + statusCode;
 		} else {
 			return "ErrorResult(" + playlistID + ", statusCode = " + statusCode + ")";
 		}
