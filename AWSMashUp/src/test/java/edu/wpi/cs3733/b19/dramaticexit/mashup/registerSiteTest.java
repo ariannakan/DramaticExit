@@ -16,6 +16,7 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.http.ListSitesRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.RegisterSiteRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.RegisterSiteResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoRequest;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Site;
 
 
 public class registerSiteTest extends LambdaTest{
@@ -68,6 +69,17 @@ public class registerSiteTest extends LambdaTest{
 		System.out.println(resp.toString());
 		
 	    Assert.assertEquals(200, resp.statusCode);
+	}
+	
+	@Test
+	public void testCreateSiteObject() {
+		Site wpi = new Site("Worcester Polytechnic Institute", "100 Institute Rd");
+		Site myCollege = new Site();
+		
+		myCollege.setTimestampID(wpi.getTimestampID());
+		myCollege.setUrl(wpi.getUrl());
+		
+		Assert.assertTrue(myCollege.equals(wpi));
 	}
 	
 	@Test
