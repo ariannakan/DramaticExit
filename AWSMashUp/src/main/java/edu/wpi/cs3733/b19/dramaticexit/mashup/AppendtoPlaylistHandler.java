@@ -42,8 +42,10 @@ public class AppendtoPlaylistHandler implements RequestHandler<AppendToPlaylistR
 		Playlist pExist = dao.getPlaylist(playlistName);
 		
 		if (video == null) {
+			System.out.println("video doesn't exist");
 			return false;
 		} else if (pExist == null) {
+			System.out.println("playlist doesn't exist");
 			return false;
 		} else {
 			return dao.appendVideo(pExist, video);

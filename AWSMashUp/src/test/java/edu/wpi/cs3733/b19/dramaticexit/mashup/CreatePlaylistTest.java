@@ -1,4 +1,4 @@
-// tests create and delete and list
+// tests create/delete playlist and list playlists and append/remove from playlist
 
 package edu.wpi.cs3733.b19.dramaticexit.mashup;
 
@@ -10,11 +10,14 @@ import org.junit.Test;
 import com.google.gson.Gson;
 
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.AllPlaylistsResponse;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.AppendToPlaylistRequest;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.AppendToPlaylistResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.CreatePlaylistRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.CreatePlaylistResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeletePlaylistRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeletePlaylistResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.ListPlaylistsRequest;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.RemoveFromPlaylistRequest;
 
 public class CreatePlaylistTest extends LambdaTest{
 	
@@ -56,6 +59,22 @@ public class CreatePlaylistTest extends LambdaTest{
 	   
 		AllPlaylistsResponse resp = handler.handleRequest(req, createContext("create"));
 	    Assert.assertEquals(200, resp.statusCode);
+	}
+	
+	void testSuccessAppend(String incoming) throws IOException {
+		AppendtoPlaylistHandler handler = new AppendtoPlaylistHandler();
+		AppendToPlaylistRequest req = new Gson().fromJson(incoming, AppendToPlaylistRequest.class);
+	   
+		AppendToPlaylistResponse resp = handler.handleRequest(req, createContext("create"));
+	    Assert.assertEquals(200, resp.statusCode);
+	}
+	
+	void testFailAppend(String incoming, int failureCode) throws IOException {
+		AppendtoPlaylistHandler handler = new AppendtoPlaylistHandler();
+		AppendToPlaylistRequest req = new Gson().fromJson(incoming, AppendToPlaylistRequest.class);
+	   
+		AppendToPlaylistResponse resp = handler.handleRequest(req, createContext("create"));
+	    Assert.assertEquals(failureCode, resp.statusCode);
 	}
 	
 	@Test
@@ -119,7 +138,7 @@ public class CreatePlaylistTest extends LambdaTest{
 		
 		System.out.println("playlist created: " + resp.playlistID);
 	    
-		DeletePlaylistRequest testExisting = new DeletePlaylistRequest(n);
+		DeletePlaylistRequest testExisting = new DeletePlaylistRequest(resp.playlistID);
 	    String deleteExisting = new Gson().toJson(testExisting);  
 	    
 	    try {
@@ -138,6 +157,68 @@ public class CreatePlaylistTest extends LambdaTest{
 	    
 	    try {
 	    	testSuccessList(listPlaylists);
+	    } catch (IOException ioe) {
+	    	Assert.fail("Invalid:" + ioe.getMessage());
+	    }
+	}
+	
+	@Test
+	public void testAppendToPlaylistSuccess() {
+		System.out.println("Testing: appending to playlist");
+		
+		AppendToPlaylistRequest append = new AppendToPlaylistRequest("Michelle", "2019.12.12.20.46.08");
+	    String appendToPlaylist = new Gson().toJson(append);  
+	    
+	    try {
+	    	testSuccessAppend(appendToPlaylist);
+	    } catch (IOException ioe) {
+	    	Assert.fail("Invalid:" + ioe.getMessage());
+	    }
+	}
+	
+	@Test
+	public void testAppendToPlaylistFail() {
+		System.out.println("Testing: fail appending to playlist");
+		
+		AppendToPlaylistRequest append = new AppendToPlaylistRequest("Michelle", "");
+	    String appendToPlaylist = new Gson().toJson(append);  
+	    
+	    try {
+	    	testFailAppend(appendToPlaylist, 422);
+	    } catch (IOException ioe) {
+	    	Assert.fail("Invalid:" + ioe.getMessage());
+	    }
+	}
+	
+	@Test
+	public void testRemoveFromPlaylistSuccess() {
+		System.out.println("Testing: removing from playlist");
+		
+		AppendToPlaylistRequest append = new AppendToPlaylistRequest("Michelle", "2019.12.12.20.46.01");
+	    String appendToPlaylist = new Gson().toJson(append);
+	    AppendtoPlaylistHandler handler = new AppendtoPlaylistHandler();
+		AppendToPlaylistRequest req = new Gson().fromJson(appendToPlaylist, AppendToPlaylistRequest.class);
+	   
+		
+		RemoveFromPlaylistRequest remove = new RemoveFromPlaylistRequest("Michelle", "2019.12.12.20.46.01");
+	    String removeFromPlaylist = new Gson().toJson(remove);  
+	    
+	    try {
+	    	testSuccessInput(removeFromPlaylist);
+	    } catch (IOException ioe) {
+	    	Assert.fail("Invalid:" + ioe.getMessage());
+	    }
+	}
+	
+	@Test
+	public void testRemoveFromPlaylistFail() {
+		System.out.println("Testing: fail to remove from playlist");
+		
+		RemoveFromPlaylistRequest remove = new RemoveFromPlaylistRequest("Michelle", "");
+	    String removeFromPlaylist = new Gson().toJson(remove);  
+	    
+	    try {
+	    	testSuccessInput(removeFromPlaylist);
 	    } catch (IOException ioe) {
 	    	Assert.fail("Invalid:" + ioe.getMessage());
 	    }
