@@ -108,7 +108,7 @@ public class SearchTest extends LambdaTest{
 	
 	@Test
 	public void testEmptySearch() {
-		System.out.println("Testing: search by name");
+		System.out.println("Testing: search everything");
 		String name = "";
 		String keyword = "";
 		

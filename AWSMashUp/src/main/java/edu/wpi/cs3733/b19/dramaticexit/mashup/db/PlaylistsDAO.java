@@ -70,6 +70,7 @@ public class PlaylistsDAO {
 **/
     public boolean appendVideo(Playlist playlist, Video video) throws Exception {
         try {
+        	System.out.println("in VideosDAO appendVideo()");
         	String query = "INSERT INTO PlaylistVideos (playlistName,videoID,url,characterName,sentence) values(?,?,?,?,?);";
         	PreparedStatement ps = conn.prepareStatement(query);
         	ps.setString(1, playlist.playlistName);
@@ -79,6 +80,7 @@ public class PlaylistsDAO {
             ps.setString(5, video.sentence);
             int numAffected = ps.executeUpdate();
             ps.close();
+            
             
             return (numAffected == 1);
         } catch (Exception e) {
@@ -103,11 +105,11 @@ public class PlaylistsDAO {
     
     public boolean deletePlaylist(String playlistName) throws Exception {
         try {
-        	System.out.println("in deletePlaylist DAO");
+        	System.out.println("in deletePlaylist DAO: " + playlistName);
         	//delete playlist from playlistVideos first
         	PreparedStatement ps2 = conn.prepareStatement("DELETE FROM Playlists WHERE playlistName = ?;");
             ps2.setString(1, playlistName);
-            ps2.executeUpdate();
+            int numAffected2 = ps2.executeUpdate();
             
             //delete playlist from playlist database
             PreparedStatement ps = conn.prepareStatement("DELETE FROM PlaylistVideos WHERE playlistName = ?;");
@@ -116,11 +118,12 @@ public class PlaylistsDAO {
           
             
             int numAffected = ps.executeUpdate();
+            System.out.println("numAffected: " + numAffected);
             
             
             ps.close();
             
-            return (numAffected == 1);
+            return (numAffected2 == 1);
 
         } catch (Exception e) {
             throw new Exception("Failed to delete playlist: " + e.getMessage());

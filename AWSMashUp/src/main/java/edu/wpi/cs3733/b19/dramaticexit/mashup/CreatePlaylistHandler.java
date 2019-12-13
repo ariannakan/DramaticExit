@@ -52,7 +52,7 @@ public class CreatePlaylistHandler implements RequestHandler<CreatePlaylistReque
 		} catch (Exception e) {
 			response = new CreatePlaylistResponse("Unable to create playlist: " + req.playlistName + "(" + e.getMessage() + ")", 400);
 		}
-
+		System.out.println("response: " + response);
 		return response;
 	}
 

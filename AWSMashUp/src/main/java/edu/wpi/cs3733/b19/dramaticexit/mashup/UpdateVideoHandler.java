@@ -22,6 +22,7 @@ public class UpdateVideoHandler implements RequestHandler<UpdateVideoRequest,Upd
 		//check if video is in RDS
 		Video exist = dao.getVideo(videoID);
 		if(exist == null){
+			System.out.println("video does not exist");
 			return false;
 		}
 		else {

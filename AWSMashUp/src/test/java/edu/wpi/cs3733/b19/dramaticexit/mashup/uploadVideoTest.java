@@ -14,6 +14,8 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.http.AllVideosResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeleteVideoRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeleteVideoResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.ListVideosRequest;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UpdateVideoRequest;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UpdateVideoResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoResponse;
 
@@ -30,6 +32,13 @@ public class uploadVideoTest extends LambdaTest{
 	   
 	    UploadVideoResponse resp = handler.handleRequest(req, createContext("create"));
 	    Assert.assertEquals(200, resp.statusCode);
+	    
+	    DeleteVideoRequest deleteThis = new DeleteVideoRequest(resp.response);
+		String SAMPLE =  new Gson().toJson(deleteThis); 
+		DeleteVideoHandler deletehandler = new DeleteVideoHandler();
+		DeleteVideoRequest dreq = new Gson().fromJson(SAMPLE, DeleteVideoRequest.class);
+	   
+	    DeleteVideoResponse dresp = deletehandler.handleRequest(dreq, createContext("create"));
 	}
 	
 	void testFailInput(String incoming, int failureCode) throws IOException {
@@ -61,6 +70,14 @@ public class uploadVideoTest extends LambdaTest{
 		ListVideosRequest req = new Gson().fromJson(incoming, ListVideosRequest.class);
 	   
 		AllVideosResponse resp = handler.handleRequest(req, createContext("create"));
+	    Assert.assertEquals(200, resp.statusCode);
+	}
+	
+	void testSuccessUpdate(String incoming) throws IOException {
+		UpdateVideoHandler handler = new UpdateVideoHandler();
+		UpdateVideoRequest req = new Gson().fromJson(incoming, UpdateVideoRequest.class);
+	   
+		UpdateVideoResponse resp = handler.handleRequest(req, createContext("create"));
 	    Assert.assertEquals(200, resp.statusCode);
 	}
 	
@@ -116,7 +133,7 @@ public class uploadVideoTest extends LambdaTest{
 		   
 		    UploadVideoResponse resp = handler.handleRequest(req, createContext("create"));
 		    
-		    System.out.println(resp.response);
+		    System.out.println("upload video response: " + resp.response);
 		
 			
 			DeleteVideoRequest testDelete = new DeleteVideoRequest(resp.response);
@@ -131,26 +148,10 @@ public class uploadVideoTest extends LambdaTest{
 	@Test
 	public void testEmptyDeleteVideo() {
 		System.out.println("Testing: Delete video with incorrect input");
-		String characterName = "Jamie";
-		String sentence = "There you are. I just wanted one more look at you.";
 		
 		byte[] fileContent;
 		try {
-			fileContent = Files.readAllBytes(Paths.get("src/test/resources/videoseg10.ogg"));
-			String encoded = java.util.Base64.getEncoder().encodeToString(fileContent);
-			
-	    	UploadVideoRequest testOK = new UploadVideoRequest(characterName, sentence, encoded);
-	        String SAMPLE_INPUT_STRING = new Gson().toJson(testOK);  
-	        
-	        UploadVideoHandler handler = new UploadVideoHandler();
-			UploadVideoRequest req = new Gson().fromJson(SAMPLE_INPUT_STRING, UploadVideoRequest.class);
-		   
-		    UploadVideoResponse resp = handler.handleRequest(req, createContext("create"));
-		    
-		    System.out.println(resp.response);
-		
-			
-			DeleteVideoRequest testDelete = new DeleteVideoRequest(resp.toString());
+			DeleteVideoRequest testDelete = new DeleteVideoRequest();
 			String SAMPLE =  new Gson().toJson(testDelete); 
 			
 			testFailDelete(SAMPLE, 422);
@@ -168,6 +169,23 @@ public class uploadVideoTest extends LambdaTest{
         
         try {
         	testSuccessList(SAMPLE_INPUT_STRING);
+        } catch (IOException ioe) {
+        	Assert.fail("Invalid:" + ioe.getMessage());
+        }
+    }
+	
+	@Test
+    public void testUpdateVideo() {
+		System.out.println("Testing: update video");
+		String videoID = "2019.12.12.20.46.12";
+		
+    	UpdateVideoRequest update = new UpdateVideoRequest(videoID, false);
+    	String SAMPLE_INPUT_STRING =  new Gson().toJson(update);  
+    	
+    	System.out.println(SAMPLE_INPUT_STRING);
+        
+        try {
+        	testSuccessUpdate(SAMPLE_INPUT_STRING);
         } catch (IOException ioe) {
         	Assert.fail("Invalid:" + ioe.getMessage());
         }

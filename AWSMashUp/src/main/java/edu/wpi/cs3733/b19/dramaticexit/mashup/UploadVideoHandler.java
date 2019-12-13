@@ -58,7 +58,7 @@ LambdaLogger logger;
 			logger.log("attach to S3 succeed");
 		}
 		
-		System.out.printf("Uploading %s to S3 bucket %s...\n", base64EncodedValue, "b19dramaticexit");
+		//System.out.printf("Uploading %s to S3 bucket %s...\n", base64EncodedValue, "b19dramaticexit");
 		
 		try {
 			byte[] videoByteArray = Base64.getDecoder().decode(base64EncodedValue);
@@ -106,7 +106,7 @@ LambdaLogger logger;
 	@Override 
 	public UploadVideoResponse handleRequest(UploadVideoRequest req, Context context)  {
 		logger = context.getLogger();
-		logger.log(req.toString());
+		//logger.log(req.toString());
 
 		UploadVideoResponse response;
 		

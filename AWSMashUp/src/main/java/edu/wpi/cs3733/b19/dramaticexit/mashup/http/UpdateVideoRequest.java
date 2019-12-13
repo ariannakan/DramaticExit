@@ -15,6 +15,7 @@ public class UpdateVideoRequest {
 	}
 	
 	public UpdateVideoRequest(String videoID, boolean availability) {
+		this.videoID = videoID;
 		this.availability = availability;
 	}
 

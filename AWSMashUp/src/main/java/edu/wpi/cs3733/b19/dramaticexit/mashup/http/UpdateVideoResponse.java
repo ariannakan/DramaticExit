@@ -4,7 +4,7 @@ public class UpdateVideoResponse {
 	
 	public String videoID;
 	public boolean availability;
-	int statusCode;
+	public int statusCode;
 	String errorMsg;
 	
 	// success - 200
