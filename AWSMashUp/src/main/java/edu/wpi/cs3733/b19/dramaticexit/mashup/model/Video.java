@@ -8,6 +8,38 @@ public class Video {
 	public String url;
 	public boolean system;      // when TRUE this is actually stored in S3 bucket
 	
+	public String getVideoID() {
+		return videoID;
+	}
+
+	public void setVideoID(String videoID) {
+		this.videoID = videoID;
+	}
+
+	public String getCharacterName() {
+		return characterName;
+	}
+
+	public void setCharacterName(String characterName) {
+		this.characterName = characterName;
+	}
+
+	public String getSentence() {
+		return sentence;
+	}
+
+	public void setSentence(String sentence) {
+		this.sentence = sentence;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
 	public Video (String videoID, String characterName, String sentence, boolean availability, String url) {
 		this.sentence = "";
 		this.videoID = videoID;
@@ -37,5 +69,19 @@ public class Video {
 		this.sentence = "";
 		this.availability = true;
 		this.url = "";
+	}
+	
+	/**
+	 * Equality of Constants determined by name alone.
+	 */
+	public boolean equals (Object o) {
+		if (o == null) { return false; }
+		
+		if (o instanceof Video) {
+			Video other = (Video) o;
+			return videoID.equals(other.videoID);
+		}
+		
+		return false;  // not a Constant
 	}
 }

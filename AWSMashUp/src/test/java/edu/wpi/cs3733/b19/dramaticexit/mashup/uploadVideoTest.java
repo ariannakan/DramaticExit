@@ -18,6 +18,7 @@ import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UpdateVideoRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UpdateVideoResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoResponse;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.model.Video;
 
 /** 
  * A simple test harness for locally invoking your Lambda function handler.
@@ -103,6 +104,24 @@ public class uploadVideoTest extends LambdaTest{
 		
 	    Assert.assertEquals(failureCode, resp.statusCode);
 	} 
+	
+	@Test
+	public void testCreateVideoObject() {
+		System.out.println("Testing: testFirstUpload");
+		String characterName = "Pom";
+		String sentence = "Where are you, Pom?";
+		String videoID = "508-410-7005";
+		String url = "www.Thailand.com";
+		
+		Video pom = new Video(videoID, characterName, sentence, url);
+		Video monoBoy = new Video();
+		monoBoy.setCharacterName(pom.getCharacterName());
+		monoBoy.setSentence(pom.getSentence());
+		monoBoy.setUrl(pom.getUrl());
+		monoBoy.setVideoID(pom.getVideoID());
+		
+		Assert.assertTrue(pom.equals(monoBoy));
+    }
 	
 	@Test
 	public void testFirstUpload() {
