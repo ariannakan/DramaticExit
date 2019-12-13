@@ -162,7 +162,7 @@ public class uploadVideoTest extends LambdaTest{
 		monoBoy.setSystem(pom.getSystem());
 		
 		
-		Assert.assertTrue(pom.equals(monoBoy));
+		Assert.assertEquals(pom.toString(), monoBoy.toString());
     }
 	
 	
