@@ -33,15 +33,8 @@ public class ListAllPlaylistsHandler implements RequestHandler<ListPlaylistsRequ
 
 		AllPlaylistsResponse response;
 		try {
-			// get all user defined constants AND system-defined constants.
-			// Note that user defined constants override system-defined constants.
 			List<Playlist> list = getPlaylists();
-		
-//			for (Video v : systemVideos()) {
-//				if (!list.contains(v)) {
-//					list.add(v);
-//				}
-//			}
+
 			response = new AllPlaylistsResponse(list, 200);
 		} catch (Exception e) {
 			response = new AllPlaylistsResponse(403, e.getMessage());

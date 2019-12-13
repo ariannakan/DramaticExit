@@ -1,4 +1,4 @@
-//tests both upload and delete
+//tests both upload and delete and list
 package edu.wpi.cs3733.b19.dramaticexit.mashup;
 
 import java.io.IOException;
@@ -10,8 +10,10 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.AllVideosResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeleteVideoRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeleteVideoResponse;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.ListVideosRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoResponse;
 
@@ -54,14 +56,22 @@ public class uploadVideoTest extends LambdaTest{
 	    Assert.assertEquals(failureCode, resp.statusCode);
 	}
 	
+	void testSuccessList(String incoming) throws IOException {
+		ListAllVideosHandler handler = new ListAllVideosHandler();
+		ListVideosRequest req = new Gson().fromJson(incoming, ListVideosRequest.class);
+	   
+		AllVideosResponse resp = handler.handleRequest(req, createContext("create"));
+	    Assert.assertEquals(200, resp.statusCode);
+	}
+	
 	@Test
 	public void testFirstUpload() {
 		System.out.println("Testing: testFirstUpload");
-		String characterName = "Spock";
-		String sentence = "Not again";
+		String characterName = "Sulu";
+		String sentence = "Sir, Is he kidding?";
 
 		try {
-			byte[] fileContent = Files.readAllBytes(Paths.get("src/test/resources/videoseg2converted.ogg"));
+			byte[] fileContent = Files.readAllBytes(Paths.get("src/test/resources/videoseg6.ogg"));
 			String encoded = java.util.Base64.getEncoder().encodeToString(fileContent);
 			
 	    	UploadVideoRequest testOK = new UploadVideoRequest(characterName, sentence, encoded);
@@ -72,7 +82,7 @@ public class uploadVideoTest extends LambdaTest{
         	Assert.fail("Invalid:" + ioe.getMessage());
         }
     }
-		
+	
 	@Test
     public void testEmptyUpload() {
 		System.out.println("Testing: Empty input");
@@ -90,12 +100,12 @@ public class uploadVideoTest extends LambdaTest{
 	@Test
 	public void testDeleteVideo() {
 		System.out.println("Testing: Delete video");
-		String characterName = "testingDelete";
-		String sentence = "okie-dokie";
+		String characterName = "Jamie";
+		String sentence = "There you are. I just wanted one more look at you.";
 		
 		byte[] fileContent;
 		try {
-			fileContent = Files.readAllBytes(Paths.get("src/test/resources/videoseg2converted.ogg"));
+			fileContent = Files.readAllBytes(Paths.get("src/test/resources/videoseg10.ogg"));
 			String encoded = java.util.Base64.getEncoder().encodeToString(fileContent);
 			
 	    	UploadVideoRequest testOK = new UploadVideoRequest(characterName, sentence, encoded);
@@ -121,12 +131,12 @@ public class uploadVideoTest extends LambdaTest{
 	@Test
 	public void testEmptyDeleteVideo() {
 		System.out.println("Testing: Delete video with incorrect input");
-		String characterName = "testingIncorrectInputDelete";
-		String sentence = "should fail";
+		String characterName = "Jamie";
+		String sentence = "There you are. I just wanted one more look at you.";
 		
 		byte[] fileContent;
 		try {
-			fileContent = Files.readAllBytes(Paths.get("src/test/resources/videoseg2converted.ogg"));
+			fileContent = Files.readAllBytes(Paths.get("src/test/resources/videoseg10.ogg"));
 			String encoded = java.util.Base64.getEncoder().encodeToString(fileContent);
 			
 	    	UploadVideoRequest testOK = new UploadVideoRequest(characterName, sentence, encoded);
@@ -148,4 +158,19 @@ public class uploadVideoTest extends LambdaTest{
 			Assert.fail("Invalid:" + ioe.getMessage());
 		}
 	}
+	
+	@Test
+    public void testListVideos() {
+		System.out.println("Testing: List videos");
+		
+    	ListVideosRequest list = new ListVideosRequest();
+    	String SAMPLE_INPUT_STRING =  new Gson().toJson(list);  
+        
+        try {
+        	testSuccessList(SAMPLE_INPUT_STRING);
+        } catch (IOException ioe) {
+        	Assert.fail("Invalid:" + ioe.getMessage());
+        }
+    }
+	
 }

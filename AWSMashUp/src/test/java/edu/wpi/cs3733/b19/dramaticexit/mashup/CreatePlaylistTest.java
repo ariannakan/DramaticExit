@@ -1,3 +1,5 @@
+// tests create and delete and list
+
 package edu.wpi.cs3733.b19.dramaticexit.mashup;
 
 import java.io.IOException;
@@ -7,10 +9,12 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.AllPlaylistsResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.CreatePlaylistRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.CreatePlaylistResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeletePlaylistRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeletePlaylistResponse;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.ListPlaylistsRequest;
 
 public class CreatePlaylistTest extends LambdaTest{
 	
@@ -44,6 +48,14 @@ public class CreatePlaylistTest extends LambdaTest{
 	   
 	    DeletePlaylistResponse resp = handler.handleRequest(req, createContext("create"));
 	    Assert.assertEquals(failureCode, resp.statusCode);
+	}
+	
+	void testSuccessList(String incoming) throws IOException {
+		ListAllPlaylistsHandler handler = new ListAllPlaylistsHandler();
+		ListPlaylistsRequest req = new Gson().fromJson(incoming, ListPlaylistsRequest.class);
+	   
+		AllPlaylistsResponse resp = handler.handleRequest(req, createContext("create"));
+	    Assert.assertEquals(200, resp.statusCode);
 	}
 	
 	@Test
@@ -117,18 +129,18 @@ public class CreatePlaylistTest extends LambdaTest{
 	    }
 	}
 	
-//	@Test
-//	public void testDeleteNonExistingSite() {
-//		System.out.println("Testing: delete non-existing site");
-//		String url = "www.IDon'tExist.com";
-//		DeleteSiteRequest testOK = new DeleteSiteRequest(url);
-//	    String deleteExisting = new Gson().toJson(testOK);  
-//	    
-//	    try {
-//	    	testFailDelete(deleteExisting, 422);
-//	    } catch (IOException ioe) {
-//	    	Assert.fail("Invalid:" + ioe.getMessage());
-//	    }
-//	}
+	@Test
+	public void testListPlaylistsSuccess() {
+		System.out.println("Testing: listing playlists");
+		
+		ListPlaylistsRequest list = new ListPlaylistsRequest();
+	    String listPlaylists = new Gson().toJson(list);  
+	    
+	    try {
+	    	testSuccessList(listPlaylists);
+	    } catch (IOException ioe) {
+	    	Assert.fail("Invalid:" + ioe.getMessage());
+	    }
+	}
 
 }

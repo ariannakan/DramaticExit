@@ -1,3 +1,5 @@
+// tests create and delete and list 
+
 package edu.wpi.cs3733.b19.dramaticexit.mashup;
 
 import java.io.IOException;
@@ -7,8 +9,10 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.AllSitesResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeleteSiteRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.DeleteSiteResponse;
+import edu.wpi.cs3733.b19.dramaticexit.mashup.http.ListSitesRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.RegisterSiteRequest;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.RegisterSiteResponse;
 import edu.wpi.cs3733.b19.dramaticexit.mashup.http.UploadVideoRequest;
@@ -46,6 +50,14 @@ public class registerSiteTest extends LambdaTest{
 	   
 	    DeleteSiteResponse resp = handler.handleRequest(req, createContext("create"));
 	    Assert.assertEquals(failureCode, resp.statusCode);
+	}
+	
+	void testSuccessList(String incoming) throws IOException {
+		ListAllSitesHandler handler = new ListAllSitesHandler();
+		ListSitesRequest req = new Gson().fromJson(incoming, ListSitesRequest.class);
+	   
+		AllSitesResponse resp = handler.handleRequest(req, createContext("create"));
+	    Assert.assertEquals(200, resp.statusCode);
 	}
 	
 	@Test
@@ -128,6 +140,20 @@ public class registerSiteTest extends LambdaTest{
 	    
 	    try {
 	    	testFailDelete(deleteExisting, 422);
+	    } catch (IOException ioe) {
+	    	Assert.fail("Invalid:" + ioe.getMessage());
+	    }
+	}
+	
+	@Test
+	public void testListSites() {
+		System.out.println("Testing: list sites");
+		
+		ListSitesRequest list = new ListSitesRequest();
+	    String listSites = new Gson().toJson(list);  
+	    
+	    try {
+	    	testSuccessList(listSites);
 	    } catch (IOException ioe) {
 	    	Assert.fail("Invalid:" + ioe.getMessage());
 	    }
