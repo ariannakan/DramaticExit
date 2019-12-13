@@ -51,7 +51,7 @@ public class RemoveFromPlaylistHandler implements RequestHandler<RemoveFromPlayl
 		} catch (Exception e) {
 			response = new RemoveFromPlaylistResponse("Unable to remove " + req.videoID + " from playlist: " + req.playlistName + "(" + e.getMessage() + ")", 400);
 		}
-
+		System.out.println("response: " + response);
 		return response;
 	}
 

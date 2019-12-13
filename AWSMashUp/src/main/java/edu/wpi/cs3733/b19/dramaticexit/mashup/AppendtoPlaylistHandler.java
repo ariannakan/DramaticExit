@@ -33,6 +33,7 @@ public class AppendtoPlaylistHandler implements RequestHandler<AppendToPlaylistR
 		Video video = null;
 		if (vdao.getVideo(videoID) != null) {
 			video = vdao.getVideo(videoID);
+			System.out.println("video: " + video);
 		} else if (vdao.getRemoteVideoByID(videoID) != null) {
 			video = vdao.getRemoteVideoByID(videoID);
 		} 
@@ -40,7 +41,7 @@ public class AppendtoPlaylistHandler implements RequestHandler<AppendToPlaylistR
 		
 		// check if playlist exists
 		Playlist pExist = dao.getPlaylist(playlistName);
-		
+		System.out.println("playlist: " + pExist);
 		if (video == null) {
 			System.out.println("video doesn't exist");
 			return false;
