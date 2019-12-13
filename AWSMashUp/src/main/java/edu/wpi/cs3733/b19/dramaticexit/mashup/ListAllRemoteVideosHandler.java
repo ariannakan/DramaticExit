@@ -49,15 +49,9 @@ public class ListAllRemoteVideosHandler implements RequestHandler<ListAllRemoteV
 
 		ListAllRemoteVideosResponse response;
 		try {
-			// get all user defined constants AND system-defined constants.
-			// Note that user defined constants override system-defined constants.
+
 			List<Video> list = getVideos();
 		
-//			for (Video v : systemVideos()) {
-//				if (!list.contains(v)) {
-//					list.add(v);
-//				}
-//			}
 			response = new ListAllRemoteVideosResponse(list, 200);
 		} catch (Exception e) {
 			response = new ListAllRemoteVideosResponse(403, e.getMessage());

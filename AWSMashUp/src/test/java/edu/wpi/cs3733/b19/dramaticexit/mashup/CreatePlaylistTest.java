@@ -49,7 +49,7 @@ public class CreatePlaylistTest extends LambdaTest{
 	@Test
 	public void testCreateNewPlaylist() {
 		System.out.println("Testing: create new playlist");
-		String n = "Vicky" + (int)Math.random();
+		String n = "SneakyNarwhal";
 		CreatePlaylistRequest testNew = new CreatePlaylistRequest(n);
 	    String newPlaylist = new Gson().toJson(testNew);  
 	    
@@ -97,17 +97,17 @@ public class CreatePlaylistTest extends LambdaTest{
 	@Test
 	public void testDeleteExistingPlaylist() {
 		System.out.println("Testing: delete existing playlist");
-		String name = "Ken";
-		CreatePlaylistRequest testNew = new CreatePlaylistRequest(name);
+		String n = "Moody";
+		CreatePlaylistRequest testNew = new CreatePlaylistRequest(n);
 	    String newPlaylist = new Gson().toJson(testNew);  
 		CreatePlaylistHandler handler = new CreatePlaylistHandler();
 		CreatePlaylistRequest req = new Gson().fromJson(newPlaylist, CreatePlaylistRequest.class);
 	   
 		CreatePlaylistResponse resp = handler.handleRequest(req, createContext("create"));
 		
-		System.out.println(resp.playlistID);
+		System.out.println("playlist created: " + resp.playlistID);
 	    
-		DeletePlaylistRequest testExisting = new DeletePlaylistRequest(name);
+		DeletePlaylistRequest testExisting = new DeletePlaylistRequest(n);
 	    String deleteExisting = new Gson().toJson(testExisting);  
 	    
 	    try {

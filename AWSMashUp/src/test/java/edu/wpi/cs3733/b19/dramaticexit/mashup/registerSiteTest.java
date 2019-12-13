@@ -51,8 +51,13 @@ public class registerSiteTest extends LambdaTest{
 	@Test
 	public void testNewSiteRegister() {
 		System.out.println("Testing: new site register");
-		String url = "www.jumanjiTest" + (int)Math.random() + ".com";
-		RegisterSiteRequest testNew = new RegisterSiteRequest(url);
+		String url = "https://q1usdooppf.execute-api.us-east-2.amazonaws.com/beta/publicsegments";
+		String apikey = "ES3kGiFETL2wlXnQ5IZ064VR5E1QtENVcObJ1rE2";
+		int num = (int) Math.random();
+		System.out.println(num);
+		String sentence = "testing" + num;
+		String characterName = "test" + num;
+		RegisterSiteRequest testNew = new RegisterSiteRequest(apikey,url,characterName,sentence);
 	    String newSite = new Gson().toJson(testNew);  
 	    
 	    try {
@@ -77,16 +82,20 @@ public class registerSiteTest extends LambdaTest{
 	
 	@Test
 	public void testExistingSiteRegister() {
-		System.out.println("Testing: existing site register");
-		String url = "www.google.com";
+		System.out.println("Testing: existing site register");	
+		String url = "https://jnma78xc8j.execute-api.us-east-2.amazonaws.com/RemoteSite/publicsegments";
+		String apikey = "7wJummKN8COPl62GX2As9mVan9DjsIO7pdCIJdUg";
+		int num = (int) Math.random();
+		String sentence = "testing" + num;
+		String characterName = "test" + num;
 		
-		RegisterSiteRequest firstUpload = new RegisterSiteRequest(url);
-	    String string1 = new Gson().toJson(firstUpload);
+		RegisterSiteRequest firstUpload = new RegisterSiteRequest(apikey,url,characterName,sentence);
+	    String string1 = new Gson().toJson(firstUpload);  
 	    RegisterSiteHandler handler = new RegisterSiteHandler();
 		RegisterSiteRequest req = new Gson().fromJson(string1, RegisterSiteRequest.class);
-		RegisterSiteResponse resp = handler.handleRequest(req, createContext("create"));
+	    RegisterSiteResponse resp = handler.handleRequest(req, createContext("create"));
 		
-		RegisterSiteRequest secondUpload = new RegisterSiteRequest(url);
+		RegisterSiteRequest secondUpload = new RegisterSiteRequest(apikey,url,characterName,sentence);
 	    String string2 = new Gson().toJson(secondUpload);  
 	    
 	    try {
@@ -99,8 +108,8 @@ public class registerSiteTest extends LambdaTest{
 	@Test
 	public void testDeleteExistingSite() {
 		System.out.println("Testing: delete existing site");
-		String url = "www.google.com";
-		DeleteSiteRequest testOK = new DeleteSiteRequest(url);
+		String apikey = "ES3kGiFETL2wlXnQ5IZ064VR5E1QtENVcObJ1rE2";
+		DeleteSiteRequest testOK = new DeleteSiteRequest(apikey);
 	    String deleteExisting = new Gson().toJson(testOK);  
 	    
 	    try {
@@ -113,7 +122,7 @@ public class registerSiteTest extends LambdaTest{
 	@Test
 	public void testDeleteNonExistingSite() {
 		System.out.println("Testing: delete non-existing site");
-		String url = "www.IDon'tExist.com";
+		String url = "TwgjfiS4Z45AzAoqg0Vke4pW7UalgsHfa2hvg7rM";
 		DeleteSiteRequest testOK = new DeleteSiteRequest(url);
 	    String deleteExisting = new Gson().toJson(testOK);  
 	    
@@ -123,5 +132,18 @@ public class registerSiteTest extends LambdaTest{
 	    	Assert.fail("Invalid:" + ioe.getMessage());
 	    }
 	}
+	
+//	@Test															//returns 422
+//	public void testDeleteEmptyString() {
+//		System.out.println("Testing: delete empty string");
+//		DeleteSiteRequest testOK = new DeleteSiteRequest();
+//	    String deleteExisting = new Gson().toJson(testOK);  
+//	    
+//	    try {
+//	    	testFailDelete(deleteExisting, 400);
+//	    } catch (IOException ioe) {
+//	    	Assert.fail("Invalid:" + ioe.getMessage());
+//	    }
+//	}
 
 }
